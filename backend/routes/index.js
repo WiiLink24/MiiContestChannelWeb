@@ -58,11 +58,11 @@ router.get("/api/plaza/all", async (req, res) => {
   }
 });
 
-router.get("/api/plaza/search", async (req, res) => {
+router.post("/api/plaza/search", async (req, res) => {
   try {
-    const { search } = req.query;
+    const { search } = req.body;
     let data_response;
-    if (search.length > 2) {
+    if (search.length < 2) {
       data_response = await db.any(
       "SELECT entry_id, artisan_id, initials, skill, nickname, gender, country_id, mii_data, likes, perm_likes FROM miis WHERE initials = $1", [search]
       );

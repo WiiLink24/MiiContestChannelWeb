@@ -2,3 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+    .container {
+      @apply max-w-screen-xl mx-auto lg:px-32 md:px-20 sm:px-10;
+    }
+}
