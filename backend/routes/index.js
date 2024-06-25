@@ -1,9 +1,12 @@
 var express = require("express");
 var router = express.Router();
 
+require("dotenv").config();
 const pgp = require("pg-promise")(/* options */);
 //import db from env
-const db = pgp("postgres://username:password@127.0.0.1/EVC");
+const db = pgp(
+  `postgres://${process.env.POSTGRES_USERNAME}:${process.env.POSTGRES_PASSWORD}@${process.env.POSTGRES_HOST}/${process.env.POSTGRES_DB}`
+);
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
@@ -12,14 +15,14 @@ router.get("/", function (req, res, next) {
 
 router.get("/api/plaza/top", async (req, res) => {
     try {
-        const data = await db.many(
+        const data_response = await db.many(
           "SELECT entry_id, artisan_id, initials, skill, nickname, gender, country_id, mii_data, likes, perm_likes FROM miis ORDER BY likes DESC LIMIT 50"
         );
-        const formattedData = data.map((item) => {
+        const data = data_response.map((item) => {
           const miiDataEncoded = item.mii_data.toString("base64");
           return { ...item, mii_data: miiDataEncoded };
         });
-        res.json(formattedData);
+        res.json(data);
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: "Internal server error" });
@@ -29,12 +32,12 @@ router.get("/api/plaza/top", async (req, res) => {
 
 router.get("/api/plaza/popular", async (req, res) => {
   try {
-    const data = await db.many("SELECT * FROM miis ORDER BY entry_id DESC");
-    const formattedData = data.map((item) => {
+    const data_response = await db.many("SELECT * FROM miis ORDER BY entry_id DESC");
+    const data = data_response.map((item) => {
       const miiDataEncoded = item.mii_data.toString("base64");
       return { ...item, mii_data: miiDataEncoded };
     });
-    res.json(formattedData);
+    res.json(data);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal server error" });
@@ -43,12 +46,12 @@ router.get("/api/plaza/popular", async (req, res) => {
 
 router.get("/api/plaza/all", async (req, res) => {
   try {
-    const data = await db.many("SELECT entry_id, artisan_id, initials, skill, nickname, gender, country_id, mii_data, likes, perm_likes FROM miis ORDER BY entry_id");
-    const formattedData = data.map((item) => {
+    const data_response = await db.many("SELECT entry_id, artisan_id, initials, skill, nickname, gender, country_id, mii_data, likes, perm_likes FROM miis ORDER BY entry_id");
+    const data = data_response.map((item) => {
       const miiDataEncoded = item.mii_data.toString("base64");
       return { ...item, mii_data: miiDataEncoded };
     });
-    res.json(formattedData);
+    res.json(data);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal server error" });
@@ -68,16 +71,16 @@ router.get("/api/contests", async (req, res) => {
 router.post("/api/contests/contest", async (req, res) => {
   try {
     const { contest_id } = req.body;
-    const contestData = await db.oneOrNone(
+    const contest_data = await db.oneOrNone(
       "SELECT contest_id, has_thumbnail, english_name, status, open_time, close_time, has_souvenir FROM contests WHERE contest_id = $1",
       [contest_id]
     );
-    const entriesData = await db.manyOrNone("SELECT artisan_id, country_id, mii_data, likes, rank FROM contest_miis WHERE contest_id = $1", [contest_id]);
-    const formattedEntriesData = entriesData.map((item) => {
+    const entriesData_response = await db.manyOrNone("SELECT artisan_id, country_id, mii_data, likes, rank FROM contest_miis WHERE contest_id = $1", [contest_id]);
+    const entries_data = entriesData_response.map((item) => {
       const miiDataEncoded = item.mii_data.toString("base64");
       return { ...item, mii_data: miiDataEncoded };
     });
-    res.json({ contestData, formattedEntriesData });
+    res.json({ contest_data, entries_data });
   } catch (error)
   {
     console.error(error);
@@ -99,23 +102,25 @@ router.get("/api/artisans", async (req, res) => {
 
 router.post("/api/artisans/artisan", async (req, res) => {
   try {
-    //fetch body data
     const { wii_number } = req.body
-    const artisandata = await db.oneOrNone(
-      "SELECT name, country_id, wii_number, number_of_posts, total_likes, is_master, last_post FROM artisans WHERE wii_number = $1",
+    const artisan_response = await db.oneOrNone(
+      "SELECT name, country_id, wii_number, mii_data, number_of_posts, total_likes, is_master, last_post FROM artisans WHERE wii_number = $1",
       [wii_number]
     );
-    const miidata = await db.manyOrNone(
-      "SELECT name, country_id, wii_number, number_of_posts, total_likes, is_master, last_post FROM miis WHERE artisan_id = $1",
-      artisandata.artisan_id
+    const miidata_response = await db.manyOrNone(
+      "SELECT entry_id, initials, skill, nickname, gender, country_id, mii_data, likes, perm_likes FROM miis WHERE artisan_id = $1",
+      [artisan_response.artisan_id]
     );
 
-    const formattedArtisanData = { ...artisandata, mii_data: artisandata.mii_data.toString("base64") };
-    const formattedMiiData = data.map((item) => {
-      const miiDataEncoded = item.mii_data.toString("base64");
+    const artisan_data = {
+      ...artisan_response,
+      mii_data: artisan_response.mii_data.toString("base64"),
+    };
+    const miis_data = miidata_response.map((item) => {
+      const miiDataEncoded = item.miidataresponse.toString("base64");
       return { ...item, mii_data: miiDataEncoded };
     });
-    res.json({ formattedArtisanData, formattedMiiData });
+    res.json({ artisan_data, miis_data });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal server error" });
@@ -125,21 +130,24 @@ router.post("/api/artisans/artisan", async (req, res) => {
 router.post("/api/artisans/search", async (req, res) => {
   try {
     const { search } = req.body;
-    let data;
+    let data_response;
     if (isNaN(search)) {
-      data = await db.any("SELECT name, country_id, wii_number, mii_data number_of_posts, total_likes, is_master, last_post FROM artisans WHERE name ILIKE $1", [`%${search}%`]);
+      data_response = await db.any(
+        "SELECT name, country_id, wii_number, mii_data, number_of_posts, total_likes, is_master, last_post FROM artisans WHERE name ILIKE $1",
+        [`%${search}%`]
+      );
     } else {
       const wii_number = BigInt(search);
-      data = await db.any(
-        "SELECT name, country_id, wii_number, mii_data number_of_posts, total_likes, is_master, last_post FROM artisans WHERE wii_number = $1",
+      data_response = await db.any(
+        "SELECT name, country_id, wii_number, mii_data, number_of_posts, total_likes, is_master, last_post FROM artisans WHERE wii_number = $1",
         [wii_number]
       );
     }
-    const formattedData = data.map((item) => {
+    const data = data_response.map((item) => {
       const miiDataEncoded = item.mii_data.toString("base64");
       return { ...item, mii_data: miiDataEncoded };
     });
-    res.json(formattedData);
+    res.json(data);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal server error" });
