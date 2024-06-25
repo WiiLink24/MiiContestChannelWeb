@@ -58,6 +58,29 @@ router.get("/api/plaza/all", async (req, res) => {
   }
 });
 
+router.get("/api/plaza/search", async (req, res) => {
+  try {
+    const { search } = req.query;
+    let data_response;
+    if (search.length > 2) {
+      data_response = await db.any(
+      "SELECT entry_id, artisan_id, initials, skill, nickname, gender, country_id, mii_data, likes, perm_likes FROM miis WHERE initials = $1", [search]
+      );
+    } else {
+      data_response = await db.any(
+      "SELECT entry_id, artisan_id, initials, skill, nickname, gender, country_id, mii_data, likes, perm_likes FROM miis WHERE nickname ILIKE $1", [`%${search}%`]
+      );
+    }
+    const data = data_response.map((item) => {
+      const miiDataEncoded = item.mii_data.toString("base64");
+      return { ...item, mii_data: miiDataEncoded };
+    })
+    res.json(data);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }});
+
 router.get("/api/contests", async (req, res) => {
   try {
     const data = await db.many("SELECT contest_id, has_thumbnail, english_name, status, open_time, close_time, has_souvenir FROM contests ORDER BY contest_id");
