@@ -6,7 +6,7 @@ import { RouterView, RouterLink } from 'vue-router'
   <header>
     <nav>
       <RouterLink to="/">Home</RouterLink> |
-      <RouterLink to="/top">Top 50</RouterLink>
+      <RouterLink to="/plaza/top">Top 50</RouterLink>
     </nav>
   </header>
   <main>
