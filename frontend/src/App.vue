@@ -1,15 +1,11 @@
 <script setup lang="ts">
 import { RouterView, RouterLink } from 'vue-router'
+import HeaderPage from '@/components/HeaderPage.vue'
 </script>
 
 <template>
-  <header>
-    <nav>
-      <RouterLink to="/">Home</RouterLink> |
-      <RouterLink to="/plaza/top">Top 50</RouterLink>
-    </nav>
-  </header>
-  <main>
+  <HeaderPage />
+  <main class="bg-white">
     <Suspense>
       <RouterView />
     </Suspense>

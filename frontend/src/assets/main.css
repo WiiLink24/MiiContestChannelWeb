@@ -4,6 +4,6 @@
 
 @layer utilities {
     .container {
-      @apply max-w-screen-xl mx-auto lg:px-32 md:px-20 sm:px-10;
+      @apply max-w-screen-xl mx-auto lg:px-24 md:px-20 sm:px-10;
     }
 }
