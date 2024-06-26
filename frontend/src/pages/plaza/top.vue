@@ -1,33 +1,49 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
+import miicard from '@/components/cards/miicard.vue'
 
-const top50 = ref([])
+interface TopItem {
+  entry_id: number;
+  artisan_id: number;
+  initials: string;
+  skill: string;
+  nickname: string;
+  gender: string;
+  country_id: number;
+  wii_number: string;
+  mii_data: string;
+}
+
+const top50 = ref<TopItem[]>([])
 
 onMounted(() => {
-    axios.get('http://localhost:3000/api/top')
-        .then(response => {
-            top50.value = response.data
-        })
-        .catch(error => {
-            console.error(error)
-        })
-    
-    console.log(top50.value)
+  axios
+    .get('http://localhost:3000/api/plaza/top')
+    .then((response) => {
+      top50.value = response.data
+    })
+    .catch((error) => {
+      console.error("An exception has been caught: ", error)
+    })
+
+  console.log(top50.value)
 })
 </script>
 
 <template>
-    <h1>Top 50</h1>
-    <div v-for="item in top50">
-        <p>{{ item.entry_id }}</p>
-        <p>{{ item.artisan_id }}</p>
-        <p>{{ item.initials }}</p>
-        <p>{{ item.skill }}</p>
-        <p>{{ item.nickname }}</p>
-        <p>{{ item.gender }}</p>
-        <p>{{ item.country_id }}</p>
-        <p>{{ item.wii_number }}</p>
-        <p>{{ item.mii_data  }}</p>
-    </div>
+  <h1>Top 50</h1>
+  <div v-for="item in top50">
+    <miicard
+      :entry_id="item.entry_id"
+      :artisan_id="item.artisan_id"
+      :initials="item.initials"
+      :skill="item.skill"
+      :nickname="item.nickname"
+      :gender="item.gender"
+      :country_id="item.country_id"
+      :wii_number="item.wii_number"
+      :mii_data="item.mii_data"
+    />
+  </div>
 </template>

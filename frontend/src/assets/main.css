@@ -6,4 +6,57 @@
     .container {
       @apply max-w-screen-xl mx-auto lg:px-24 md:px-20 sm:px-10;
     }
+
+    .cmoc-bg {
+      background: url('https://rc24.xyz/goodies/wallpapers/CMO_Channel_BG_orange_1600x900.png');
+      background-size: cover;
+    }
+
+    .header-link {
+      transition: 0.3s;
+      padding:10px;
+      border-radius: 8px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header-link:hover {
+      transform: scale(1.02) !important;
+      background-color: #ffffff10;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      padding-left: 15px;
+      padding-right: 15px;
+      border-radius: 8px;
+      transition: 0.3s;
+      overflow: hidden;
+    }
+
+    .header-link:active {
+      transform: scale(0.97) !important;
+      background-color: #ffffff40;
+      transition: 0.1s;
+    }
+
+    .header-link::after {
+      content: "";
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: #ffffff50;
+      transition: 0.2s;
+    }
+
+    .header-link:hover::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: #ffffff50;
+      transition: 0.2s;
+    }
 }

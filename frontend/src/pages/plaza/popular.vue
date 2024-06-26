@@ -4,4 +4,5 @@
 
 <template>
     <h1>Popular Miis</h1>
+    
 </template>
