@@ -5,7 +5,7 @@ export interface Mii {
     skill: string;
     nickname: string;
     gender: 1 | 2;
-    countr_id: number;
+    country_id: number;
     mii_data: string;
     likes: number;
     perm_likes: number;

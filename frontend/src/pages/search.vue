@@ -35,7 +35,9 @@ const searchQuery = async () => {
         </div>
         <div v-if="search_results">
             <h2>Results</h2>
-            <MiiCard v-for="result in search_results" :key="result.entry_id" v-bind="result" />
+            <ul class="grid grid-cols-5 gap-10">
+                <MiiCard v-for="result in search_results" :key="result.entry_id" v-bind="result" />
+            </ul>
         </div>
     </div>
 </template>

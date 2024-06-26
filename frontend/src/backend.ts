@@ -40,3 +40,47 @@ export async function fetchSearch(type: string, query: string) {
         return response.data
     }
 }
+
+
+export function renderMii(base64String: string) {
+  // Decode base64 string
+  const binaryString = atob(base64String)
+  const binaryLen = binaryString.length
+  // Create binary array from base64 decoded string
+  const bytes = new Uint8Array(binaryLen)
+  // Fill the binary array
+  for (let i = 0; i < binaryLen; i++) {
+    const ascii = binaryString.charCodeAt(i)
+    bytes[i] = ascii
+  }
+
+  // Create a blob object
+  const blob = new Blob([bytes], { type: 'application/octet-stream' })
+
+  // Create a file object from the blob
+  const file = new File([blob], 'file.miigx')
+
+  // Send the file to the server
+  const formData = new FormData()
+  formData.append('platform', 'wii')
+  formData.append('data', file)
+
+  // Use larsen's funky studio.cgi to get the data needed to render the mii
+  return fetch('https://miicontestp.wii.rc24.xyz/cgi-bin/studio.cgi', {
+    method: 'POST',
+    body: formData
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      const mii = data.mii
+
+      // Render the mii using Nintendo's servers
+      const src =
+        'https://studio.mii.nintendo.com/miis/image.png?data=' +
+        mii +
+        '&type=face_only&expression=normal&width=270&bgColor=FFFFFF00'
+
+      // Return the mii image
+      return src
+    })
+}

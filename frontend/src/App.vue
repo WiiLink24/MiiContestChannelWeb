@@ -5,7 +5,7 @@ import HeaderPage from '@/components/HeaderPage.vue'
 
 <template>
   <HeaderPage />
-  <main class="bg-white">
+  <main class="bg-white dark:bg-slate-800 dark:text-white">
     <Suspense>
       <RouterView />
     </Suspense>
