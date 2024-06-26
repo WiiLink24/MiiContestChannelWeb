@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
-import miicard from '@/components/cards/miicard.vue'
+import MiiCard from '@/components/MiiCard.vue'
+import { fetchPlazaTop } from '@/backend';
 
 interface TopItem {
   entry_id: number;
@@ -17,33 +18,18 @@ interface TopItem {
 
 const top50 = ref<TopItem[]>([])
 
-onMounted(() => {
-  axios
-    .get('http://localhost:3000/api/plaza/top')
-    .then((response) => {
-      top50.value = response.data
-    })
-    .catch((error) => {
-      console.error("An exception has been caught: ", error)
-    })
+onMounted(async () => {
+  top50.value = await fetchPlazaTop();
 
   console.log(top50.value)
 })
 </script>
 
 <template>
-  <h1>Top 50</h1>
-  <div v-for="item in top50">
-    <miicard
-      :entry_id="item.entry_id"
-      :artisan_id="item.artisan_id"
-      :initials="item.initials"
-      :skill="item.skill"
-      :nickname="item.nickname"
-      :gender="item.gender"
-      :country_id="item.country_id"
-      :wii_number="item.wii_number"
-      :mii_data="item.mii_data"
-    />
+  <div class="container">
+    <h1>Top 50</h1>
+    <ul class="grid grid-cols-5 gap-10">
+      <MiiCard v-for="item in top50" :key="top50.entry_id" v-bind="item" />
+    </ul>
   </div>
 </template>

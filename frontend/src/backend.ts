@@ -41,6 +41,20 @@ export async function fetchSearch(type: string, query: string) {
     }
 }
 
+export async function fetchArtisan(wii_number: string) {
+    const response = await axios.post(`${api}/api/artisans/artisan`, {
+        wii_number: wii_number
+    })
+    return response.data
+}
+
+export async function fetchContest(contest_id: number) {
+    const response = await axios.post(`${api}/api/contests/contest`, {
+        contest_id: contest_id
+    })
+    return response.data
+}
+
 
 export function renderMii(base64String: string) {
   // Decode base64 string

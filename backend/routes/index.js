@@ -113,9 +113,13 @@ router.post("/api/contests/contest", async (req, res) => {
 
 router.get("/api/artisans", async (req, res) => {
   try {
-    const data = await db.many(
-      "SELECT name, country_id, wii_number, mii_data number_of_posts, total_likes, is_master, last_post FROM artisans ORDER BY artisan_id"
+    const data_response = await db.many(
+      "SELECT name, country_id, wii_number, mii_data, number_of_posts, total_likes, is_master, last_post FROM artisans ORDER BY artisan_id"
     );
+    const data = data_response.map((item) => {
+      const miiDataEncoded = item.mii_data.toString("base64");
+      return { ...item, mii_data: miiDataEncoded };
+    });
     res.json(data);
   } catch (error) {
     console.error(error);

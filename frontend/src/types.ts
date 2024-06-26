@@ -2,7 +2,7 @@ export interface Mii {
     entry_id: number;
     artisan_id: number;
     initials: string;
-    skill: string;
+    skill: number;
     nickname: string;
     gender: 1 | 2;
     country_id: number;
