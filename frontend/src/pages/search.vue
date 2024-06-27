@@ -2,6 +2,7 @@
 import { ref } from 'vue';
 import { fetchSearch } from '@/backend'
 import MiiCard from '@/components/MiiCard.vue'
+import ArtisanCard from '@/components/ArtisanCard.vue';
 
 let search_field = ref('');
 let search_type = ref('miis');
@@ -30,13 +31,16 @@ const searchQuery = async () => {
                     <label>Artisans</label>
                 </li>
             </ul>
-            <input class="bg-gray-100 border" v-model="search_field" type="text" placeholder="Search..." />
+            <input class="bg-gray-100 border text-black" v-model="search_field" type="text" placeholder="Search..." />
             <button @click="searchQuery()">Search</button>
         </div>
         <div v-if="search_results">
             <h2>Results</h2>
-            <ul class="grid grid-cols-5 gap-10">
+            <ul class="grid grid-cols-5 gap-10" v-if="search_type === 'miis'">
                 <MiiCard v-for="result in search_results" :key="result.entry_id" v-bind="result" />
+            </ul>
+            <ul class="grid grid-cols-5 gap-10" v-else-if="search_type === 'artisans'">
+                <ArtisanCard v-for="result in search_results" :key="result.entry_id" v-bind="result" />
             </ul>
         </div>
     </div>

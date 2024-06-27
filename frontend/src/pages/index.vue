@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { fetchContests } from '@/backend'
+import type { Contest } from '@/types';
 
 const contests = ref<Contest[]>([])
 console.log(fetchContests())
@@ -14,7 +15,7 @@ onMounted(async () => {
   <div class="container h-screen py-20">
     <div class="flex w-full h-auto">
       <div class="cmoc-bg m-6">
-        <div v-for="contest in contests" :key="contest.id" class="p-8">
+        <div v-for="contest in contests" :key="contest.contest_id" class="p-8">
           <div
         class="w-100 h-50 shadow-[0px 0px 60px #d3d68c60]"
       >
@@ -26,7 +27,7 @@ onMounted(async () => {
           </p>
           <p>{{  contest.status }}</p>
           <div class="mt-2 bg-white p-1 rounded-xl flex flex-row items-center">
-            <img :src="`http://127.0.0.1:9018/assets/contest/${contest.contest_id}/thumbnail.jpg`"
+            <img :src="`http://127.0.0.1:9011/assets/contest/${contest.contest_id}/thumbnail.jpg`"
               alt="Thumbnail Preview"
               class="p-1 mr-40 w-32 h-32 rounded-xl"
             />

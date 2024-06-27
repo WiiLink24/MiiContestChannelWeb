@@ -35,7 +35,7 @@ export async function fetchSearch(type: string, query: string) {
         return response.data
     } else if (type === 'artisans') {
         const response = await axios.post(`${api}/api/artisans/search`, {
-            wii_number: query
+            search: query
         })
         return response.data
     }
