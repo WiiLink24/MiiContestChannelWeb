@@ -11,6 +11,7 @@ const country_flag = Object.values(countries).find(country => country.id === pro
 
 <template>
     <li class="p-3 rounded-lg border dark:border-slate-600 dark:bg-slate-700 dark:text-white ">
+        <RouterLink :to="`/artisans/${wii_number}`">
         <img class="w-24" :src="mii_img" />
         <section class="inline-flex gap-4">
             <h1>{{ name }}</h1>
@@ -19,5 +20,6 @@ const country_flag = Object.values(countries).find(country => country.id === pro
             <span>{{ country_flag }}</span>
             <span><i class="fa-solid fa-chevron-up"></i>{{ total_likes }}</span>
         </div>
+        </RouterLink>
     </li>
 </template>

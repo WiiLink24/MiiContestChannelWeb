@@ -8,6 +8,15 @@ const db = pgp(
   `postgres://${process.env.POSTGRES_USERNAME}:${process.env.POSTGRES_PASSWORD}@${process.env.POSTGRES_HOST}/${process.env.POSTGRES_DB}`
 );
 
+//pagination settings
+const PlazaPageSize = 50;
+const ContestPageSize = 50;
+const ArtisanPageSize = 50;
+
+const GetPagesMiis = `SELECT COUNT(*) FROM miis`;
+const GetPagesContests = `SELECT COUNT(*) FROM contests`;
+const GetPagesArtisans = `SELECT COUNT(*) FROM artisans`;
+
 /* GET home page. */
 router.get("/", function (req, res, next) {
   res.render("index", { title: "Express" });
@@ -32,12 +41,24 @@ router.get("/api/plaza/top", async (req, res) => {
 
 router.get("/api/plaza/popular", async (req, res) => {
   try {
-    const data_response = await db.many("SELECT * FROM miis ORDER BY entry_id DESC");
+    const page = req.query.page || 1;
+    //convert page to number
+    const pageNumber = parseInt(page);
+    //calculate offset
+    const offset = (page - 1) * PlazaPageSize;
+    const data_response = await db.many(`SELECT * FROM miis ORDER BY entry_id DESC LIMIT ${PlazaPageSize} OFFSET ${offset}`);
     const data = data_response.map((item) => {
       const miiDataEncoded = item.mii_data.toString("base64");
       return { ...item, mii_data: miiDataEncoded };
     });
-    res.json(data);
+
+    //calculate total pages
+    let total_items = await db.one(GetPagesMiis);
+    //get only the number of items
+    total_items = parseInt(total_items.count);
+    const total_pages = Math.ceil(total_items / PlazaPageSize);
+
+    res.json({total_pages, data});
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal server error" });
@@ -46,11 +67,16 @@ router.get("/api/plaza/popular", async (req, res) => {
 
 router.get("/api/plaza/all", async (req, res) => {
   try {
+    const { page } = req.params;
     const data_response = await db.many("SELECT entry_id, artisan_id, initials, skill, nickname, gender, country_id, mii_data, likes, perm_likes FROM miis ORDER BY entry_id");
     const data = data_response.map((item) => {
       const miiDataEncoded = item.mii_data.toString("base64");
       return { ...item, mii_data: miiDataEncoded };
     });
+
+    //pagination
+    
+
     res.json(data);
   } catch (error) {
     console.error(error);
@@ -113,6 +139,13 @@ router.post("/api/contests/contest", async (req, res) => {
 
 router.get("/api/artisans", async (req, res) => {
   try {
+    const page = req.query.page || 1;
+    //convert page to number
+    const pageNumber = parseInt(page);
+
+    //calculate offset
+    const offset = (page - 1) * ArtisanPageSize;
+
     const data_response = await db.many(
       "SELECT name, country_id, wii_number, mii_data, number_of_posts, total_likes, is_master, last_post FROM artisans ORDER BY artisan_id"
     );
@@ -120,7 +153,14 @@ router.get("/api/artisans", async (req, res) => {
       const miiDataEncoded = item.mii_data.toString("base64");
       return { ...item, mii_data: miiDataEncoded };
     });
-    res.json(data);
+
+    //calculate total pages
+    let total_items = await db.one(GetPagesArtisans);
+    //get only the number of items
+    total_items = parseInt(total_items.count);
+    const total_pages = Math.ceil(total_items / ArtisanPageSize);
+
+    res.json({total_pages, data});
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal server error" });

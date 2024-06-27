@@ -32,12 +32,6 @@
       overflow: hidden;
     }
 
-    .header-link:active {
-      transform: scale(0.97) !important;
-      background-color: #ffffff40;
-      transition: 0.1s;
-    }
-
     .header-link::after {
       content: "";
       position: absolute;
