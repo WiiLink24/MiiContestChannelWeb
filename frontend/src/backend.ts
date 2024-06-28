@@ -22,8 +22,8 @@ export async function fetchPlazaTop() {
     return response.data
 }
 
-export async function fetchPlazaNew() {
-    const response = await axios.get(`${api}/api/plaza/popular`)
+export async function fetchPlazaNew(page: number) {
+    const response = await axios.get(`${api}/api/plaza/popular?page=${page}`)
     return response.data
 }
 

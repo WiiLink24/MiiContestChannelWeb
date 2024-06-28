@@ -51,7 +51,7 @@ onMounted(async () => {
           Get updated info on all running contests, as well as download your favorite Mii Characters
           from our service.
         </h2>
-        <a class="bg-[#2bca38] px-8 py-3 rounded-xl text-white border-2 border-gray-200/10"
+        <a class="bg-[#2bca38] px-8 py-3 rounded-xl text-white border-2 border-gray-200/10" href="https://www.wiilink24.com/"
           >Install WiiLink</a
         >
         <!-- Display contests -->

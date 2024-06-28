@@ -13,14 +13,18 @@ const PlazaPageSize = 50;
 const ContestPageSize = 50;
 const ArtisanPageSize = 50;
 
+function calculatePages(totalItems, pageSize) {
+  
+}
+
 const GetPagesMiis = `SELECT COUNT(*) FROM miis`;
 const GetPagesContests = `SELECT COUNT(*) FROM contests`;
 const GetPagesArtisans = `SELECT COUNT(*) FROM artisans`;
 
 /* GET home page. */
-router.get("/", function (req, res, next) {
+/* router.get("/", function (req, res, next) {
   res.render("index", { title: "Express" });
-});
+}); */
 
 router.get("/api/plaza/top", async (req, res) => {
     try {

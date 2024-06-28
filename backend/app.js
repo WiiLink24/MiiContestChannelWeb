@@ -10,7 +10,9 @@ var app = express();
 
 app.use(express.json());
 app.use(cors());
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "public/dist")));
+
+app.use("/", indexRouter);
 
 // Adds rate limiting
 const limiter = rateLimit({
@@ -23,7 +25,9 @@ const limiter = rateLimit({
 
 app.use(limiter);
 
-app.use("/", indexRouter);
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "public/dist/index.html"));
+});
 
 app.listen(port, () => {
   console.log(`CMOC Viewer is running on ${port}`);

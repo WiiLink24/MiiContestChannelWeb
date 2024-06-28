@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import { useRoute } from 'vue-router';
+import { ref, onMounted, watch } from 'vue'
+import { useRoute, useRouter } from 'vue-router';
 import { fetchPlazaNew } from '@/backend';
 import MiiCard from '@/components/MiiCard.vue';
 import PageNavigation from '@/components/PageNavigation.vue';
@@ -9,16 +9,22 @@ const plaza_new = ref();
 const plaza_new_data = ref();
 
 const route = useRoute();
+const router = useRouter()
 const current_page = ref(route.query.page ? parseInt(route.query.page as string) : 1);
 
 onMounted(async () => {
-    plaza_new.value = await fetchPlazaNew();
+    plaza_new.value = await fetchPlazaNew(current_page.value);
     plaza_new_data.value = plaza_new.value.data;
 })
 
 const updateCurrentPage = (newPage: number) => {
     current_page.value = newPage;
 };
+
+watch(current_page, async (newValue) => {
+    router.push({ query: { ...route.query, page: newValue.toString() } });
+    plaza_new.value = await fetchPlazaNew(current_page.value);
+});
 
 </script>
 
