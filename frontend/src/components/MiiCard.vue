@@ -58,7 +58,7 @@ const genderIcon = computed(() => {
     @mousemove="handleMouseMove"
     @mouseleave="resetTransform"
     :class="rankingClass"
-    class="p-3 rounded-lg border flex flex-col justify-end relative z-20 dark:border-slate-600 dark:bg-slate-700 dark:text-white hover:shadow-xl transition-shadow overflow-hidden backdrop-blur-md bg-opacity-50"
+    class="p-3 rounded-lg border flex flex-col justify-end relative z-20 dark:border-slate-600/60 dark:bg-slate-700/60 dark:text-white hover:shadow-xl transition-shadow overflow-hidden backdrop-blur-md bg-opacity-50"
     ref="card"
   >
     <span
@@ -70,7 +70,7 @@ const genderIcon = computed(() => {
       <span class="self-end text-2xl" v-html="countryFlagHtml"></span>
       <img class="w-28 relative bottom-3" :src="mii_img" />
       <h1 class="text-3xl relative bottom-5">{{ nickname }}</h1>
-      <span class="w-full text-2xl flex items-center justify-between gap-3"
+      <span class="w-full text-2xl flex items-center justify-between gap-3 flex-wrap"
         ><l><i class="fa-solid fa-thumbs-up"></i> {{ perm_likes }}</l
         ><l><i :class="genderIcon"></i> | {{ skill }}</l></span
       >
@@ -139,7 +139,7 @@ export default {
       const rotateY = (mouseX / width) * 20 // Rotation around the Y axis
       const rotateX = (-mouseY / height) * 20 // Rotation around the X axis
 
-      card.style.transform = `perspective(800px) rotateY(${rotateY}deg) rotateX(${rotateX}deg)`
+      card.style.transform = `perspective(800px) rotateY(${rotateY}deg) rotateX(${rotateX}deg) scale(1.05)`
 
       // Use the card's rect for positioning the blur element
       const rect = card.getBoundingClientRect()
@@ -150,7 +150,7 @@ export default {
     resetTransform() {
       const card = this.$refs.card
       const blur = card.querySelector('.blur')
-      card.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg)'
+      card.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1)'
       blur.style.display = 'none'
     }
   }
