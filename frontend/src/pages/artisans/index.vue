@@ -2,6 +2,7 @@
 import { fetchArtisans } from '@/backend';
 import ArtisanCard from '@/components/ArtisanCard.vue';
 import PageNavigation from '@/components/PageNavigation.vue';
+import Title from '@/components/Title.vue';
 import { onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 
@@ -21,7 +22,7 @@ const updateCurrentPage = (newPage: number) => {
 
 <template>
     <div class="container">
-        <h1>Artisans</h1>
+        <Title name="Artisans" />
         <div v-if="artisans">
             <ul class="grid grid-cols-5 gap-10">
                 <ArtisanCard v-for="artisan in artisans.data" :key="artisan.wii_number" v-bind="artisan" />

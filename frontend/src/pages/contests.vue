@@ -2,6 +2,7 @@
 import { fetchContests } from '@/backend';
 import { ref, onMounted } from 'vue';
 import ContestCard from '@/components/ContestCard.vue';
+import Title from '@/components/Title.vue';
 
 import { RouterLink, RouterView } from 'vue-router'
 
@@ -19,7 +20,7 @@ onMounted(async () => {
 
 <template>
     <div class="container">
-        <h1>Contests</h1>
+        <Title name="Contests" />
         <nav class="pb-3 border-b border-white flex gap-5">
             <RouterLink to="/contests/active" activeClass="border-b-2 border-blue-400">Active Contests</RouterLink>
             <RouterLink to="/contests/previous" activeClass="border-b-2 border-blue-400">Previous Contests</RouterLink>

@@ -3,6 +3,7 @@ import { ref, onMounted, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router';
 import { fetchPlazaNew } from '@/backend';
 import MiiCard from '@/components/MiiCard.vue';
+import Title from '@/components/Title.vue'
 import PageNavigation from '@/components/PageNavigation.vue';
 
 const plaza_new = ref();
@@ -30,7 +31,7 @@ watch(current_page, async (newValue) => {
 
 <template>
     <div class="container">
-        <h1>Popular Miis</h1>
+        <Title name="Popular" />
         <div v-if="plaza_new">
             <ul class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-10">
                     <MiiCard v-for="mii in plaza_new_data" :key="mii.entry_id" v-bind="mii" />
