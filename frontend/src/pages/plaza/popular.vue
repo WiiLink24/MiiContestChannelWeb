@@ -36,7 +36,7 @@ watch(current_page, async (newValue) => {
   <div class="container translate-y-10">
     <Title name="Popular" />
     <p class="-translate-y-20 text-right opacity-45">
-      There are  Miis in the Plaza!
+      There are Miis in the Plaza!
     </p>
     <div v-if="plaza_new">
       <ul

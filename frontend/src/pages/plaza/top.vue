@@ -2,12 +2,21 @@
 import { ref, onMounted } from 'vue'
 import MiiCard from '@/components/MiiCard.vue'
 import Title from '@/components/Title.vue'
+import LoadingAnimation from '@/components/LoadingAnimation.vue'
 import { fetchPlazaTop } from '@/backend'
 
 const top50 = ref()
+const isLoading = ref(true)
 
 onMounted(async () => {
-  top50.value = await fetchPlazaTop()
+  try {
+    isLoading.value = true
+    top50.value = await fetchPlazaTop()
+  } catch (error) {
+    console.error(error)
+  } finally {
+    isLoading.value = false
+  }
 })
 </script>
 
@@ -21,8 +30,9 @@ onMounted(async () => {
     <p class="-translate-y-20 text-right opacity-45">
       These are the Top 50 Miis, sorted by number of likes!
     </p>
+    <LoadingAnimation v-if="isLoading" />
     <ul
-      class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-10 -translate-y-14"
+      class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-10 -translate-y-14" v-else
     >
       <MiiCard
         v-for="(item, index) in top50"
