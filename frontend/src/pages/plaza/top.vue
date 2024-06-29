@@ -33,25 +33,3 @@ onMounted(async () => {
     </ul>
   </div>
 </template>
-
-<style scoped>
-ul,
-li {
-  transition: 0.2s;
-}
-
-ul:hover li {
-  opacity: 0.5;
-  transition: 0.2s;
-}
-
-ul:not(:has(li:hover)) li {
-  opacity: 1;
-  transition: 0.2s;
-}
-
-ul li:hover {
-  opacity: 1;
-  transition: 0.2s;
-}
-</style>

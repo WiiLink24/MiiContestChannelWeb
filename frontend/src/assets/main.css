@@ -12,6 +12,14 @@
     background-size: cover;
   }
 
+  .tooltip {
+    @apply invisible absolute;
+  }
+  
+  .has-tooltip:hover .tooltip {
+    @apply visible z-50;
+  }
+
   .outline-text {
     -webkit-text-stroke-width: 3px;
     -webkit-text-stroke-color: #ffffff;

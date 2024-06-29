@@ -35,9 +35,12 @@ watch(current_page, async (newValue) => {
   />
   <div class="container translate-y-10">
     <Title name="Popular" />
+    <p class="-translate-y-20 text-right opacity-45">
+      There are  Miis in the Plaza!
+    </p>
     <div v-if="plaza_new">
       <ul
-        class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-10 -translate-y-10"
+        class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-10 -translate-y-14"
       >
         <MiiCard v-for="mii in plaza_new_data" :key="mii.entry_id" v-bind="mii" />
       </ul>

@@ -3,6 +3,7 @@ import { ref } from 'vue';
 import { fetchSearch } from '@/backend'
 import MiiCard from '@/components/MiiCard.vue'
 import ArtisanCard from '@/components/ArtisanCard.vue';
+import Title from '@/components/Title.vue'
 
 let search_field = ref('');
 let search_type = ref('miis');
@@ -17,7 +18,7 @@ const searchQuery = async () => {
 
 <template>
     <div class="container">
-        <h1>Search</h1>
+        <Title icon="fa-solid fa-magnifying-glass" name="Search" />
         <h2>Search for Miis or Artisans!</h2>
         <h3>Miis require the name or initials, while artisans require the Wii number of the user.</h3>
         <div class="flex flex-col">
