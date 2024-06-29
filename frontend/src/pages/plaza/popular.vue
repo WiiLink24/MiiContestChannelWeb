@@ -33,7 +33,7 @@ watch(current_page, async (newValue) => {
     <div class="container">
         <Title name="Popular" />
         <div v-if="plaza_new">
-            <ul class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-10">
+            <ul class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-10 -translate-y-10">
                     <MiiCard v-for="mii in plaza_new_data" :key="mii.entry_id" v-bind="mii" />
                 </ul>
             <PageNavigation :current_page="current_page" :total_pages="plaza_new.total_pages" @update:current_page="updateCurrentPage"/>

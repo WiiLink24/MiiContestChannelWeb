@@ -15,7 +15,7 @@ onMounted(() => {
     // Example calculations for translateY and opacity
     // Adjust these calculations based on your specific needs
     const translateY = Math.min(100, scrollY / 2); // Example: translateY increases with scroll, up to a max of 100
-    const opacity = Math.max(0, 0.05 - scrollY / 3000); // Example: opacity decreases with scroll, down to a minimum of 0
+    const opacity = Math.max(0, 0.5 - scrollY / 100); // Example: opacity decreases with scroll, down to a minimum of 0
 
     titleElement.style.transform = `translateY(${translateY}px)`;
     titleElement.style.opacity = `${opacity}`;
@@ -31,5 +31,5 @@ onMounted(() => {
 </script>
 
 <template>
-    <h1 id="title" class="text-9xl font-black outline-text uppercase opacity-5 translate-y-10">{{ title }}</h1>
+    <h1 id="title" class="text-9xl font-black outline-text uppercase opacity-50 z-5 relative">{{ title }}</h1>
 </template>

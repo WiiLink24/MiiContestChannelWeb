@@ -27,30 +27,56 @@ const countryFlagHtml = computed(() => {
   }
   return ''
 })
+
+const rankingClass = computed(() => {
+  switch (props.ranking) {
+    case 1:
+      return 'bg-gold'
+    case 2:
+      return 'bg-silver'
+    case 3:
+      return 'bg-bronze'
+    default:
+      return ''
+  }
+})
+
+const genderIcon = computed(() => {
+  switch (props.gender) {
+    case 1:
+      return 'fa-solid fa-male'
+    case 2:
+      return 'fa-solid fa-female'
+    default:
+      return ''
+  }
+})
 </script>
 
 <template>
   <li
     @mousemove="handleMouseMove"
     @mouseleave="resetTransform"
-    class="p-3 rounded-lg border flex flex-col justify-end relative z-20 dark:border-slate-600 dark:bg-slate-700 dark:text-white hover:shadow-xl transition-shadow overflow-hidden"
+    :class="rankingClass"
+    class="p-3 rounded-lg border flex flex-col justify-end relative z-20 dark:border-slate-600 dark:bg-slate-700 dark:text-white hover:shadow-xl transition-shadow overflow-hidden backdrop-blur-md bg-opacity-50"
     ref="card"
   >
     <span
       v-if="ranking"
-      class="text-7xl font-bold text-gray-600 opacity-50 z-0 absolute select-none self-start -ml-2 mb-[9.75rem]"
+      class="text-7xl font-bold text-white opacity-5 z-0 absolute select-none self-start -ml-2 mb-[9.75rem]"
       >{{ ranking }}</span
     >
     <div class="z-10 flex flex-col w-full items-center">
       <span class="self-end text-2xl" v-html="countryFlagHtml"></span>
       <img class="w-28 relative bottom-3" :src="mii_img" />
-      <h1 class="text-3xl">{{ nickname }}</h1>
-      <span class="text-2xl inline-flex items-center gap-3 self-start"
-        ><i class="fa-solid fa-thumbs-up"></i>{{ perm_likes }}</span
+      <h1 class="text-3xl relative bottom-5">{{ nickname }}</h1>
+      <span class="w-full text-2xl flex items-center justify-between gap-3"
+        ><l><i class="fa-solid fa-thumbs-up"></i> {{ perm_likes }}</l
+        ><l><i :class="genderIcon"></i> | {{ skill }}</l></span
       >
     </div>
     <span
-      class="text-8xl font-bold text-gray-600 opacity-50 z-0 absolute -mr-3.5 -mb-4 select-none self-end"
+      class="text-8xl font-bold text-white opacity-5 z-0 absolute -mr-3.5 -mb-4 select-none self-end"
       >{{ initials }}</span
     >
     <div class="blur"></div>
@@ -75,6 +101,22 @@ const countryFlagHtml = computed(() => {
   pointer-events: none;
   z-index: 0;
   display: none;
+}
+
+.bg-gold {
+  background: linear-gradient(145deg, #ffd70020, #ffdf0030, #ffd70030);
+  border: 1px solid #ffd70030;
+  grid-column: span 2;
+}
+
+.bg-silver {
+  background: linear-gradient(145deg, #c0c0c020, #dcdcdc30, #c0c0c030);
+  border: 1px solid #dcdcdc30;
+}
+
+.bg-bronze {
+  background: linear-gradient(145deg, #cd7f3220, #e07a2d30, #cd7f3230);
+  border: 1px solid #e07a2d30;
 }
 </style>
 
