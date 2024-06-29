@@ -9,6 +9,7 @@ export interface Mii {
     mii_data: string;
     likes: number;
     perm_likes: number;
+    ranking?: number;
 }
 
 export interface Contest {

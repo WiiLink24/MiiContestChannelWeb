@@ -11,18 +11,14 @@ const country_flag = computed(() => countries[props.country_id]?.flag);
 </script>
 
 <template>
-    <li class="p-3 rounded-lg border dark:border-slate-600 dark:bg-slate-700 dark:text-white">
-        <img class="w-24" :src="mii_img" />
-        <section class="inline-flex gap-4">
-            <h1>{{ nickname }}</h1>
-            <span>{{ initials }}</span>
-        </section>
-        <div class="flex items-center px-4 justify-center gap-5">
-            <i v-if="gender === 1" class="fa-solid fa-person"></i>
-            <i v-else-if="gender === 2" class="fa-solid fa-person-dress"></i>
-            <span>{{ country_flag }}</span>
-            <span><i class="fa-solid fa-chevron-up"></i>{{ likes }}</span>
-            <span><i class="fa-solid fa-chevrons-up"></i>{{ perm_likes }}</span>
+    <li class="p-3 rounded-lg border flex flex-col justify-end relative z-20 dark:border-slate-600 dark:bg-slate-700 dark:text-white">
+        <span v-if="ranking" class="text-7xl font-bold text-gray-600 z-0 absolute select-none self-start -ml-2 mb-[9.75rem]">{{ ranking }}</span>
+        <div class="z-10 flex flex-col w-full items-center">
+            <span class="self-end text-2xl">{{ country_flag }}</span>
+            <img class="w-28 relative bottom-3" :src="mii_img" />
+            <h1 class="text-3xl">{{ nickname }}</h1>
+            <span class="text-2xl inline-flex items-center gap-3 self-start"><i class="fa-solid fa-thumbs-up"></i>{{ perm_likes }}</span>
         </div>
+        <span class="text-8xl font-bold text-gray-600 z-0 absolute -mr-3.5 -mb-4 select-none self-end">{{ initials }}</span>
     </li>
 </template>

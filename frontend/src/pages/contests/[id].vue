@@ -3,6 +3,7 @@ import { onMounted, ref } from 'vue';
 import { fetchContest } from '@/backend';
 import { useRoute } from 'vue-router';
 import MiiCard from '@/components/MiiCard.vue';
+import ReturnBtn from '@/components/ReturnBtn.vue';
 
 const route = useRoute();
 const contestId = ref(route.params.id)
@@ -23,6 +24,7 @@ onMounted(async () => {
 
 <template>
     <div class="container">
+        <ReturnBtn />
         <div v-if="contest">
             <h1>Contest Results for {{ contest_data.english_name }}</h1>
         </div>
