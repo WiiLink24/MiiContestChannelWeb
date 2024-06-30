@@ -113,7 +113,7 @@ const dragEnd = () => {
             position: 'absolute',
             top: positions[contest.contest_id]?.top + 'px',
             left: positions[contest.contest_id]?.left + 'px',
-            transform: 'rotate(' + positions[contest.contest_id]?.rotation + 'deg)',
+            rotate: positions[contest.contest_id]?.rotation + 'deg',
             animationDelay: index * 0.2 + 's'
           }"
           @mousedown="(e) => dragStart(contest.contest_id, e)"
@@ -170,11 +170,11 @@ const dragEnd = () => {
 @keyframes fadeIn {
   from {
     opacity: 0;
-    zoom: 1.05;
+    transform: scale(1.05);
   }
   to {
     opacity: 1;
-    zoom: 1;
+    transform: scale(1);
   }
 }
 .draggable {
