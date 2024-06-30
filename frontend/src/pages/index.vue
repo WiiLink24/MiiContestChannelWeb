@@ -94,10 +94,12 @@ const dragEnd = () => {
         <div
           class="p-2 rounded-3xl border-[5px] border-white bg-[rgb(76,130,163)] shadow-2xl z-10 relative"
         >
+        <div class="flex flex-row items-center justify-between">
           <p class="ml-1 text-white text-lg">
             <span id="randomInt"></span> days remaining
           </p>
           <p>{{  contest.status }}</p>
+          </div>
           <div class="mt-2 bg-white p-1 rounded-xl flex flex-row items-center">
             <img :src="`http://127.0.0.1:9011/assets/contest/${contest.contest_id}/thumbnail.jpg`"
               alt="Thumbnail Preview"
