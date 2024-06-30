@@ -8,8 +8,9 @@
   }
 
   .cmoc-bg {
-    background: url('https://rc24.xyz/goodies/wallpapers/CMO_Channel_BG_orange_1600x900.png');
-    background-size: cover;
+    background: url('https://rc24.xyz/goodies/wallpapers/CMO_Channel_BG_1600x900.png') no-repeat center center / cover;
+    background-color: rgba(32, 41, 58, 0.6);
+    background-blend-mode: multiply;
   }
 
   .tooltip {
