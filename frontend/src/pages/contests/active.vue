@@ -14,11 +14,12 @@ onMounted(async () => {
 
 <template>
     <div>
-        <h1>Active Contests</h1>
-        <ul v-if="active_contests === Array(0)"  class="grid grid-cols-3">
+        <ul class="flex flex-col gap-3" v-if="active_contests">
             <ContestCard v-for="contest in active_contests" :key="contest.id" v-bind="contest" />
         </ul>
-        <p v-else>There is no contest currently running :(</p>
+        <p v-else>
+            No results
+        </p>
     </div>
 
 </template>

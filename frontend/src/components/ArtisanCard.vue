@@ -42,7 +42,7 @@ const isMaster = computed(() => {
       @mousemove="handleMouseMove"
       @mouseleave="resetTransform"
       :class="rankingClass"
-      class="p-3 rounded-lg border flex flex-col justify-end relative z-20 dark:border-slate-600/60 dark:bg-slate-700/60 dark:text-white hover:shadow-xl transition-shadow overflow-hidden backdrop-blur-md bg-opacity-50"
+      class="p-3 rounded-xl border flex flex-col justify-end relative z-20 dark:border-slate-600/60 dark:bg-slate-700/60 dark:text-white hover:shadow-xl transition-shadow overflow-hidden backdrop-blur-md bg-opacity-50"
       ref="card"
     >
     <RouterLink :to="`/artisans/${wii_number}`" class="hover:no-underline">

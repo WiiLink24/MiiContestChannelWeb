@@ -14,8 +14,7 @@ onMounted(async () => {
 
 <template>
     <div>
-        <h1>Previous Contests</h1>
-        <ul class="grid grid-cols-3">
+        <ul class="flex flex-col gap-3">
             <ContestCard v-for="contest in ended_contests" :key="contest.id" v-bind="contest" />
         </ul>
     </div>

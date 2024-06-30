@@ -62,7 +62,7 @@ const genderIcon = computed(() => {
     backgroundColor: isTooltipHovered ? '#36d14160' : '',
     border: isTooltipHovered ? '1px solid green' : ''
     }"
-    class="p-3 rounded-lg border flex flex-col justify-end relative z-20 dark:border-slate-600/60 dark:bg-slate-700/60 dark:text-white hover:shadow-xl transition-shadow overflow-hidden backdrop-blur-md bg-opacity-50"
+    class="p-3 rounded-xl border flex flex-col justify-end relative z-20 dark:border-slate-600/60 dark:bg-slate-700/60 dark:text-white hover:shadow-xl transition-shadow overflow-hidden backdrop-blur-md bg-opacity-50"
     ref="card"
   >
     <span
