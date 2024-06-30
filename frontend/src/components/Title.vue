@@ -34,7 +34,7 @@ onMounted(() => {
 <template>
   <h1
     id="title"
-    class="text-9xl font-black outline-text uppercase opacity-50 z-5 relative flex items-center justify-between"
+    class="text-9xl text-white/60 outline-text uppercase opacity-50 z-5 relative flex items-center justify-between"
   >
     {{ title }} <i v-if="icon" :class="icon" class="opacity-50"></i>
   </h1>

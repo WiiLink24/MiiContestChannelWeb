@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, nextTick } from 'vue'
+import { ref, onMounted } from 'vue'
 import { fetchContests } from '@/backend'
 import type { Contest } from '@/types'
 
@@ -19,7 +19,7 @@ onMounted(async () => {
     contests.value.forEach((contest) => {
       let positionSet = false
       while (!positionSet) {
-        const minLeft = width / 4
+        const minLeft = width / 2
         const randomLeft = minLeft + Math.random() * (width - 400 - minLeft)
         const randomTop = Math.random() * (height - 300)
         const randomRotation = Math.random() * 6 - 3
@@ -28,8 +28,8 @@ onMounted(async () => {
         let overlap = false
         for (const key in positions.value) {
           const pos = positions.value[key]
-          if (Math.abs(pos.left - randomLeft) < 200 && Math.abs(pos.top - randomTop) < 200) {
-            // Assuming 200px as the minimum distance to avoid overlap
+          // Increase the minimum distance to 300px for both left and top to avoid overlap
+          if (Math.abs(pos.left - randomLeft) < 300 && Math.abs(pos.top - randomTop) < 300) {
             overlap = true
             break
           }
@@ -56,8 +56,8 @@ const dragStart = (contestId, e) => {
   start.value.rotation = position.rotation
 
   const parent = document.getElementById('parent')
-  parentDimensions.value.width = parent.offsetWidth - 25
-  parentDimensions.value.height = parent.offsetHeight - 200
+  parentDimensions.value.width = parent.offsetWidth + 200
+  parentDimensions.value.height = parent.offsetHeight + 200
   elementDimensions.value.width = e.target.offsetWidth
   elementDimensions.value.height = e.target.offsetHeight
 }
@@ -87,21 +87,26 @@ const dragEnd = () => {
     <div class="container h-screen py-20 absolute">
       <section class="h-[500px] flex flex-col justify-between grow-0 w-1/2 space-y-2 text-white">
         <div>
-        <h1 class="text-5xl font-bold">Welcome to the new CMOC Viewing Tool</h1>
-        <h2 class="mt-2 text-3xl">
-          Get updated info on all running contests, as well as download your favorite Mii Characters
-          from our service.
-        </h2>
-        <br />
-        <a
-          class="inline-flex flex-row gap-1 items-center bg-[#2bca38] px-8 py-3 rounded-xl text-white border-2 border-gray-200/10"
-          href="https://www.wiilink24.com/"
-          ><img src="/img/favicon.png" style="filter:brightness(10000);height:20px !important;"> Install WiiLink</a
-        >
-      </div>
+          <h1 class="text-5xl font-bold">Welcome to the new CMOC Viewing Tool</h1>
+          <h2 class="mt-2 text-3xl">
+            Get updated info on all running contests, as well as download your favorite Mii
+            Characters from our service.
+          </h2>
+          <br />
+          <a
+            class="inline-flex flex-row gap-1 items-center bg-[#2bca38] hover:bg-green-600 hover:scale-105 hover:shadow-xl hover:shadow-green-400/10 hover:no-underline transition-all px-8 py-3 rounded-xl text-white border-2 border-gray-200/10"
+            href="https://www.wiilink24.com/"
+            ><img
+              src="/img/favicon.png"
+              style="filter: brightness(10000); height: 20px !important"
+            />
+            Install WiiLink</a
+          >
+        </div>
         <div class="text-xl opacity-80">
-        <i class="fa-solid fa-hand"></i> Here are all available contests, go ahead and play around with them!
-      </div>
+          <i class="fa-solid fa-hand"></i> Here are all available contests, go ahead and play around
+          with them!
+        </div>
       </section>
     </div>
     <transition-group name="fade" tag="div" class="container">
@@ -148,14 +153,21 @@ const dragEnd = () => {
         </div>
       </div>
       <div v-else class="right-40 top-1/2 -translate-y-1/2 absolute">
-        <div class="text-center flex flex-col items-center gap-3">
-          <i class="fa-solid fa-triangle-exclamation text-6xl"></i>
-          There are no contests available at the moment...<br>
-          Once there are, they will be shown here!
+        <div
+          class="p-2 rounded-3xl border-[5px] border-white bg-[rgb(76,130,163)] shadow-2xl rotate-3 z-10 relative"
+        >
+          <div class="mt-2 bg-white p-1 rounded-xl flex flex-row items-center">
+            <div class="p-3 pl-6 pr-6 text-left flex flex-row items-center text-black gap-6">
+              <i class="fa-solid fa-triangle-exclamation text-6xl"></i>
+              There are no contests available at the moment...<br />
+              Once there are, they will be shown here!
+            </div>
+          </div>
         </div>
       </div>
     </transition-group>
   </div>
+  <h1 class="text-3xl translate-y-28 relative">Newest Miis</h1>
 </template>
 
 <style>

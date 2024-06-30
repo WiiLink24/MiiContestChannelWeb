@@ -3,6 +3,7 @@ import { onMounted, computed, ref } from 'vue'
 import type { Mii } from '@/types'
 import { renderMii } from '@/backend'
 import { countries } from '@/countries'
+import { skills } from '@/skills'
 
 const props = defineProps<Mii>()
 const mii_img = await renderMii(props.mii_data)
@@ -41,6 +42,10 @@ const rankingClass = computed(() => {
   }
 })
 
+const skillName = computed(() => {
+  return skills[props.skill]
+})
+
 const genderIcon = computed(() => {
   switch (props.gender) {
     case 1:
@@ -67,7 +72,7 @@ const genderIcon = computed(() => {
   >
     <span
       v-if="ranking"
-      class="text-7xl font-bold text-white opacity-5 z-0 absolute select-none self-start -ml-2 mb-[9.75rem]"
+      class="text-7xl font-bold text-white opacity-5 z-0 absolute select-none self-start -ml-2 mb-[10.75rem]"
       >{{ ranking }}</span
     >
     <div class="z-10 flex flex-col w-full items-center">
@@ -87,9 +92,9 @@ const genderIcon = computed(() => {
         />
       </div>
       <h1 class="text-3xl relative bottom-5">{{ nickname }}</h1>
-      <span class="w-full text-2xl flex items-center justify-between gap-3 flex-wrap"
+      <span class="w-full text-2xl flex items-end justify-between gap-3 flex-wrap"
         ><l><i class="fa-solid fa-thumbs-up"></i> {{ perm_likes }}</l
-        ><l><i :class="genderIcon"></i> | {{ skill }}</l></span
+        ><l class="flex flex-col gap-1"><i :class="genderIcon" class="text-right"></i><l class="text-sm opacity-60">{{ skillName.name }}</l></l></span
       >
     </div>
     <span
