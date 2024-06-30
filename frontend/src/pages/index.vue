@@ -120,7 +120,7 @@ const dragEnd = () => {
           @mousemove="(e) => draggingEvent(contest.contest_id, e)"
           @mouseup="dragEnd"
           @mouseleave="dragEnd"
-          class="draggable w-100 h-50 shadow-[0px 0px 60px #d3d68c60] z-10 hover:z-50 opacity-0 fade-enter-active fade-leave-active hover:scale-105 transition-all"
+          class="draggable w-100 h-50 shadow-[0px 0px 60px #d3d68c60] z-10 hover:z-50 opacity-0 fade-enter-active fade-leave-active transition-all"
           style="width: 600px !important"
         >
           <div

@@ -21,6 +21,10 @@
     @apply visible z-50;
   }
 
+  .draggable:hover {
+    rotate: 0deg !important;
+  }
+
   .outline-text {
     -webkit-text-stroke-width: 3px;
     -webkit-text-stroke-color: #ffffff;
