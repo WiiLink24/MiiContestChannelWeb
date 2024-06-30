@@ -27,9 +27,9 @@ onMounted(async () => {
         <ReturnBtn />
         <div v-if="contest">
             <h1>Contest Results for {{ contest_data.english_name }}</h1>
+            <ul class="grid grid-cols-5 gap-10">
+                <MiiCard v-for="entry in entries_data" :key="entry.artisan_id" v-bind="entry" />
+            </ul>
         </div>
-        <ul class="grid grid-cols-5 gap-10">
-            <MiiCard v-for="entry in entries_data" :key="entry.artisan_id" v-bind="entry" />
-        </ul>
     </div>
 </template>

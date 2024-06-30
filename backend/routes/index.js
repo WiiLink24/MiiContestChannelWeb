@@ -141,22 +141,8 @@ router.post("/api/plaza/search", async (req, res) => {
 
 router.get("/api/contests", async (req, res) => {
   try {
-    const page = req.query.page || 1;
-    //convert page to number
-    const pageNumber = parseInt(page);
-    //calculate offset
-    const offset = (pageNumber - 1) * ContestPageSize;
-
-    const data = await db.many("SELECT contest_id, has_thumbnail, english_name, status, open_time, close_time, has_souvenir FROM contests ORDER BY contest_id LIMIT $1 OFFSET $2", [ContestPageSize, offset]);
-
-    //pagination
-    //calculate total pages
-    let total_items = await db.one(GetPagesContests);
-    //get only the number of items
-    total_items = parseInt(total_items.count);
-    const total_pages = Math.ceil(total_items / ContestPageSize);
-
-    res.json({total_pages, data});
+    const data = await db.many("SELECT contest_id, has_thumbnail, english_name, status, open_time, close_time, has_souvenir FROM contests ORDER BY contest_id");
+    res.json(data);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal server error" });

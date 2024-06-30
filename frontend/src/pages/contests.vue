@@ -1,20 +1,8 @@
 <script setup lang="ts">
-import { fetchContests } from '@/backend'
-import { ref, onMounted } from 'vue'
-import ContestCard from '@/components/ContestCard.vue'
 import Title from '@/components/Title.vue'
 
 import { RouterLink, RouterView } from 'vue-router'
 
-const active_contests = ref()
-const ended_contests = ref()
-
-onMounted(async () => {
-  const contests = await fetchContests()
-
-  active_contests.value = contests.filter((contest: any) => contest.status === 'waiting')
-  ended_contests.value = contests.filter((contest: any) => contest.status === 'results')
-})
 </script>
 
 <template>

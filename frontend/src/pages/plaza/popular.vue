@@ -5,17 +5,27 @@ import { fetchPlazaNew } from '@/backend'
 import MiiCard from '@/components/MiiCard.vue'
 import Title from '@/components/Title.vue'
 import PageNavigation from '@/components/PageNavigation.vue'
+import LoadingAnimation from '@/components/LoadingAnimation.vue'
 
 const plaza_new = ref()
 const plaza_new_data = ref()
+const isLoading = ref(false)
 
 const route = useRoute()
 const router = useRouter()
 const current_page = ref(route.query.page ? parseInt(route.query.page as string) : 1)
 
 onMounted(async () => {
-  plaza_new.value = await fetchPlazaNew(current_page.value)
-  plaza_new_data.value = plaza_new.value.data
+  try {
+    isLoading.value = true
+    plaza_new.value = await fetchPlazaNew(current_page.value)
+    plaza_new_data.value = plaza_new.value.data
+  } catch (error) {
+    console.error(error)
+  } finally {
+    isLoading.value = false
+  
+  }
 })
 
 const updateCurrentPage = (newPage: number) => {
@@ -35,20 +45,23 @@ watch(current_page, async (newValue) => {
   />
   <div class="container translate-y-10">
     <Title name="Popular" />
-    <p class="-translate-y-20 text-right opacity-45">
-      There are Miis in the Plaza!
-    </p>
-    <div v-if="plaza_new">
-      <ul
-        class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-10 -translate-y-14"
-      >
-        <MiiCard v-for="mii in plaza_new_data" :key="mii.entry_id" v-bind="mii" />
-      </ul>
-      <PageNavigation
-        :current_page="current_page"
-        :total_pages="plaza_new.total_pages"
-        @update:current_page="updateCurrentPage"
-      />
+    <LoadingAnimation v-if="isLoading" />
+    <div v-else>
+      <p class="-translate-y-20 text-right opacity-45">
+        There are Miis in the Plaza!
+      </p>
+      <div v-if="plaza_new">
+        <ul
+          class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-10 -translate-y-14"
+        >
+          <MiiCard v-for="mii in plaza_new_data" :key="mii.entry_id" v-bind="mii" />
+        </ul>
+        <PageNavigation
+          :current_page="current_page"
+          :total_pages="plaza_new.total_pages"
+          @update:current_page="updateCurrentPage"
+        />
+    </div>
     </div>
   </div>
 </template>
