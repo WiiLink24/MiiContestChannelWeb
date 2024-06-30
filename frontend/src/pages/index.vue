@@ -62,7 +62,7 @@ const dragEnd = () => {
 </script>
 
 <template>
-  <div id="parent" class="w-[calc(100%-50px)] h-[calc(100vh-200px)] rounded-[80px] rounded-t-2xl cmoc-bg overflow-hidden">
+  <div id="parent" class="w-[calc(100%-50px)] h-[calc(100vh-200px)] rounded-[80px] rounded-t-2xl cmoc-bg overflow-hidden" style="left:50%; transform:translate(-50%, 50px); position: relative;">
     <div class="container h-screen py-20 absolute">
       <section class="grow-0 w-1/2 space-y-2 text-black">
         <h1 class="text-5xl font-bold">Welcome to the new CMOC Viewing Tool</h1>
