@@ -47,10 +47,6 @@ const draggingEvent = (contestId, e) => {
     let newLeft = e.clientX - start.value.x
     let newTop = e.clientY - start.value.y
 
-    // New: Apply boundary checks
-    newLeft = Math.max(0, Math.min(newLeft, parentDimensions.value.width - elementDimensions.value.width))
-    newTop = Math.max(0, Math.min(newTop, parentDimensions.value.height - elementDimensions.value.height))
-
     position.left = newLeft
     position.top = newTop
   }
