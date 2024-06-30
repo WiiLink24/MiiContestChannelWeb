@@ -55,6 +55,13 @@ export async function fetchContest(contest_id: number) {
     return response.data
 }
 
+export async function fetchMii(entry_id: number) {
+    const response = await axios.post(`${api}/api/plaza/mii`, {
+        entry_id: entry_id
+    })
+    return response.data
+}
+
 
 export function renderMii(base64String: string) {
   // Decode base64 string

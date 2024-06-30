@@ -94,6 +94,27 @@ router.get("/api/plaza/all", async (req, res) => {
   }
 });
 
+router.post("/api/plaza/mii", async (req, res) => {
+  try {
+    const { entry_id } = req.body;
+    const data_response = await db.oneOrNone("SELECT entry_id, artisan_id, initials, skill, nickname, gender, country_id, mii_data, likes, perm_likes FROM miis WHERE entry_id = $1", [entry_id]);
+    if (!data_response) {
+      return res.status(404).json({ message: "Mii not found" });
+    } else {
+      const data = {
+        ...data_response,
+        mii_data: data_response.mii_data.toString("base64"),
+      };
+      res.json(data);
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+}
+);
+  
+
 router.post("/api/plaza/search", async (req, res) => {
   try {
     const { search } = req.body;
