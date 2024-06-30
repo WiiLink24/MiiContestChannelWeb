@@ -26,6 +26,7 @@ const searchQuery = async () => {
         type="text"
         placeholder="Search for Miis or Artisans by Name, ID or Initials..."
         @keyup.enter="searchQuery()"
+        :autofocus="true"
       />
       <div class="flex items-center bg-gray-200/60 dark:bg-slate-500/60 backdrop-blur-sm hover:bg-gray-300 dark:hover:bg-slate-600 transition-all rounded-[4px] p-1">
         <div
