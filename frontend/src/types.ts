@@ -11,6 +11,7 @@ export interface Mii {
     perm_likes?: number;
     ranking?: number;
     contest_id?: number;
+    artisan?: Artisan;
 }
 
 export interface Contest {

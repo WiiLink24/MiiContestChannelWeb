@@ -7,6 +7,7 @@ import { skills } from '@/skills'
 import { downloadMii } from '@/backend'
 
 const props = defineProps<Mii>()
+console.log(props)
 const mii_img = await renderMii(props.mii_data)
 const country_flag = computed(() => countries[props.country_id]?.flag)
 
@@ -111,8 +112,8 @@ const genderIcon = computed(() => {
         />
       </div>
       <h1 class="text-3xl relative bottom-5">{{ nickname }}</h1>
-      <span :class="{ 'invisible': !perm_likes}" class="w-full text-2xl flex items-end justify-between gap-3 flex-wrap"
-        ><span><i class="fa-solid fa-thumbs-up"></i> {{ perm_likes }}</span
+      <span class="w-full text-2xl flex items-end justify-between gap-3 flex-wrap"
+        ><span class="flex flex-col gap-1"><span><i class="fa-solid fa-thumbs-up text-xl"></i> {{ perm_likes }}</span><span class="text-sm opacity-60">by <RouterLink :to="`/artisans/${artisan.wii_number}`" class="underline text-sm">{{ artisan.name }} ({{ artisan_id }})</RouterLink></span></span
         ><span v-if="skill" class="flex flex-col gap-1"><i :class="genderIcon" class="text-right"></i><span class="text-sm opacity-60">{{ skillName.name }}</span></span></span
       >
     </div>

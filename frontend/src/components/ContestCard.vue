@@ -33,7 +33,7 @@ const isNew = computed(() => {
 </script>
 
 <template>
-  <li @mouseenter="hover = true" @mouseleave="hover = false" :style="{ transform: `rotate(${rotationDegree}deg) scale(1.05)` }" class="list-none td-none w-100 h-50 shadow-[0px 0px 60px #d3d68c60] hover:no-underline hover:shadow-lg transition-all">
+  <li @mouseenter="hover = true" @mouseleave="hover = false" :style="{ rotate: `${rotationDegree}deg` }" class="list-none td-none w-100 h-50 shadow-[0px 0px 60px #d3d68c60] hover:no-underline hover:shadow-lg hover:scale-105 transition-all">
       <div
         class="p-2 rounded-3xl border-[5px] border-white bg-[rgb(76,130,163)] shadow-2xl z-10 relative"
       >
