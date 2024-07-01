@@ -23,12 +23,12 @@ onMounted(async () => {
 </script>
 
 <template>
-    <div class="container">
+    <div>
         <ReturnBtn />
         <div v-if="contest">
             <h1>Contest Results for {{ contest_data.english_name }}</h1>
-            <ul class="grid grid-cols-5 gap-10">
-                <MiiCard v-for="entry in entries_data" :key="entry.artisan_id" v-bind="entry" />
+            <ul class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-10">
+                <MiiCard v-for="entry in entries_data" :key="entry.artisan_id" v-bind="entry" :ranking="entry.rank" :contest_id="contest_data.contest_id"/>
             </ul>
         </div>
     </div>

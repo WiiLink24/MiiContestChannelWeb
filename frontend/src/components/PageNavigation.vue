@@ -53,7 +53,7 @@ function updateArrows() {
 <template>
   <div class="inline-flex items-center gap-1 w-full justify-end">
     <p class="p-3 dark:bg-slate-700 rounded-lg">Page <b id="curr">{{ current_page }}</b> of <b id="last">{{ total_pages }}</b></p>
-    <l class="opacity-30 ml-3 mr-3"> | </l>
+    <span class="opacity-30 ml-3 mr-3"> | </span>
     <button
       id="prev"
       class="p-2 dark:bg-slate-700 dark:hover:bg-slate-900 rounded-lg transition-all"

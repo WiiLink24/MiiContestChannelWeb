@@ -105,3 +105,22 @@ export function renderMii(base64String: string) {
       return src
     })
 }
+
+export function downloadMii(name: any, mii_data: any) {
+      const blob = new Blob([mii_data], { type: 'application/octet-stream' })
+      const url = window.URL.createObjectURL(blob)
+      const a = document.createElement('a')
+
+      a.href = url
+      if (name === String) {
+        a.download = `${name}.mii`
+      } else {
+        a.download = `Contest_${name[0]}_${name[1]}.mii`
+      }
+      
+      document.body.appendChild(a)
+      a.click()
+
+      window.URL.revokeObjectURL(url)
+      a.remove()
+    }

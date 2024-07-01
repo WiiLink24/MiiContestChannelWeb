@@ -8,7 +8,7 @@ const ended_contests = ref();
 onMounted(async () => {
     const contests = await fetchContests();
 
-    ended_contests.value = contests.filter((contest) => contest.status === 'results');
+    ended_contests.value = contests.filter((contest: any) => contest.status === 'results');
 })
 </script>
 
@@ -16,7 +16,7 @@ onMounted(async () => {
     <div>
         <ul class="flex flex-col gap-3" v-if="ended_contests">
             <div  v-for="contest in ended_contests">
-            <RouterLink :to="`/contests/${contest_id}`">
+            <RouterLink :to="`/contests/${contest.contest_id}`">
                 <ContestCard :key="contest.id" v-bind="contest" />
             </RouterLink>
         </div>

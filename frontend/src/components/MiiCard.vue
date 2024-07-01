@@ -4,10 +4,14 @@ import type { Mii } from '@/types'
 import { renderMii } from '@/backend'
 import { countries } from '@/countries'
 import { skills } from '@/skills'
+import { downloadMii } from '@/backend'
 
 const props = defineProps<Mii>()
 const mii_img = await renderMii(props.mii_data)
 const country_flag = computed(() => countries[props.country_id]?.flag)
+
+const isTooltipHovered = ref(false)
+
 const twemoji = ref(null)
 
 // Import twemoji from the CDN
@@ -73,11 +77,12 @@ const genderIcon = computed(() => {
     <span
       v-if="ranking"
       class="text-7xl font-bold text-white opacity-5 z-0 absolute select-none self-start -ml-2 mb-[10.75rem]"
+      :class="{ 'mb-[7.5rem]' : !nickname }"
       >{{ ranking }}</span
     >
     <div class="z-10 flex flex-col w-full items-center">
       <span class="self-end text-2xl" v-html="countryFlagHtml"></span>
-      <div class="has-tooltip"
+      <div v-if="nickname" class="has-tooltip"
       @mouseenter="isTooltipHovered = true"
       @mouseleave="isTooltipHovered = false">
         <span
@@ -91,10 +96,24 @@ const genderIcon = computed(() => {
           @click="downloadMii(nickname, mii_data)"
         />
       </div>
+      <div v-else class="has-tooltip"
+      @mouseenter="isTooltipHovered = true"
+      @mouseleave="isTooltipHovered = false">
+        <span
+          class="top-2 left-2 tooltip rounded shadow-lg p-2 pl-3 pr-3 bg-green-600 hover:bg-green-700 text-white cursor-pointer absolute"
+          @click="downloadMii([contest_id, ranking], mii_data)"
+          ><i class="fa-solid fa-download"></i
+        ></span>
+        <img
+          class="w-28 bottom-3 cursor-pointer relative"
+          :src="mii_img"
+          @click="downloadMii([contest_id, ranking], mii_data)"
+        />
+      </div>
       <h1 class="text-3xl relative bottom-5">{{ nickname }}</h1>
-      <span class="w-full text-2xl flex items-end justify-between gap-3 flex-wrap"
-        ><l><i class="fa-solid fa-thumbs-up"></i> {{ perm_likes }}</l
-        ><l class="flex flex-col gap-1"><i :class="genderIcon" class="text-right"></i><l class="text-sm opacity-60">{{ skillName.name }}</l></l></span
+      <span :class="{ 'invisible': !perm_likes}" class="w-full text-2xl flex items-end justify-between gap-3 flex-wrap"
+        ><span><i class="fa-solid fa-thumbs-up"></i> {{ perm_likes }}</span
+        ><span v-if="skill" class="flex flex-col gap-1"><i :class="genderIcon" class="text-right"></i><span class="text-sm opacity-60">{{ skillName.name }}</span></span></span
       >
     </div>
     <span
@@ -144,11 +163,6 @@ const genderIcon = computed(() => {
 
 <script lang="ts">
 export default {
-  data() {
-    return {
-        isTooltipHovered: false,
-    }
-  },
   methods: {
     handleMouseMove(event) {
       const card = this.$refs.card
@@ -173,20 +187,6 @@ export default {
       card.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1)'
       blur.style.display = 'none'
     },
-
-    downloadMii(name, mii_data) {
-      const blob = new Blob([mii_data], { type: 'application/octet-stream' })
-      const url = window.URL.createObjectURL(blob)
-      const a = document.createElement('a')
-
-      a.href = url
-      a.download = `${name}.mii`
-      document.body.appendChild(a)
-      a.click()
-
-      window.URL.revokeObjectURL(url)
-      a.remove()
-    }
   }
 }
 </script>

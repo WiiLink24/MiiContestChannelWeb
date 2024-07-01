@@ -1,13 +1,18 @@
-<script setup>
-import { defineProps, computed } from 'vue'
+<script setup lang="ts">
+import type { Contest } from '@/types';
+import { defineProps, computed, ref, watch } from 'vue'
 
-const props = defineProps({
-  contest_id: String,
-  status: String,
-  english_name: String,
-  has_souvenir: Boolean,
-  open_time: String,
-  close_time: String,
+const props = defineProps<Contest>()
+const hover = ref(false)
+const rotationDegree = ref(0)
+
+watch(hover, (newValue) => {
+  if (newValue === true) {
+    rotationDegree.value = Math.floor(Math.random() * 6) - 3;
+    // Assign a value to rotationDegree here
+  } else if (newValue === false) {
+    rotationDegree.value = 0;
+  }
 })
 
 const daysRemaining = computed(() => {
@@ -20,18 +25,15 @@ const daysRemaining = computed(() => {
 
 const isNew = computed(() => {
   const openDate = new Date(props.open_time);
-  console.log(openDate);
   const currentDate = new Date();
-  console.log(currentDate);
   const differenceInTime = openDate.getTime() - currentDate.getTime()
   const differenceInDays = Math.ceil(differenceInTime / (1000 * 3600 * 24));
-  console.log(differenceInDays);
   return differenceInDays < 5 && differenceInDays > 0;
 });
 </script>
 
 <template>
-  <li @mouseenter="hover = true" @mouseleave="hover = false" :style="hoverStyle" class="list-none td-none w-100 h-50 shadow-[0px 0px 60px #d3d68c60] hover:no-underline hover:shadow-lg transition-all">
+  <li @mouseenter="hover = true" @mouseleave="hover = false" :style="{ transform: `rotate(${rotationDegree}deg) scale(1.05)` }" class="list-none td-none w-100 h-50 shadow-[0px 0px 60px #d3d68c60] hover:no-underline hover:shadow-lg transition-all">
       <div
         class="p-2 rounded-3xl border-[5px] border-white bg-[rgb(76,130,163)] shadow-2xl z-10 relative"
       >
@@ -42,7 +44,7 @@ const isNew = computed(() => {
             <span v-else>{{ daysRemaining }} days remaining</span>
           </p>
           <p class="flex flex-row items-center uppercase-first-letter">
-            {{ status }} <l class="opacity-60">({{ contest_id }})</l> <div v-if="isNew" class="ml-3 box sb4">New!</div>  <div v-if="daysRemaining <= 2 && daysRemaining >= 0" class="ml-3 box-red sb4-red">Closing soon!</div>
+            {{ status }} <span class="opacity-60">({{ contest_id }})</span> <div v-if="isNew" class="ml-3 box sb4">New!</div>  <div v-if="daysRemaining <= 2 && daysRemaining >= 0" class="ml-3 box-red sb4-red">Closing soon!</div>
           </p>
         </div>
         <div class="mt-2 bg-white p-1 rounded-xl flex flex-row items-center justify-between">
@@ -62,25 +64,3 @@ const isNew = computed(() => {
       />
   </li>
 </template>
-
-<script>
-export default {
-  data() {
-    return {
-      hover: false, // Track hover state
-    };
-  },
-  computed: {
-    hoverStyle() {
-      // Apply rotation style only when hover is true
-      if (this.hover) {
-        const rotationDegree = Math.floor(Math.random() * 6) - 3;
-        return {
-          transform: `rotate(${rotationDegree}deg) scale(1.05)`,
-        };
-      }
-      return {};
-    },
-  },
-}
-</script>

@@ -1,15 +1,16 @@
 export interface Mii {
-    entry_id: number;
+    entry_id?: number;
     artisan_id: number;
-    initials: string;
-    skill: number;
-    nickname: string;
-    gender: 1 | 2;
+    initials?: string;
+    skill?: number;
+    nickname?: string;
+    gender?: 1 | 2;
     country_id: number;
     mii_data: string;
     likes: number;
-    perm_likes: number;
+    perm_likes?: number;
     ranking?: number;
+    contest_id?: number;
 }
 
 export interface Contest {
@@ -17,8 +18,8 @@ export interface Contest {
     has_thumbnail: boolean;
     english_name: string;
     status: string;
-    open_time: Date;
-    close_time: Date;
+    open_time: string;
+    close_time: string;
     has_souvenir: boolean;
 }
 
@@ -30,7 +31,7 @@ export interface Artisan {
     number_of_posts: any;
     total_likes: number;
     is_master: boolean;
-    last_post: Date;
+    last_post: string;
 }
 
 

@@ -56,8 +56,8 @@ const isMaster = computed(() => {
         <img class="w-28 bottom-3 relative" :src="mii_img" />
         <h1 class="text-3xl relative bottom-5">{{ name }}</h1>
         <span class="w-full text-2xl flex items-center justify-between gap-3 flex-wrap"
-          ><l><i class="fa-solid fa-thumbs-up"></i> {{ total_likes }}</l
-          ><l>{{ number_of_posts }} <i class="fa-solid fa-user"></i></l></span
+          ><span><i class="fa-solid fa-thumbs-up"></i> {{ total_likes }}</span
+          ><span>{{ number_of_posts }} <i class="fa-solid fa-user"></i></span></span
         >
       </div>
       <div class="blur"></div>
