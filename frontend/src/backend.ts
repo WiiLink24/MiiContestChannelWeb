@@ -2,8 +2,8 @@ import axios from 'axios'
 export const api = import.meta.env.VITE_API_URL
 
 
-export async function fetchArtisans() {
-  const response = await axios.get(`${api}/api/artisans`)
+export async function fetchArtisans(page: number) {
+  const response = await axios.get(`${api}/api/artisans?page=${page}`)
   return response.data
 }
 

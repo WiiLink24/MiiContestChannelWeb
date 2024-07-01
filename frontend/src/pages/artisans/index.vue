@@ -3,21 +3,36 @@ import { fetchArtisans } from '@/backend'
 import ArtisanCard from '@/components/ArtisanCard.vue'
 import PageNavigation from '@/components/PageNavigation.vue'
 import Title from '@/components/Title.vue'
-import { onMounted, ref } from 'vue'
-import { useRoute } from 'vue-router'
+import { onMounted, ref, watch } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 
 const artisans = ref()
+const isLoading = ref(false)
 
 onMounted(async () => {
-  artisans.value = await fetchArtisans()
+  artisans.value = await fetchArtisans(current_page.value)
   console.log(artisans.value)
 })
 
 const route = useRoute()
+const router = useRouter()
 const current_page = ref(route.query.page ? parseInt(route.query.page as string) : 1)
 const updateCurrentPage = (newPage: number) => {
   current_page.value = newPage
 }
+
+watch(current_page, async (newValue) => {
+  router.push({ query: { ...route.query, page: newValue.toString() } })
+  try {
+    isLoading.value = true
+    artisans.value = await fetchArtisans(current_page.value)
+  } catch (error) {
+    console.error(error)
+  } finally {
+    isLoading.value = false
+  
+  }
+})
 </script>
 
 <template>
