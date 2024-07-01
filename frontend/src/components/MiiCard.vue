@@ -72,12 +72,12 @@ const genderIcon = computed(() => {
     backgroundColor: isTooltipHovered ? '#36d14160' : '',
     border: isTooltipHovered ? '1px solid green' : ''
     }"
-    class="p-3 rounded-xl border flex flex-col justify-end relative z-20 dark:border-slate-600/60 dark:bg-slate-700/60 dark:text-white hover:shadow-xl transition-shadow overflow-hidden backdrop-blur-md bg-opacity-50"
+    class="p-3 rounded-xl border flex flex-col justify-between relative z-20 dark:border-slate-600/60 dark:bg-slate-700/60 dark:text-white hover:shadow-xl transition-shadow overflow-hidden backdrop-blur-md bg-opacity-50"
     ref="card"
   >
     <span
       v-if="ranking"
-      class="text-7xl font-bold text-white opacity-5 z-0 absolute select-none self-start -ml-2 mb-[10.75rem]"
+      class="-top-4 text-7xl font-bold text-white opacity-5 z-0 absolute select-none self-start -ml-2"
       :class="{ 'mb-[7.5rem]' : !nickname }"
       >{{ ranking }}</span
     >
@@ -111,14 +111,14 @@ const genderIcon = computed(() => {
           @click="downloadMii([contest_id, ranking], mii_data)"
         />
       </div>
-      <h1 class="text-3xl relative bottom-5">{{ nickname }}</h1>
-      <span class="w-full text-2xl flex items-end justify-between gap-3 flex-wrap"
-        ><span class="flex flex-col gap-1"><span><i class="fa-solid fa-thumbs-up text-xl"></i> {{ perm_likes }}</span><span class="text-sm opacity-60">by <RouterLink :to="`/artisans/${wii_number}`" class="underline text-sm">{{ artisan_name }} ({{ artisan_id }})</RouterLink></span></span
+      <h1 class="text-3xl relative bottom-3 text-center">{{ nickname }}</h1>
+    </div>
+    <span class="w-full text-2xl flex items-end justify-between gap-1 flex-no-wrap"
+        ><span class="flex flex-col gap-1"><span><i class="fa-solid fa-thumbs-up text-xl"></i> {{ perm_likes }}</span><span class="text-sm opacity-60">by <RouterLink :to="`/artisans/${wii_number}`" class="underline text-sm">{{ artisan_name }}</RouterLink></span></span
         ><span v-if="skill" class="flex flex-col gap-1"><i :class="genderIcon" class="text-right"></i><span class="text-sm opacity-60">{{ skillName.name }}</span></span></span
       >
-    </div>
     <span
-      class="text-8xl font-bold text-white opacity-5 z-0 absolute -mr-3.5 -mb-4 select-none self-end"
+      class="bottom-0 text-8xl font-bold text-white opacity-5 z-0 absolute -mr-3.5 -mb-4 select-none self-end"
       >{{ initials }}</span
     >
     <div class="blur"></div>

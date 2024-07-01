@@ -42,7 +42,7 @@ const isMaster = computed(() => {
       @mousemove="handleMouseMove"
       @mouseleave="resetTransform"
       :class="rankingClass"
-      class="p-3 rounded-xl border flex flex-col justify-end relative z-20 dark:border-slate-600/60 dark:bg-slate-700/60 dark:text-white hover:shadow-xl transition-shadow overflow-hidden backdrop-blur-md bg-opacity-50"
+      class="p-3 rounded-xl border flex flex-col justify-between relative z-20 dark:border-slate-600/60 dark:bg-slate-700/60 dark:text-white hover:shadow-xl transition-shadow overflow-hidden backdrop-blur-md bg-opacity-50"
       ref="card"
     >
     <RouterLink :to="`/artisans/${wii_number}`" class="hover:no-underline">
@@ -51,17 +51,17 @@ const isMaster = computed(() => {
         class="w-full text-7xl font-bold opacity-30 z-0 absolute select-none -ml-0 mb-[9.75rem] text-yellow-500 -rotate-6"
         ><i class="fa-solid fa-crown"></i></span
       >
-      <div class="z-10 flex flex-col w-full items-center">
+      <div class="z-10 flex flex-col w-full items-center justify-between">
         <span class="self-end text-2xl" v-html="countryFlagHtml"></span>
         <img class="w-28 bottom-3 relative" :src="mii_img" />
-        <h1 class="text-3xl relative bottom-5">{{ name }}</h1>
-        <span class="w-full text-2xl flex items-center justify-between gap-3 flex-wrap"
-          ><span><i class="fa-solid fa-thumbs-up"></i> {{ total_likes }}</span
-          ><span>{{ number_of_posts }} <i class="fa-solid fa-user"></i></span></span
-        >
+        <h1 class="text-3xl relative bottom-5 text-center">{{ name }}</h1>
       </div>
       <div class="blur"></div>
     </RouterLink>
+    <span class="w-full text-2xl flex items-center justify-between gap-3 flex-wrap"
+          ><span><i class="fa-solid fa-thumbs-up"></i> {{ total_likes }}</span
+          ><span>{{ number_of_posts }} <i class="fa-solid fa-user"></i></span></span
+        >
     </li>
   </template>
   
