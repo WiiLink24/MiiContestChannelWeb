@@ -34,7 +34,16 @@ const updateCurrentPage = (newPage: number) => {
 
 watch(current_page, async (newValue) => {
   router.push({ query: { ...route.query, page: newValue.toString() } })
-  plaza_new.value = await fetchPlazaNew(current_page.value)
+  try {
+    isLoading.value = true
+    plaza_new.value = await fetchPlazaNew(current_page.value)
+    plaza_new_data.value = plaza_new.value.data
+  } catch (error) {
+    console.error(error)
+  } finally {
+    isLoading.value = false
+  
+  }
 })
 </script>
 

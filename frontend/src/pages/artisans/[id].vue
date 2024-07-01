@@ -2,8 +2,10 @@
 import { fetchArtisan, renderMii } from '@/backend'
 import { onMounted, ref, computed } from 'vue'
 import { useRoute } from 'vue-router'
+import { downloadMii } from '@/backend'
 import ReturnBtn from '@/components/ReturnBtn.vue'
 import ArtisanCard from '@/components/ArtisanCard.vue'
+import MiiCard from '@/components/MiiCard.vue'
 import Title from '@/components/Title.vue'
 
 const route = useRoute()
@@ -18,7 +20,7 @@ const mii_img = ref()
 onMounted(async () => {
   artisan.value = await fetchArtisan(artisanId.value);
   artisan_data.value = artisan.value.artisan_data;
-  mii_data.value = artisan.value.mii_data;
+  mii_data.value = artisan.value.miis_data;
 
   if (artisan_data.value && artisan_data.value.mii_data) {
     mii_img.value = await renderMii(artisan_data.value.mii_data);
@@ -82,10 +84,10 @@ const lastPostFormatted = computed(() => {
     <hr class="pb-3 opacity-5" />
     <div class="mt-6 mb-3 flex flex-row items-center justify-between">
       <h1 class="font-bold text-4xl">Miis</h1>
-      <h2 v-if="artisan_data" class="opacity-60">{{ artisan_data.name }} has sbumitted {{ artisan_data.number_of_posts }} Miis.</h2>
+      <h2 v-if="artisan_data" class="opacity-60">{{ artisan_data.name }} has submitted {{ artisan_data.number_of_posts }} Miis.</h2>
     </div>
     <div v-if="artisan_data && mii_data">
-      <ul>
+      <ul class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-10">
         <MiiCard v-for="entries in mii_data" :key="entries.entry_id" v-bind="entries" />
       </ul>
     </div>
@@ -102,28 +104,3 @@ const lastPostFormatted = computed(() => {
     </div>
   </div>
 </template>
-
-<script lang="ts">
-export default {
-  data() {
-    return {
-        
-    }
-  },
-  methods: {
-    downloadMii(name, mii_data) {
-      const blob = new Blob([mii_data], { type: 'application/octet-stream' })
-      const url = window.URL.createObjectURL(blob)
-      const a = document.createElement('a')
-
-      a.href = url
-      a.download = `${name}.mii`
-      document.body.appendChild(a)
-      a.click()
-
-      window.URL.revokeObjectURL(url)
-      a.remove()
-    }
-  }
-}
-</script>
