@@ -25,7 +25,7 @@ const GetPagesArtisans = `SELECT COUNT(*) FROM artisans`;
 
 router.get("/api/plaza/top", async (req, res) => {
     try {
-      const query = `SELECT m.*, a.name AS artisan_name
+      const query = `SELECT m.*, a.is_master AS artisan_is_master, a.name AS artisan_name
       FROM miis m
       LEFT JOIN artisans a ON m.artisan_id = a.artisan_id
       ORDER BY m.likes DESC
@@ -49,7 +49,7 @@ router.get("/api/plaza/popular", async (req, res) => {
     const pageNumber = parseInt(page);
     const offset = (pageNumber - 1) * PlazaPageSize;
     const query = `
-  SELECT m.*, a.name AS artisan_name
+  SELECT m.*, a.is_master AS artisan_is_master, a.name AS artisan_name
   FROM miis m
   LEFT JOIN artisans a ON m.artisan_id = a.artisan_id
   ORDER BY m.entry_id DESC
@@ -80,7 +80,7 @@ router.get("/api/plaza/all", async (req, res) => {
     const pageNumber = parseInt(page);
     //calculate offset
     const offset = (pageNumber - 1) * PlazaPageSize;
-    const query = `SELECT m.*, a.name AS artisan_name
+    const query = `SELECT m.*, a.is_master AS artisan_is_master, a.name AS artisan_name
     FROM miis m
     LEFT JOIN artisans a ON m.artisan_id = a.artisan_id
     ORDER BY m.entry_id
@@ -215,20 +215,23 @@ router.post("/api/artisans/artisan", async (req, res) => {
   try {
     const { wii_number } = req.body
     const artisan_response = await db.oneOrNone(
-      "SELECT name, country_id, wii_number, mii_data, number_of_posts, total_likes, is_master, last_post FROM artisans WHERE wii_number = $1",
+      "SELECT artisan_id, name, country_id, wii_number, mii_data, number_of_posts, total_likes, is_master, last_post FROM artisans WHERE wii_number = $1",
       [wii_number]
     );
+    console.log(artisan_response)
     const miidata_response = await db.manyOrNone(
       "SELECT entry_id, initials, skill, nickname, gender, country_id, mii_data, likes, perm_likes FROM miis WHERE artisan_id = $1",
       [artisan_response.artisan_id]
     );
 
+    console.log(miidata_response)
     const artisan_data = {
       ...artisan_response,
       mii_data: artisan_response.mii_data.toString("base64"),
     };
     const miis_data = miidata_response.map((item) => {
-      const miiDataEncoded = item.miidataresponse.toString("base64");
+      console.log(item)
+      const miiDataEncoded = item.mii_data.toString("base64");
       return { ...item, mii_data: miiDataEncoded };
     });
     res.json({ artisan_data, miis_data });
