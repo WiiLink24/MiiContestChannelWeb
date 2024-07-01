@@ -25,9 +25,12 @@ const GetPagesArtisans = `SELECT COUNT(*) FROM artisans`;
 
 router.get("/api/plaza/top", async (req, res) => {
     try {
-        const data_response = await db.many(
-          "SELECT entry_id, artisan_id, initials, skill, nickname, gender, country_id, mii_data, likes, perm_likes FROM miis ORDER BY likes DESC LIMIT 50"
-        );
+      const query = `SELECT m.*, a.name AS artisan_name
+      FROM miis m
+      LEFT JOIN artisans a ON m.artisan_id = a.artisan_id
+      ORDER BY m.likes DESC
+      LIMIT 50`;
+        const data_response = await db.many(query);
         const data = data_response.map((item) => {
           const miiDataEncoded = item.mii_data.toString("base64");
           return { ...item, mii_data: miiDataEncoded };
@@ -45,24 +48,18 @@ router.get("/api/plaza/popular", async (req, res) => {
     const page = req.query.page || 1;
     const pageNumber = parseInt(page);
     const offset = (pageNumber - 1) * PlazaPageSize;
-    const data_response = await db.many(
-      `SELECT * FROM miis ORDER BY entry_id DESC LIMIT ${PlazaPageSize} OFFSET ${offset}`
-    );
-
-    const artisanId = [
-      ...new Set(data_response.map((item) => item.artisan_id)),
-    ];
-
-    const artisans = await db.many("SELECT name, country_id, wii_number, mii_data, number_of_posts, total_likes, is_master, last_post FROM artisans WHERE artisan_id = ANY($1)", [artisanId]);
-
-    const artisanMap = new Map(
-      artisans.map((artisan) => [artisan.artisan_id, artisan])
-    );
+    const query = `
+  SELECT m.*, a.name AS artisan_name
+  FROM miis m
+  LEFT JOIN artisans a ON m.artisan_id = a.artisan_id
+  ORDER BY m.entry_id DESC
+  LIMIT $1 OFFSET $2
+`;
+    const data_response = await db.many(query, [PlazaPageSize, offset]);
 
     const data = data_response.map((item) => {
       const miiDataEncoded = item.mii_data.toString("base64");
-      const artisanDetails = artisanMap.get(item.artisan_id);
-      return { ...item, mii_data: miiDataEncoded, artisan: artisanDetails };
+      return { ...item, mii_data: miiDataEncoded};
     });
 
     let total_items = await db.one(GetPagesMiis);
@@ -83,8 +80,13 @@ router.get("/api/plaza/all", async (req, res) => {
     const pageNumber = parseInt(page);
     //calculate offset
     const offset = (pageNumber - 1) * PlazaPageSize;
+    const query = `SELECT m.*, a.name AS artisan_name
+    FROM miis m
+    LEFT JOIN artisans a ON m.artisan_id = a.artisan_id
+    ORDER BY m.entry_id
+    LIMIT $1 OFFSET $2`;
 
-    const data_response = await db.many("SELECT entry_id, artisan_id, initials, skill, nickname, gender, country_id, mii_data, likes, perm_likes FROM miis ORDER BY entry_id LIMIT $1 OFFSET $2", [PlazaPageSize, offset]);
+    const data_response = await db.many(query, [PlazaPageSize, offset]);
     const data = data_response.map((item) => {
       const miiDataEncoded = item.mii_data.toString("base64");
       return { ...item, mii_data: miiDataEncoded };
