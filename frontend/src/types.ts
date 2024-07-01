@@ -12,6 +12,8 @@ export interface Mii {
     ranking?: number;
     contest_id?: number;
     artisan?: Artisan;
+    wii_number?: bigint;
+    artisan_name?: string;
 }
 
 export interface Contest {
