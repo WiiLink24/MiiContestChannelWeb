@@ -49,7 +49,7 @@
             >
             <a href="/artisans" class="animated-link">Artisans</a
             >
-            <a href="/contests" class="animated-link">Previous Contests</a
+            <a href="/contests/active" class="animated-link">Contests</a
             >
           </div>
           <div class="column">

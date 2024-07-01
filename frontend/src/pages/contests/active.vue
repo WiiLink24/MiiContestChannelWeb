@@ -14,7 +14,7 @@ onMounted(async () => {
 
 <template>
     <div>
-        <ul class="flex flex-col gap-3" v-if="active_contests">
+        <ul class="grid magic_grid gap-3" v-if="active_contests">
             <ContestCard v-for="contest in active_contests" :key="contest.id" v-bind="contest" />
         </ul>
         <p v-else class="text-red-500">

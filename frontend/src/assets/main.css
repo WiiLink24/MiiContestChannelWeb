@@ -31,6 +31,96 @@
     rotate: 0deg !important;
   }
 
+  .magic_grid {
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  }
+
+  .uppercase-first-letter::first-letter {
+    text-transform: uppercase;
+  }
+  
+  .box {
+    background: orange; /* Change background color to orange */
+    padding: 4px;
+    padding-left: 16px;
+    padding-right: 16px;
+    text-align: center;
+    color: #fff;
+    font-family: arial;
+    position: relative;
+    border: 2px solid #fff; /* Add white border */
+    border-radius: 9999px;
+  }
+  
+  .sb4:before {
+    content: "";
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    border-left: 10px solid white; /* Now orange */
+    border-right: 10px solid transparent;
+    border-top: 5px solid white; /* Remains orange */
+    border-bottom: 10px solid transparent;
+    left: 8px;
+    bottom: -15px;
+  }
+
+  .sb4:after {
+    content: "";
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    border-left: 10px solid orange; /* Now orange */
+    border-right: 10px solid transparent;
+    border-top: 5px solid orange; /* Remains orange */
+    border-bottom: 10px solid transparent;
+    left: 10px;
+    bottom: -10px;
+  }
+
+  .box-red {
+    background: rgb(255, 29, 29); /* Change background color to orange */
+    padding: 4px;
+    padding-left: 16px;
+    padding-right: 16px;
+    text-align: center;
+    color: #fff;
+    font-family: arial;
+    position: relative;
+    border: 2px solid #fff; /* Add white border */
+    border-radius: 9999px;
+  }
+  
+  .sb4-red:before {
+    content: "";
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    border-left: 10px solid white; /* Now orange */
+    border-right: 10px solid transparent;
+    border-top: 5px solid white; /* Remains orange */
+    border-bottom: 10px solid transparent;
+    left: 8px;
+    bottom: -15px;
+  }
+
+  .td-none {
+    text-decoration: none !important;
+  }
+
+  .sb4-red:after {
+    content: "";
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    border-left: 10px solid rgb(255, 29, 29); /* Now orange */
+    border-right: 10px solid transparent;
+    border-top: 5px solid rgb(255, 29, 29); /* Remains orange */
+    border-bottom: 10px solid transparent;
+    left: 10px;
+    bottom: -10px;
+  }
+
   .outline-text {
     -webkit-text-stroke-width: 3px;
     -webkit-text-stroke-color: #ffffff60;

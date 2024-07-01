@@ -2,79 +2,53 @@
 import { ref, onMounted } from 'vue'
 import { fetchContests } from '@/backend'
 import type { Contest } from '@/types'
+import ContestCard from '@/components/ContestCard.vue'
 
-const dragging = ref(false)
 const contests = ref<Contest[]>([])
-const positions = ref<{ [key: string]: { top: number; left: number; rotation: number } }>({})
-const start = ref({ x: 0, y: 0 })
-const parentDimensions = ref({ width: 0, height: 0 })
-const elementDimensions = ref({ width: 0, height: 0 })
+const positions = ref({})
 
 onMounted(async () => {
   contests.value = await fetchContests()
   const container = document.querySelector('.cmoc-bg')
   if (container) {
     const { width, height } = container.getBoundingClientRect()
-
-    contests.value.forEach((contest) => {
-      let positionSet = false
-      while (!positionSet) {
-        const minLeft = width / 2
-        const randomLeft = minLeft + Math.random() * (width - 400 - minLeft)
-        const randomTop = Math.random() * (height - 300)
-        const randomRotation = Math.random() * 6 - 3
-
-        // Check if the new position overlaps with any existing position
-        let overlap = false
-        for (const key in positions.value) {
-          const pos = positions.value[key]
-          // Increase the minimum distance to 300px for both left and top to avoid overlap
-          if (Math.abs(pos.left - randomLeft) < 300 && Math.abs(pos.top - randomTop) < 300) {
-            overlap = true
-            break
-          }
-        }
-
-        if (!overlap) {
-          positions.value[contest.contest_id] = {
-            top: randomTop,
-            left: randomLeft,
-            rotation: randomRotation
-          }
-          positionSet = true
-        }
-      }
-    })
+    contests.value.forEach((contest, index) => {
+  const randomPosition = generateRandomPosition(width, height, index)
+  positions.value[contest.contest_id] = randomPosition
+})
   }
 })
 
-const dragStart = (contestId, e) => {
-  dragging.value = true
-  const position = positions.value[contestId]
-  start.value.x = e.clientX - position.left
-  start.value.y = e.clientY - position.top
-  start.value.rotation = position.rotation
-
-  const parent = document.getElementById('parent')
-  parentDimensions.value.width = parent.offsetWidth + 200
-  parentDimensions.value.height = parent.offsetHeight + 200
-  elementDimensions.value.width = e.target.offsetWidth
-  elementDimensions.value.height = e.target.offsetHeight
-}
-
-const draggingEvent = (contestId, e) => {
-  if (dragging.value) {
-    const position = positions.value[contestId]
-    let newLeft = e.clientX - start.value.x
-    let newTop = e.clientY - start.value.y
-
-    position.left = newLeft
-    position.top = newTop
+const generateRandomPosition = (width, height, index) => {
+  return {
+    top: Math.random() * (height - 300) + index * Math.random() * 5,
+    left: width / 2 + Math.random() * (width - 400 - width / 2) + index * Math.random() * 10,
+    rotation: Math.random() * 6 - 3,
   }
 }
 
-const dragEnd = () => {
-  dragging.value = false
+let dragging = false
+let start = { x: 0, y: 0 }
+
+const dragStart = (contestId, e) => {
+  dragging = true
+  const position = positions.value[contestId]
+  start.x = e.clientX - position.left
+  start.y = e.clientY - position.top
+  e.target.style.zIndex = 50 // Bring to front
+}
+
+const draggingEvent = (contestId, e) => {
+  if (!dragging) return
+  const position = positions.value[contestId]
+  position.left = e.clientX - start.x
+  position.top = e.clientY - start.y
+}
+
+const dragEnd = (e) => {
+  if (!dragging) return
+  dragging = false
+  e.target.style.zIndex = 10 // Reset z-index
 }
 </script>
 
@@ -128,29 +102,8 @@ const dragEnd = () => {
           class="draggable w-100 h-50 shadow-[0px 0px 60px #d3d68c60] z-10 hover:z-50 opacity-0 fade-enter-active fade-leave-active transition-all"
           style="width: 600px !important"
         >
-          <div
-            class="p-2 rounded-3xl border-[5px] border-white bg-[rgb(76,130,163)] shadow-2xl z-10 relative"
-          >
-            <div class="flex flex-row items-center justify-between">
-              <p class="ml-1 text-white text-lg"><span id="randomInt"></span> days remaining</p>
-              <p>{{ contest.status }}</p>
-            </div>
-            <div class="mt-2 bg-white p-1 rounded-xl flex flex-row items-center">
-              <img
-                :src="`http://127.0.0.1:9011/assets/contest/${contest.contest_id}/thumbnail.jpg`"
-                alt="Thumbnail Preview"
-                class="p-1 mr-40 w-32 h-32 rounded-xl"
-              />
-              <h2 id="contestName" class="col-start-1 col-span-full text-2xl text-black">
-                {{ contest.english_name }}
-              </h2>
-            </div>
-          </div>
-          <img
-            id="souvenirPreview2"
-            class="w-80 hidden rounded-3xl shadow-2xl z-0 absolute !right-0 -translate-x-full -translate-y-[70%] rotate-3"
-          />
-        </div>
+        <ContestCard :key="contest.id" v-bind="contest" />
+         </div>
       </div>
       <div v-else class="right-40 top-1/2 -translate-y-1/2 absolute">
         <div
@@ -167,7 +120,6 @@ const dragEnd = () => {
       </div>
     </transition-group>
   </div>
-  <h1 class="text-3xl translate-y-28 relative">Newest Miis</h1>
 </template>
 
 <style>
@@ -192,9 +144,6 @@ const dragEnd = () => {
 .draggable {
   animation: fadeIn 0.5s ease forwards;
 }
-</style>
-
-<style scoped>
 .draggable {
   user-select: none;
   cursor: pointer;
