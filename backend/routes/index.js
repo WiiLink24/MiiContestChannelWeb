@@ -142,19 +142,19 @@ router.post("/api/plaza/search", async (req, res) => {
       if (search.length <= 2) {
         data_response = await db.any(
         queries.searchByInitials,
-        [search]
+        [search, PlazaPageSize, offset]
       );
       } else {
         // Search by nickname using ILIKE for case-insensitive partial match
         data_response = await db.any(
           queries.searchByNickname,
-          [`%${search}%`]
+          [`%${search}%`, PlazaPageSize, offset]
         );
       }
     } else if (search.toString().length == 9) {
       data_response = await db.any(
         queries.searchByEntryId,
-        [search]
+        [search, PlazaPageSize, offset]
       );
     }
     const data = data_response.map((item) => {
