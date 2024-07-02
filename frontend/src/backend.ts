@@ -106,16 +106,16 @@ export function renderMii(base64String: string) {
     })
 }
 
-export function downloadMii(name: any, mii_data: any) {
+export function downloadMii(name: string | [number, number], mii_data: any) {
       const blob = new Blob([mii_data], { type: 'application/octet-stream' })
       const url = window.URL.createObjectURL(blob)
       const a = document.createElement('a')
 
       a.href = url
-      if (name === String) {
-        a.download = `${name}.mii`
-      } else {
-        a.download = `Contest_${name[0]}_${name[1]}.mii`
+      if (typeof name === 'string') {
+        a.download = `${name}.mii`;
+      } else if (Array.isArray(name) && name.length === 2) {
+        a.download = `Contest_${name[0]}_${name[1]}.mii`;
       }
       
       document.body.appendChild(a)

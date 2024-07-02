@@ -132,7 +132,7 @@ const dragEnd = (e) => {
       <h1 class="font-bold text-4xl">Tools</h1>
       <h2 class="opacity-60">Here are some tools we really like!</h2>
     </div> 
-    <div class="mt-3 grid magic_grid_sm gap-3">
+    <div class="mt-3 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-5 gap-3">
       <a class="btn" href="https://www.miicharacters.com/">Mii Characters</a>
       <a class="btn" href="https://www.miilibrary.com/">Mii Library</a>
       <a class="btn" href="https://github.com/Genwald/MiiPort/releases/tag/0.1.1">MiiPort</a>
