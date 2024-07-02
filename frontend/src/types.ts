@@ -35,6 +35,7 @@ export interface Artisan {
     total_likes: number;
     is_master: boolean;
     last_post: string;
+    artisan_id?: number;
 }
 
 

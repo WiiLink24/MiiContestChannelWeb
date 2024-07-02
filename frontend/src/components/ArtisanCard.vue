@@ -45,7 +45,7 @@ const isMaster = computed(() => {
       class="p-3 rounded-xl border flex flex-col justify-between relative z-20 dark:border-slate-600/60 dark:bg-slate-700/60 dark:text-white hover:shadow-xl transition-shadow overflow-hidden backdrop-blur-md bg-opacity-50"
       ref="card"
     >
-    <RouterLink :to="`/artisans/${wii_number}`" class="hover:no-underline">
+    <RouterLink :to="`/artisans/${artisan_id}`" class="hover:no-underline">
       <span
         v-if="isMaster"
         class="w-full text-7xl font-bold opacity-30 z-0 absolute select-none -ml-0 mb-[9.75rem] text-yellow-500 -rotate-6"

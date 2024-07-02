@@ -114,7 +114,7 @@ const genderIcon = computed(() => {
       <h1 class="text-3xl relative bottom-3 text-center">{{ nickname }}</h1>
     </div>
     <span class="w-full text-2xl flex items-end justify-between gap-1 flex-no-wrap"
-        ><span class="flex flex-col gap-1"><span><i class="fa-solid fa-thumbs-up text-xl"></i> {{ perm_likes }}</span><span class="text-sm opacity-60">by <RouterLink :to="`/artisans/${wii_number}`" class="underline text-sm">{{ artisan_name }}</RouterLink></span></span
+        ><span class="flex flex-col gap-1"><span><i class="fa-solid fa-thumbs-up text-xl"></i> {{ perm_likes }}</span><span class="text-sm opacity-60">by <RouterLink :to="`/artisans/${artisan_id}`" class="underline text-sm">{{ artisan_name }}</RouterLink></span></span
         ><span v-if="skill" class="flex flex-col gap-1"><i :class="genderIcon" class="text-right"></i><span class="text-sm opacity-60">{{ skillName.name }}</span></span></span
       >
     <span

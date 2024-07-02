@@ -26,7 +26,6 @@ declare module 'vue-router/auto-routes' {
     '/contests/[id]': RouteRecordInfo<'/contests/[id]', '/contests/:id', { id: ParamValue<true> }, { id: ParamValue<false> }>,
     '/contests/active': RouteRecordInfo<'/contests/active', '/contests/active', Record<never, never>, Record<never, never>>,
     '/contests/previous': RouteRecordInfo<'/contests/previous', '/contests/previous', Record<never, never>, Record<never, never>>,
-    '/plaza/': RouteRecordInfo<'/plaza/', '/plaza', Record<never, never>, Record<never, never>>,
     '/plaza/[id]': RouteRecordInfo<'/plaza/[id]', '/plaza/:id', { id: ParamValue<true> }, { id: ParamValue<false> }>,
     '/plaza/popular': RouteRecordInfo<'/plaza/popular', '/plaza/popular', Record<never, never>, Record<never, never>>,
     '/plaza/top': RouteRecordInfo<'/plaza/top', '/plaza/top', Record<never, never>, Record<never, never>>,

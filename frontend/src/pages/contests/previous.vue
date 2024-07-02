@@ -8,7 +8,7 @@ const ended_contests = ref();
 onMounted(async () => {
     const contests = await fetchContests();
 
-    ended_contests.value = contests.filter((contest: any) => contest.status === 'results');
+    ended_contests.value = contests.filter((contest: any) => contest.status === 'ended');
 })
 </script>
 

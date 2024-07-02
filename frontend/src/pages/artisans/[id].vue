@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { fetchArtisan, renderMii } from '@/backend'
+import { fetchArtisan, renderMii, downloadMii, formatWiiNumber } from '@/backend'
+import { formatDate } from '@/date_format'
 import { onMounted, ref, computed } from 'vue'
 import { useRoute } from 'vue-router'
-import { downloadMii } from '@/backend'
 import ReturnBtn from '@/components/ReturnBtn.vue'
 import ArtisanCard from '@/components/ArtisanCard.vue'
 import MiiCard from '@/components/MiiCard.vue'
@@ -28,15 +28,6 @@ onMounted(async () => {
   console.log(artisan.value);
 });
 
-function formatDate(dateString) {
-  if (!dateString) return 'Date not available';
-  const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', timeZoneName: 'short' };
-  const date = new Date(dateString);
-  if (isNaN(date.getTime())) {
-    return 'Invalid date';
-  }
-  return date.toLocaleDateString('en-US', options);
-}
 
 // Using a computed property to automatically update the formatted date when artisan_data.last_post changes
 const lastPostFormatted = computed(() => {
@@ -68,7 +59,7 @@ const lastPostFormatted = computed(() => {
         </span>
         </div>
         <p class="flex flex-col text-xl">
-          <span class="opacity-30 text-sm">Wii Number</span>{{ artisan_data.wii_number }}
+          <span class="opacity-30 text-sm">Wii Number</span>{{ formatWiiNumber(artisan_data.wii_number) }}
         </p>
         <div class="flex flex-row items-center">
           <p class="flex flex-col justify-end text-left">

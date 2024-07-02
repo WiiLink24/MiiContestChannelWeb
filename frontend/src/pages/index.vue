@@ -120,6 +120,9 @@ const dragEnd = (e) => {
       </div>
     </transition-group>
   </div>
+  <div class="container pt-32">
+    <h1>Newest Miis</h1>  
+  </div>
 </template>
 
 <style>

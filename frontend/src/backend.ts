@@ -41,9 +41,9 @@ export async function fetchSearch(type: string, query: string) {
     }
 }
 
-export async function fetchArtisan(wii_number: string) {
+export async function fetchArtisan(artisan_id: string) {
     const response = await axios.post(`${api}/api/artisans/artisan`, {
-        wii_number: wii_number
+        artisan_id: artisan_id
     })
     return response.data
 }
@@ -124,3 +124,7 @@ export function downloadMii(name: any, mii_data: any) {
       window.URL.revokeObjectURL(url)
       a.remove()
     }
+
+export function formatWiiNumber(wii_number: number) {
+  return wii_number.toString().padStart(15, '0').replace(/(\d{4})(?=\d)/g, '$1-');
+}

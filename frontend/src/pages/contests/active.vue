@@ -8,7 +8,7 @@ const active_contests = ref();
 onMounted(async () => {
     const contests = await fetchContests();
 
-    active_contests.value = contests.filter((contest) => contest.status === 'waiting');
+    active_contests.value = contests.filter((contest) => contest.status === 'open');
 })
 </script>
 

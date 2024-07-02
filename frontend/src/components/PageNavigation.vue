@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, defineProps, defineEmits } from 'vue'
+import { onMounted, defineProps, defineEmits, watch } from 'vue'
 
 const props = defineProps({
   total_pages: Number,
@@ -13,7 +13,6 @@ const incrementPage = () => {
   if (props.current_page < props.total_pages) {
     emit('update:current_page', props.current_page + 1)
   }
-  console.log(props.current_page);
 }
 
 const decrementPage = () => {
@@ -21,8 +20,13 @@ const decrementPage = () => {
   if (props.current_page > 1) {
     emit('update:current_page', props.current_page - 1)
   }
-  console.log(props.current_page);
 }
+
+const emitCurrentPage = () => {
+  //fetch input value
+  const input = document.querySelector('input');
+  emit('update:current_page', parseInt(input.value));
+};
 
 onMounted(() => {
   updateArrows();
@@ -47,13 +51,13 @@ function updateArrows() {
     next.style.pointerEvents = 'auto';
   }
 }
-
 </script>
 
 <template>
   <div class="inline-flex items-center gap-1 w-full justify-end">
     <p class="p-3 dark:bg-slate-700 rounded-lg">Page <b id="curr">{{ current_page }}</b> of <b id="last">{{ total_pages }}</b></p>
     <span class="opacity-30 ml-3 mr-3"> | </span>
+    <input type="number" class="p-3 dark:bg-slate-700 rounded-lg w-20" :value="props.current_page" @keyup.enter="emitCurrentPage" @change="updateArrows" />
     <button
       id="prev"
       class="p-2 dark:bg-slate-700 dark:hover:bg-slate-900 rounded-lg transition-all"
