@@ -7,9 +7,12 @@ import { skills } from '@/skills'
 import { downloadMii } from '@/backend'
 
 const props = defineProps<Mii>()
-console.log(props)
 const mii_img = await renderMii(props.mii_data)
 const country_flag = computed(() => countries[props.country_id]?.flag)
+
+let artisanMaster = ref(false)
+let mouseOver = ref(false)
+let mouseClick = ref(false)
 
 const isTooltipHovered = ref(false)
 
@@ -33,6 +36,33 @@ const countryFlagHtml = computed(() => {
   }
   return ''
 })
+
+const encodeEntryId = (entry_id) => {
+  let num = parseInt(entry_id);
+  num ^= ((num << 30) ^ (num << 18) ^ (num << 24)) & 0xFFFFFFFF;
+  num ^= (num & 0xF0F0F0F) << 4;
+  num ^= (num >> 29) ^ (num >> 17) ^ (num >> 23) ^ 0x20070419;
+
+  let crc = (num >> 8) ^ (num >> 24) ^ (num >> 16) ^ (num & 0xFF) ^ 0xFF;
+  if (232 < ((0xD4A50FFF < num ? 1 : 0) + (crc & 0xFF))) {
+    crc &= 0x7F;
+  }
+
+  crc &= 0xFF;
+  let crcBinary = crc.toString(2).padStart(8, '0');
+  let numBinary = num.toString(2).padStart(32, '0');
+  let combined = crcBinary + numBinary;
+  let combinedNumberString = parseInt(combined, 2).toString().padStart(12, '0');
+
+  // Split the string into chunks of 4 and join with a dash
+  return combinedNumberString.match(/.{1,4}/g).join('-');
+};
+
+const entry_id = encodeEntryId(props.entry_id)
+
+const copyToClipboard = (text) => {
+  navigator.clipboard.writeText(text)
+}
 
 const rankingClass = computed(() => {
   switch (props.ranking) {
@@ -111,14 +141,24 @@ const genderIcon = computed(() => {
           @click="downloadMii([contest_id, ranking], mii_data)"
         />
       </div>
-      <h1 class="text-3xl relative bottom-3 text-center">{{ nickname }}</h1>
+      <h1 class="text-3xl relative bottom-3 text-center flex flex-col gap-1">{{ nickname }} <p class="text-sm opacity-60">{{ entry_id }} 
+        <i :class="[
+      'cursor-pointer', 
+      'transition-all', 
+      mouseClick ? 'fa-solid fa-check text-green-400' : (mouseOver ? 'fa-solid fa-copy' : 'fa-regular fa-copy')
+    ]"
+   @mouseenter="mouseOver = true"
+   @mouseleave="mouseOver = false"
+   @click="mouseClick = true; copyToClipboard(entry_id)">
+</i>
+      </p></h1>
     </div>
-    <span class="w-full text-2xl flex items-end justify-between gap-1 flex-no-wrap"
-        ><span class="flex flex-col gap-1"><span><i class="fa-solid fa-thumbs-up text-xl"></i> {{ perm_likes }}</span><span class="text-sm opacity-60">by <RouterLink :to="`/artisans/${artisan_id}`" class="underline text-sm">{{ artisan_name }}</RouterLink></span></span
-        ><span v-if="skill" class="flex flex-col gap-1"><i :class="genderIcon" class="text-right"></i><span class="text-sm opacity-60">{{ skillName.name }}</span></span></span
+    <span class="w-full text-2xl flex items-end justify-between gap-1 flex-no-wrap z-10"
+        ><span class="flex flex-col gap-1"><span><i class="fa-solid fa-thumbs-up text-xl"></i> {{ perm_likes }}</span><span v-if="artisan_name" class="text-sm opacity-60">by <RouterLink v-if="artisan_is_master" :to="`/artisans/${artisan_id}`" class="p-1 pl-2 pr-2 text-sm bg-orange-400 rounded-full">◆{{ artisan_name }}◆</RouterLink><RouterLink v-else :to="`/artisans/${artisan_id}`" class="underline text-sm">{{ artisan_name }}</RouterLink></span></span
+        ><span class="flex flex-col gap-1"><i :class="genderIcon" class="text-right"></i><span v-if="skill" class="text-sm opacity-60">{{ skillName.name }}</span></span></span
       >
     <span
-      class="bottom-0 text-8xl font-bold text-white opacity-5 z-0 absolute -mr-3.5 -mb-4 select-none self-end"
+      class="bottom-0 text-8xl font-bold text-white opacity-5 absolute -mr-3.5 -mb-4 select-none self-end z-0"
       >{{ initials }}</span
     >
     <div class="blur"></div>

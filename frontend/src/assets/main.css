@@ -35,6 +35,14 @@
     grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
   }
 
+  .magic_grid_sm {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+
+  .btn {
+    @apply p-4 pl-8 pr-8 rounded-lg border-2 border-gray-500 bg-gray-300 hover:bg-gray-400 dark:border-slate-800 dark:bg-slate-600 dark:hover:bg-slate-700 transition-all;
+  }
+
   .uppercase-first-letter::first-letter {
     text-transform: uppercase;
   }

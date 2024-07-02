@@ -43,7 +43,7 @@ watch(current_page, async (newValue) => {
   <div class="container translate-y-10">
     <Title name="Artisans" />
     <div v-if="artisans">
-      <ul class="grid grid-cols-5 gap-10">
+      <ul class="grid grid-cols-5 gap-10 mb-6 -translate-y-8">
         <ArtisanCard v-for="artisan in artisans.data" :key="artisan.wii_number" v-bind="artisan" />
       </ul>
       <PageNavigation

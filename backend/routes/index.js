@@ -13,35 +13,30 @@ const PlazaPageSize = 50;
 const ContestPageSize = 50;
 const ArtisanPageSize = 50;
 
-function calculatePages(totalItems, pageSize) {
-  
-}
+function calculatePages(totalItems, pageSize) {}
 
 const GetPagesMiis = `SELECT COUNT(*) FROM miis`;
 const GetPagesContests = `SELECT COUNT(*) FROM contests`;
 const GetPagesArtisans = `SELECT COUNT(*) FROM artisans`;
 
-
-
 router.get("/api/plaza/top", async (req, res) => {
-    try {
-      const query = `SELECT m.*, a.is_master AS artisan_is_master, a.name AS artisan_name
+  try {
+    const query = `SELECT m.*, a.is_master AS artisan_is_master, a.name AS artisan_name
       FROM miis m
       LEFT JOIN artisans a ON m.artisan_id = a.artisan_id
-      ORDER BY m.perm_likes DESC
+      ORDER BY m.likes DESC
       LIMIT 50`;
-        const data_response = await db.many(query);
-        const data = data_response.map((item) => {
-          const miiDataEncoded = item.mii_data.toString("base64");
-          return { ...item, mii_data: miiDataEncoded };
-        });
-        res.json(data);
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: "Internal server error" });
-    }
-    }
-);
+    const data_response = await db.many(query);
+    const data = data_response.map((item) => {
+      const miiDataEncoded = item.mii_data.toString("base64");
+      return { ...item, mii_data: miiDataEncoded };
+    });
+    res.json(data);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
 
 router.get("/api/plaza/popular", async (req, res) => {
   try {
@@ -59,7 +54,7 @@ router.get("/api/plaza/popular", async (req, res) => {
 
     const data = data_response.map((item) => {
       const miiDataEncoded = item.mii_data.toString("base64");
-      return { ...item, mii_data: miiDataEncoded};
+      return { ...item, mii_data: miiDataEncoded };
     });
 
     let total_items = await db.one(GetPagesMiis);
@@ -99,7 +94,7 @@ router.get("/api/plaza/all", async (req, res) => {
     total_items = parseInt(total_items.count);
     const total_pages = Math.ceil(total_items / PlazaPageSize);
 
-    res.json({total_pages, data});
+    res.json({ total_pages, data });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal server error" });
@@ -109,7 +104,10 @@ router.get("/api/plaza/all", async (req, res) => {
 router.post("/api/plaza/mii", async (req, res) => {
   try {
     const { entry_id } = req.body;
-    const data_response = await db.oneOrNone("SELECT entry_id, artisan_id, initials, skill, nickname, gender, country_id, mii_data, likes, perm_likes FROM miis WHERE entry_id = $1", [entry_id]);
+    const data_response = await db.oneOrNone(
+      "SELECT entry_id, artisan_id, initials, skill, nickname, gender, country_id, mii_data, likes, perm_likes FROM miis WHERE entry_id = $1",
+      [entry_id]
+    );
     if (!data_response) {
       return res.status(404).json({ message: "Mii not found" });
     } else {
@@ -123,37 +121,49 @@ router.post("/api/plaza/mii", async (req, res) => {
     console.error(error);
     res.status(500).json({ message: "Internal server error" });
   }
-}
-);
-  
+});
 
 router.post("/api/plaza/search", async (req, res) => {
   try {
     const { search } = req.body;
     let data_response;
-    if (search.length <= 2) {
+    if (isNaN(search)) {
+      // Search by nickname using ILIKE for case-insensitive partial match
       data_response = await db.any(
-      "SELECT entry_id, artisan_id, initials, skill, nickname, gender, country_id, mii_data, likes, perm_likes FROM miis WHERE initials = $1", [search]
+        "SELECT entry_id, artisan_id, initials, skill, nickname, gender, country_id, mii_data, likes, perm_likes FROM miis WHERE nickname ILIKE $1",
+        [`%${search}%`]
+      );
+    } else if (search.length == 9) {
+      // Search by entry_id when search is a number with length 9, converting to BigInt
+      const entry_id = BigInt(search);
+      data_response = await db.any(
+        "SELECT entry_id, artisan_id, initials, skill, nickname, gender, country_id, mii_data, likes, perm_likes FROM miis WHERE entry_id = $1",
+        [entry_id]
       );
     } else {
+      // Search by initials when search is numeric but not 9 characters long
       data_response = await db.any(
-      "SELECT entry_id, artisan_id, initials, skill, nickname, gender, country_id, mii_data, likes, perm_likes FROM miis WHERE nickname ILIKE $1", [`%${search}%`]
+        "SELECT entry_id, artisan_id, initials, skill, nickname, gender, country_id, mii_data, likes, perm_likes FROM miis WHERE initials = $1",
+        [search]
       );
     }
     const data = data_response.map((item) => {
       const miiDataEncoded = item.mii_data.toString("base64");
       return { ...item, mii_data: miiDataEncoded };
-    })
+    });
 
     res.json(data);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal server error" });
-  }});
+  }
+});
 
 router.get("/api/contests", async (req, res) => {
   try {
-    const data = await db.many("SELECT contest_id, has_thumbnail, english_name, status, open_time, close_time, has_souvenir FROM contests ORDER BY contest_id");
+    const data = await db.many(
+      "SELECT contest_id, has_thumbnail, english_name, status, open_time, close_time, has_souvenir FROM contests ORDER BY contest_id"
+    );
     res.json(data);
   } catch (error) {
     console.error(error);
@@ -168,18 +178,20 @@ router.post("/api/contests/contest", async (req, res) => {
       "SELECT contest_id, has_thumbnail, english_name, status, open_time, close_time, has_souvenir FROM contests WHERE contest_id = $1",
       [contest_id]
     );
-    const entriesData_response = await db.manyOrNone("SELECT artisan_id, country_id, mii_data, likes, rank FROM contest_miis WHERE contest_id = $1", [contest_id]);
+    const entriesData_response = await db.manyOrNone(
+      "SELECT artisan_id, country_id, mii_data, likes, rank FROM contest_miis WHERE contest_id = $1",
+      [contest_id]
+    );
     const entries_data = entriesData_response.map((item) => {
       const miiDataEncoded = item.mii_data.toString("base64");
       return { ...item, mii_data: miiDataEncoded };
     });
     res.json({ contest_data, entries_data });
-  } catch (error)
-  {
+  } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal server error" });
   }
-})
+});
 
 router.get("/api/artisans", async (req, res) => {
   try {
@@ -191,7 +203,8 @@ router.get("/api/artisans", async (req, res) => {
     const offset = (pageNumber - 1) * ArtisanPageSize;
 
     const data_response = await db.many(
-      "SELECT artisan_id, name, country_id, wii_number, mii_data, number_of_posts, total_likes, is_master, last_post FROM artisans ORDER BY artisan_id LIMIT $1 OFFSET $2", [ArtisanPageSize, offset]
+      "SELECT name, country_id, wii_number, mii_data, number_of_posts, total_likes, is_master, last_post FROM artisans ORDER BY artisan_id LIMIT $1 OFFSET $2",
+      [ArtisanPageSize, offset]
     );
     const data = data_response.map((item) => {
       const miiDataEncoded = item.mii_data.toString("base64");
@@ -204,7 +217,7 @@ router.get("/api/artisans", async (req, res) => {
     total_items = parseInt(total_items.count);
     const total_pages = Math.ceil(total_items / ArtisanPageSize);
 
-    res.json({total_pages, data});
+    res.json({ total_pages, data });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal server error" });
@@ -213,24 +226,24 @@ router.get("/api/artisans", async (req, res) => {
 
 router.post("/api/artisans/artisan", async (req, res) => {
   try {
-    const { artisan_id } = req.body
+    const { wii_number } = req.body;
     const artisan_response = await db.oneOrNone(
-      "SELECT artisan_id, name, country_id, wii_number, mii_data, number_of_posts, total_likes, is_master, last_post FROM artisans WHERE artisan_id = $1",
-      [artisan_id]
+      "SELECT artisan_id, name, country_id, wii_number, mii_data, number_of_posts, total_likes, is_master, last_post FROM artisans WHERE wii_number = $1",
+      [wii_number]
     );
-    console.log(artisan_response)
+    console.log(artisan_response);
     const miidata_response = await db.manyOrNone(
       "SELECT entry_id, initials, skill, nickname, gender, country_id, mii_data, likes, perm_likes FROM miis WHERE artisan_id = $1",
-      [artisan_id]
+      [artisan_response.artisan_id]
     );
 
-    console.log(miidata_response)
+    console.log(miidata_response);
     const artisan_data = {
       ...artisan_response,
       mii_data: artisan_response.mii_data.toString("base64"),
     };
     const miis_data = miidata_response.map((item) => {
-      console.log(item)
+      console.log(item);
       const miiDataEncoded = item.mii_data.toString("base64");
       return { ...item, mii_data: miiDataEncoded };
     });
@@ -247,13 +260,19 @@ router.post("/api/artisans/search", async (req, res) => {
     let data_response;
     if (isNaN(search)) {
       data_response = await db.any(
-        "SELECT name, country_id, wii_number, mii_data, number_of_posts, total_likes, is_master, last_post FROM artisans WHERE name ILIKE $1",
+        "SELECT artisan_id, name, country_id, wii_number, mii_data, number_of_posts, total_likes, is_master, last_post FROM artisans WHERE name ILIKE $1",
         [`%${search}%`]
+      );
+    } else if (search.length == 9) {
+      const entry_id = BigInt(search);
+      data_response = await db.any(
+        "SELECT artisan_id, name, country_id, wii_number, mii_data, number_of_posts, total_likes, is_master, last_post FROM artisans WHERE entry_id = $1",
+        [entry_id]
       );
     } else {
       const wii_number = BigInt(search);
       data_response = await db.any(
-        "SELECT name, country_id, wii_number, mii_data, number_of_posts, total_likes, is_master, last_post FROM artisans WHERE wii_number = $1",
+        "SELECT artisan_id, name, country_id, wii_number, mii_data, number_of_posts, total_likes, is_master, last_post FROM artisans WHERE wii_number = $1",
         [wii_number]
       );
     }
@@ -266,7 +285,6 @@ router.post("/api/artisans/search", async (req, res) => {
     console.error(error);
     res.status(500).json({ message: "Internal server error" });
   }
-
-})
+});
 
 module.exports = router;

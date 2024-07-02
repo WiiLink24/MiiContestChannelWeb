@@ -7,7 +7,7 @@ export function formatDate(dateString: string): string {
     year: 'numeric',
   }
 
-  const formatter = new Intl.DateTimeFormat('fr-FR', options)
+  const formatter = new Intl.DateTimeFormat('en-EN', options)
   const formattedDate = formatter.format(date)
 
   return formattedDate

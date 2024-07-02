@@ -14,6 +14,7 @@ export interface Mii {
     artisan?: Artisan;
     wii_number?: bigint;
     artisan_name?: string;
+    artisan_is_master?: boolean;
 }
 
 export interface Contest {

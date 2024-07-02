@@ -54,23 +54,36 @@ function updateArrows() {
 </script>
 
 <template>
-  <div class="inline-flex items-center gap-1 w-full justify-end">
-    <p class="p-3 dark:bg-slate-700 rounded-lg">Page <b id="curr">{{ current_page }}</b> of <b id="last">{{ total_pages }}</b></p>
-    <span class="opacity-30 ml-3 mr-3"> | </span>
-    <input type="number" class="p-3 dark:bg-slate-700 rounded-lg w-20" :value="props.current_page" @keyup.enter="emitCurrentPage" @change="updateArrows" />
+  <div class="inline-flex items-center gap-1 w-full justify-between">
+    <p class="opacity-60">Showing page <b id="curr">{{ current_page }}</b> of <b id="last">{{ total_pages }}</b></p>
+    <div class="flex flex-row items-center gap-1">
     <button
       id="prev"
-      class="p-2 dark:bg-slate-700 dark:hover:bg-slate-900 rounded-lg transition-all"
+      class="p-3 pl-4 pr-4 border-2 border-gray-300 dark:border-slate-700 hover:border-gray-200 dark:hover:border-slate-600 dark:bg-slate-700 dark:hover:bg-slate-600 rounded-lg transition-all"
       @click="decrementPage"
     >
-      <i class="fa-solid fa-chevron-left text-3xl"></i>
+      <i class="fa-solid fa-chevron-left text-md"></i>
     </button>
+    <input type="number" class="p-3 bg-white/0 border-2 border-gray-300 hover:border-gray-200 dark:hover:border-slate-600 dark:border-slate-700 rounded-lg w-14 text-center transition-all" :value="props.current_page" @keyup.enter="emitCurrentPage" @change="updateArrows" />
     <button
       id="next"
-      class="p-2 dark:bg-slate-700 dark:hover:bg-slate-900 rounded-lg transition-all"
+      class="p-3 pl-4 pr-4 border-2 border-gray-300 dark:border-slate-700 hover:border-gray-200 dark:hover:border-slate-600 dark:bg-slate-700 dark:hover:bg-slate-600 rounded-lg transition-all"
       @click="incrementPage"
     >
-      <i class="fa-solid fa-chevron-right text-3xl"></i>
+      <i class="fa-solid fa-chevron-right text-md"></i>
     </button>
   </div>
+  </div>
 </template>
+
+<style scoped>
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+</style>

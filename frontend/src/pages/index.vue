@@ -1,13 +1,16 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import { fetchContests } from '@/backend'
-import type { Contest } from '@/types'
+import { fetchContests, fetchPlazaNew } from '@/backend'
+import type { Contest, Mii } from '@/types'
 import ContestCard from '@/components/ContestCard.vue'
+import MiiCard from '@/components/MiiCard.vue'
 
 const contests = ref<Contest[]>([])
 const positions = ref({})
+const newMiis = ref<Mii[]>([])
 
 onMounted(async () => {
+  newMiis.value = await fetchPlazaNew(1)
   contests.value = await fetchContests()
   const container = document.querySelector('.cmoc-bg')
   if (container) {
@@ -120,9 +123,23 @@ const dragEnd = (e) => {
       </div>
     </transition-group>
   </div>
-  <div class="container pt-32">
-    <h1>Newest Miis</h1>  
-  </div>
+  <div class="container translate-y-[90px]">
+    <h1 class="font-bold text-4xl">Newest Miis</h1>
+    <div class="mt-3 grid magic_grid gap-3">
+      <MiiCard v-for="mii in newMiis" :key="mii.entry_id" v-bind="mii" />
+    </div>
+    <div class="flex flex-row items-center justify-between gap-3">
+      <h1 class="font-bold text-4xl">Tools</h1>
+      <h2 class="opacity-60">Here are some tools we really like!</h2>
+    </div> 
+    <div class="mt-3 grid magic_grid_sm gap-3">
+      <a class="btn" href="https://www.miicharacters.com/">Mii Characters</a>
+      <a class="btn" href="https://www.miilibrary.com/">Mii Library</a>
+      <a class="btn" href="https://github.com/Genwald/MiiPort/releases/tag/0.1.1">MiiPort</a>
+      <a class="btn" href="https://pf2m.com/tools/mii/">Mii Renderer</a>
+      <a class="btn" href="https://www.wiilink24.com/extras/mii">Mii Avatar Editor</a>
+    </div>
+</div>
 </template>
 
 <style>
