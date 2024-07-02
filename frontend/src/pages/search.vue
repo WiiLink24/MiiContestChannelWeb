@@ -1,14 +1,24 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { fetchSearch } from '@/backend'
 import MiiCard from '@/components/MiiCard.vue'
 import ArtisanCard from '@/components/ArtisanCard.vue'
 import Title from '@/components/Title.vue'
+import PageNavigation from '@/components/PageNavigation.vue'
+import { useRoute } from 'vue-router'
+import LoadingAnimation from '@/components/LoadingAnimation.vue'
 
 let search_field = ref('')
 let search_type = ref('miis')
-
 let search_results = ref()
+let page_total
+const isLoading = ref(false)
+
+const route = useRoute()
+const current_page = ref(route.query.page ? parseInt(route.query.page as string) : 1)
+const updateCurrentPage = (newPage: number) => {
+  current_page.value = newPage
+}
 
 async function decodeInput(input) {
   let idStripped = input.replace(/-/g, '').trim();
@@ -26,6 +36,8 @@ async function decodeInput(input) {
 }
 
 const searchQuery = async () => {
+  try {
+  isLoading.value = true
   const pattern = /^\d{4}-\d{4}-\d{4}$/;
   const pattern2 = /^\d{4}-\d{4}-\d{4}-\d{4}$/;
   let searchInput = search_field.value;
@@ -41,8 +53,43 @@ const searchQuery = async () => {
   console.log(isNaN(searchInput));
   console.log(searchInput);
 
-  search_results.value = await fetchSearch(search_type.value, searchInput);
+  search_results.value = await fetchSearch(search_type.value, searchInput, current_page.value);
+  page_total = search_results.value.total_pages;
+  search_results.value = search_results.value.data;
+} catch (error) {
+  console.error(error)
+} finally {
+  isLoading.value = false
+}
 };
+
+watch(current_page, async (newValue) => {
+  try {
+    isLoading.value = true
+  const pattern = /^\d{4}-\d{4}-\d{4}$/;
+  const pattern2 = /^\d{4}-\d{4}-\d{4}-\d{4}$/;
+  let searchInput = search_field.value;
+
+
+  if (pattern.test(searchInput)) {
+    searchInput = (await decodeInput(searchInput));
+  }
+  if (pattern2.test(searchInput)) {
+    searchInput = searchInput.replace(/-/g, '');
+  }
+
+  console.log(isNaN(searchInput));
+  console.log(searchInput);
+
+  search_results.value = await fetchSearch(search_type.value, searchInput, current_page.value);
+  page_total = search_results.value.total_pages;
+  search_results.value = search_results.value.data;
+} catch (error) {
+  console.error(error)
+} finally {
+  isLoading.value = false
+}
+})
 </script>
 
 <template>
@@ -56,7 +103,7 @@ const searchQuery = async () => {
         v-model="search_field"
         type="text"
         placeholder="Search for Miis or Artisans by Name, ID or Initials..."
-        @keyup.enter="searchQuery()"
+        @keyup.enter="searchQuery(), current_page = 1"
         :autofocus="true"
       />
       <div class="flex items-center bg-gray-200/60 dark:bg-slate-500/60 backdrop-blur-sm hover:bg-gray-300 dark:hover:bg-slate-600 transition-all rounded-[4px] p-1">
@@ -122,7 +169,7 @@ const searchQuery = async () => {
         </div>
     </div>
       <button
-        @click="searchQuery()"
+        @click="searchQuery(), current_page = 1"
         class="p-3 pl-4 pr-4 bg-gray-200 dark:bg-slate-600 hover:bg-gray-300 dark:hover:bg-slate-700 transition-all rounded-l-[4px] rounded-r-[18px]"
       >
         <i class="fas fa-search"></i>
@@ -131,12 +178,30 @@ const searchQuery = async () => {
 
     <div v-if="search_results">
   <div>
-    <ul class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-10" v-if="search_results.length > 0 && search_type === 'miis'">
+    <div v-if="search_results.length > 0 && search_type === 'miis'">
+    <ul class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-10" v-if="!isLoading">
       <MiiCard v-for="result in search_results" :key="result.entry_id" v-bind="result" />
     </ul>
-    <ul class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-10" v-else-if="search_results.length > 0 && search_type === 'artisans'">
+    <LoadingAnimation v-if="isLoading" />
+      <PageNavigation
+        :current_page="current_page"
+        :total_pages="page_total"
+        @update:current_page="updateCurrentPage"
+        class="mt-10"
+      />
+  </div>
+    <div v-else-if="search_results.length > 0 && search_type === 'artisans'">
+    <ul class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-10" v-if="!isLoading">
       <ArtisanCard v-for="result in search_results" :key="result.entry_id" v-bind="result" />
     </ul>
+    <LoadingAnimation v-if="isLoading" />
+      <PageNavigation
+        :current_page="current_page"
+        :total_pages="page_total"
+        @update:current_page="updateCurrentPage"
+        class="mt-10"
+      />
+  </div>
     <p v-else class="text-red-500">
         <div class="p-20 w-full h-30 rounded-[18px] border-4 border-gray-400 dark:border-slate-500 border-dashed flex items-center justify-center relative">
         <div class="flex flex-col items-center gap-3 text-gray-200 dark:text-slate-400">

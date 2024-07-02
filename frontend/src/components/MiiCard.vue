@@ -7,7 +7,7 @@ import { skills } from '@/skills'
 import { downloadMii } from '@/backend'
 
 const props = defineProps<Mii>()
-const mii_img = await renderMii(props.mii_data)
+let mii_img = await renderMii(props.mii_data)
 const country_flag = computed(() => countries[props.country_id]?.flag)
 
 let artisanMaster = ref(false)
@@ -27,6 +27,7 @@ onMounted(() => {
     twemoji.value = window.twemoji
   }
   document.head.appendChild(script)
+
 })
 
 // Use twemoji to render the country flag
@@ -136,7 +137,7 @@ const genderIcon = computed(() => {
           ><i class="fa-solid fa-download"></i
         ></span>
         <img
-          class="w-28 bottom-3 cursor-pointer relative"
+          class="w-28 h-30 bottom-3 cursor-pointer relative"
           :src="mii_img"
           @click="downloadMii([contest_id, ranking], mii_data)"
         />

@@ -27,14 +27,14 @@ export async function fetchPlazaNew(page: number) {
     return response.data
 }
 
-export async function fetchSearch(type: string, query: string) {
+export async function fetchSearch(type: string, query: string, page: number) {
     if (type === 'miis') {
-        const response = await axios.post(`${api}/api/plaza/search`, {
+        const response = await axios.post(`${api}/api/plaza/search?page=${page}`, {
             search: query
         })
         return response.data
     } else if (type === 'artisans') {
-        const response = await axios.post(`${api}/api/artisans/search`, {
+        const response = await axios.post(`${api}/api/artisans/search?page=${page}`, {
             search: query
         })
         return response.data

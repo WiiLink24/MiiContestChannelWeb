@@ -335,6 +335,7 @@ router.post("/api/artisans/search", async (req, res) => {
         [wii_number, ArtisanPageSize, offset]
       );
     }
+    
     const data = data_response.map((item) => {
       const miiDataEncoded = item.mii_data.toString("base64");
       return { ...item, mii_data: miiDataEncoded };
