@@ -2,3 +2,4 @@ node_modules
 backend/.env
 frontend/dist
 backend/public/dist
+.DS_Store
