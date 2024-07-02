@@ -41,7 +41,7 @@ const isMaster = computed(() => {
     <li
       @mousemove="handleMouseMove"
       @mouseleave="resetTransform"
-      :class="rankingClass"
+      :class="rankingClass, { 'bg-yellow-600/30 dark:bg-yellow-600/30 border-yellow-300/50 dark:border-yellow-300/50': isMaster}"
       class="p-3 rounded-xl border flex flex-col justify-between relative z-20 dark:border-slate-600/60 dark:bg-slate-700/60 dark:text-white hover:shadow-xl transition-shadow overflow-hidden backdrop-blur-md bg-opacity-50"
       ref="card"
     >

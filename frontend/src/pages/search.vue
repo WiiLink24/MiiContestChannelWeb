@@ -11,14 +11,19 @@ let search_type = ref('miis')
 let search_results = ref()
 
 async function decodeInput(input) {
-  let num = parseInt(input.replace(/-/g, ''), 10);
+  let idStripped = input.replace(/-/g, '').trim();
+    let idBinary = parseInt(idStripped, 10).toString(2).padStart(40, '0').slice(8);
 
-  num ^= 0x20070419;
-  num ^= (num >>> 29) ^ (num >>> 17) ^ (num >>> 23);
-  num ^= (num & 0x0F0F0F0F) << 4;
-  num ^= ((num << 30) ^ (num << 18) ^ (num << 24)) & 0xFFFFFFFF;
+    let num = parseInt(idBinary, 2) >>> 0;
 
-  return num.toString();
+    num = (num ^ 0x20070419) >>> 0;
+    num = (num ^ ((num >>> 0x1D) ^ (num >>> 0x11) ^ (num >>> 0x17))) >>> 0;
+    num = (num ^ ((num & 0xF0F0F0F) << 4)) >>> 0;
+    num = (num ^ (((num << 0x1E) ^ (num << 0x12) ^ (num << 0x18)) & 0xFFFFFFFF)) >>> 0;
+
+    num = num >>> 0;
+
+    return num
 }
 
 const searchQuery = async () => {
