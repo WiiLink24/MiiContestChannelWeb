@@ -41,8 +41,8 @@ export async function fetchSearch(type: string, query: string, page: number) {
     }
 }
 
-export async function fetchArtisan(artisan_id: string) {
-    const response = await axios.post(`${api}/api/artisans/artisan`, {
+export async function fetchArtisan(artisan_id: string, page: number) {
+    const response = await axios.post(`${api}/api/artisans/artisan?page=${page}`, {
         artisan_id: artisan_id
     })
     return response.data

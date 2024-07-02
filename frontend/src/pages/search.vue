@@ -42,16 +42,12 @@ const searchQuery = async () => {
   const pattern2 = /^\d{4}-\d{4}-\d{4}-\d{4}$/;
   let searchInput = search_field.value;
 
-
   if (pattern.test(searchInput)) {
     searchInput = (await decodeInput(searchInput));
   }
   if (pattern2.test(searchInput)) {
     searchInput = searchInput.replace(/-/g, '');
   }
-
-  console.log(isNaN(searchInput));
-  console.log(searchInput);
 
   search_results.value = await fetchSearch(search_type.value, searchInput, current_page.value);
   page_total = search_results.value.total_pages;
@@ -70,16 +66,12 @@ watch(current_page, async (newValue) => {
   const pattern2 = /^\d{4}-\d{4}-\d{4}-\d{4}$/;
   let searchInput = search_field.value;
 
-
   if (pattern.test(searchInput)) {
     searchInput = (await decodeInput(searchInput));
   }
   if (pattern2.test(searchInput)) {
     searchInput = searchInput.replace(/-/g, '');
   }
-
-  console.log(isNaN(searchInput));
-  console.log(searchInput);
 
   search_results.value = await fetchSearch(search_type.value, searchInput, current_page.value);
   page_total = search_results.value.total_pages;

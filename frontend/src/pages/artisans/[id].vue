@@ -1,31 +1,46 @@
 <script setup lang="ts">
 import { fetchArtisan, renderMii, downloadMii, formatWiiNumber } from '@/backend'
 import { formatDate } from '@/date_format'
-import { onMounted, ref, computed } from 'vue'
+import { onMounted, ref, computed, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import ReturnBtn from '@/components/ReturnBtn.vue'
 import ArtisanCard from '@/components/ArtisanCard.vue'
 import MiiCard from '@/components/MiiCard.vue'
 import Title from '@/components/Title.vue'
+import PageNavigation from '@/components/PageNavigation.vue'
+import LoadingAnimation from '@/components/LoadingAnimation.vue'
+
+let page_total
+const isLoading = ref(false)
 
 const route = useRoute()
-const artisanId = ref(route.params.id)
+const current_page = ref(route.query.page ? parseInt(route.query.page as string) : 1)
+const updateCurrentPage = (newPage: number) => {
+  current_page.value = newPage
+}
 
+const artisanId = ref(route.params.id)
 const artisan = ref()
 const artisan_data = ref()
 const mii_data = ref()
-
 const mii_img = ref()
 
 onMounted(async () => {
-  artisan.value = await fetchArtisan(artisanId.value);
+  try {
+    isLoading.value = true
+  artisan.value = await fetchArtisan(artisanId.value, 1);
   artisan_data.value = artisan.value.artisan_data;
-  mii_data.value = artisan.value.miis_data;
+  page_total = artisan.value.entries_data.total_pages;
+  mii_data.value = artisan.value.entries_data.miis_data;
 
   if (artisan_data.value && artisan_data.value.mii_data) {
     mii_img.value = await renderMii(artisan_data.value.mii_data);
   }
-  console.log(artisan.value);
+} catch (error) {
+  console.error(error)
+} finally {
+  isLoading.value = false
+}
 });
 
 
@@ -37,6 +52,22 @@ const lastPostFormatted = computed(() => {
   return formatDate(artisan_data.value.last_post);
 });
 
+watch(current_page, async (newValue) => {
+  try {
+    artisan.value = await fetchArtisan(artisanId.value, current_page.value);
+  artisan_data.value = artisan.value.artisan_data;
+  page_total = artisan.value.entries_data.total_pages;
+  mii_data.value = artisan.value.entries_data.miis_data;
+
+  if (artisan_data.value && artisan_data.value.mii_data) {
+    mii_img.value = await renderMii(artisan_data.value.mii_data);
+  }
+} catch (error) {
+  console.error(error)
+} finally {
+  isLoading.value = false
+}
+})
 </script>
 
 <template>
@@ -78,9 +109,15 @@ const lastPostFormatted = computed(() => {
       <h2 v-if="artisan_data" class="opacity-60">{{ artisan_data.name }} has submitted {{ artisan_data.number_of_posts }} Miis.</h2>
     </div>
     <div v-if="artisan_data && mii_data">
-      <ul class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-10">
+      <ul v-id="!isLoading" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-10">
         <MiiCard v-for="entries in mii_data" :key="entries.entry_id" v-bind="entries" />
       </ul>
+      <LoadingAnimation v-if="isLoading" />
+      <PageNavigation
+        :current_page="current_page"
+        :total_pages="page_total"
+        @update:current_page="updateCurrentPage"
+        class="mt-10" />
     </div>
     <div
       v-else-if="artisan_data && !mii_data"
