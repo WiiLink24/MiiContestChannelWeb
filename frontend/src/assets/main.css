@@ -112,10 +112,6 @@
     bottom: -15px;
   }
 
-  .td-none {
-    text-decoration: none !important;
-  }
-
   .sb4-red:after {
     content: "";
     width: 0px;
@@ -127,6 +123,52 @@
     border-bottom: 10px solid transparent;
     left: 10px;
     bottom: -10px;
+  }
+
+  .td-none {
+    text-decoration: none !important;
+  }
+
+  .scroll-container {
+    overflow-x: hidden;
+    padding-bottom:20px;
+    white-space: nowrap;
+    position: relative; /* Add this line */
+  }
+
+  .scroll-container:before,
+  .scroll-container:after {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+    top: 0;
+    bottom: 0;
+    width: 100px; /* Adjust the width of the fade effect */
+    z-index: 2;
+  }
+
+  .scroll-container:before {
+    left: 0;
+    background: linear-gradient(to right, rgba(30, 41, 59,1), rgba(255,255,255,0));
+  }
+
+  .scroll-container:after {
+    right: 0;
+    background: linear-gradient(to left, rgba(30, 41, 59,1), rgba(255,255,255,0));
+  }
+
+  .scroll-container .mt-3 {
+    display: inline-flex;
+    animation: scrollAnimation 300s linear infinite;
+  }
+
+  @keyframes scrollAnimation {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
   }
 
   .outline-text {

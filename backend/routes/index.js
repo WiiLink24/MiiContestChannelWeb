@@ -126,29 +126,31 @@ router.post("/api/plaza/mii", async (req, res) => {
 router.post("/api/plaza/search", async (req, res) => {
   try {
     const { search } = req.body;
-    let data_response;
+    let data_response = [];
     if (isNaN(search)) {
       // Search by initials when search is numeric but not 9 characters long
       if (search.length <= 2) {
+        console.log("searching by initials");
         data_response = await db.any(
         "SELECT entry_id, artisan_id, initials, skill, nickname, gender, country_id, mii_data, likes, perm_likes FROM miis WHERE initials = $1",
         [search]
       );
       } else {
         // Search by nickname using ILIKE for case-insensitive partial match
+        console.log("searching by nickname");
         data_response = await db.any(
           "SELECT entry_id, artisan_id, initials, skill, nickname, gender, country_id, mii_data, likes, perm_likes FROM miis WHERE nickname ILIKE $1",
           [`%${search}%`]
         );
       }
-    } else if (search.length == 9) {
-      // Search by entry_id when search is a number with length 9, converting to BigInt
-      const entry_id = BigInt(search);
+    } else if (search.toString().length == 9) {
+      console.log("searching by entry_id");
       data_response = await db.any(
         "SELECT entry_id, artisan_id, initials, skill, nickname, gender, country_id, mii_data, likes, perm_likes FROM miis WHERE entry_id = $1",
-        [entry_id]
+        [search]
       );
-    } 
+      console.log(data_response);
+    }
     const data = data_response.map((item) => {
       const miiDataEncoded = item.mii_data.toString("base64");
       return { ...item, mii_data: miiDataEncoded };
@@ -263,12 +265,6 @@ router.post("/api/artisans/search", async (req, res) => {
       data_response = await db.any(
         "SELECT artisan_id, name, country_id, wii_number, mii_data, number_of_posts, total_likes, is_master, last_post FROM artisans WHERE name ILIKE $1",
         [`%${search}%`]
-      );
-    } else if (search.length == 9) {
-      const entry_id = BigInt(search);
-      data_response = await db.any(
-        "SELECT artisan_id, name, country_id, wii_number, mii_data, number_of_posts, total_likes, is_master, last_post FROM artisans WHERE entry_id = $1",
-        [entry_id]
       );
     } else {
       const wii_number = BigInt(search);

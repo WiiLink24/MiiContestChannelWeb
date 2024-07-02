@@ -22,18 +22,24 @@ async function decodeInput(input) {
     num = (num ^ (((num << 0x1E) ^ (num << 0x12) ^ (num << 0x18)) & 0xFFFFFFFF)) >>> 0;
 
     num = num >>> 0;
-
     return num
 }
 
 const searchQuery = async () => {
   const pattern = /^\d{4}-\d{4}-\d{4}$/;
+  const pattern2 = /^\d{4}-\d{4}-\d{4}-\d{4}$/;
   let searchInput = search_field.value;
-  console.log(searchInput.length);
+
 
   if (pattern.test(searchInput)) {
-    searchInput = await decodeInput(searchInput);
+    searchInput = (await decodeInput(searchInput));
   }
+  if (pattern2.test(searchInput)) {
+    searchInput = searchInput.replace(/-/g, '');
+  }
+
+  console.log(isNaN(searchInput));
+  console.log(searchInput);
 
   search_results.value = await fetchSearch(search_type.value, searchInput);
 };
