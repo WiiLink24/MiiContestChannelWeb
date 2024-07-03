@@ -1,9 +1,18 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
+import { createHead } from 'unhead'
 import { fetchContests, fetchPlazaNew } from '@/backend'
-import type { Contest, Mii } from '@/types'
+import type { Contest } from '@/types'
 import ContestCard from '@/components/ContestCard.vue'
 import MiiCard from '@/components/MiiCard.vue'
+import { useHead } from '@unhead/vue'
+
+useHead({
+  title: 'Home',
+  meta: [
+    { name: 'description', content: 'Learn more about us.' },
+  ],
+})
 
 const contests = ref<Contest[]>([])
 const positions = ref({})

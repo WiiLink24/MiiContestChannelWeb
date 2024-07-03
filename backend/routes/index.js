@@ -1,6 +1,8 @@
 var express = require("express");
 var router = express.Router();
 
+const { validateFriendCode } = require("../utils/number_test");
+
 require("dotenv").config();
 const pgp = require("pg-promise")(/* options */);
 //import db from env
@@ -13,7 +15,6 @@ const PlazaPageSize = 50;
 const ContestPageSize = 50;
 const ArtisanPageSize = 50;
 
-function calculatePages(totalItems, pageSize) {}
 
 const GetPagesMiis = `SELECT COUNT(*) FROM miis`;
 const GetPagesContests = `SELECT COUNT(*) FROM contests`;
@@ -359,6 +360,17 @@ router.post("/api/artisans/search", async (req, res) => {
     const total_pages = Math.ceil(total_items / ArtisanPageSize);
 
     res.json({total_pages, data});
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+router.post("/api/testnumber", async (req, res) => {
+  try {
+    const { number } = req.body;
+    const isValid = validateFriendCode(number);
+    res.json({ isValid });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal server error" });
