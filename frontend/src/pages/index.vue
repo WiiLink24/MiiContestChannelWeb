@@ -76,11 +76,11 @@ const dragEnd = (e) => {
 <template>
   <div
     id="parent"
-    class="md:w-[calc(100%-50px)] md:h-[650px] h-[470px] md:rounded-[80px] md:rounded-t-2xl cmoc-bg z-10 overflow-hidden"
+    class="lg:w-[calc(100%-50px)] lg:h-[650px] lg:rounded-[80px] lg:rounded-t-2xl cmoc-bg z-10 overflow-hidden"
     style="left: 50%; transform: translate(-50%, 50px); position: relative"
   >
-    <div class="container h-screen md:py-20 py-10 absolute">
-      <section class="h-[500px] flex flex-col justify-between grow-0 md:w-1/2 space-y-2">
+    <div class="container lg:py-20 py-10 lg:absolute relative">
+      <section class="lg:h-[500px] flex flex-col justify-between grow-0 lg:w-1/2 space-y-2">
         <div>
           <h1 class="text-5xl font-bold">Welcome to the new CMOC Viewing Tool</h1>
           <h2 class="mt-2 text-3xl">
