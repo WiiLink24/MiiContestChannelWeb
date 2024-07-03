@@ -53,7 +53,7 @@ watch(current_page, async (newValue) => {
 </script>
 
 <template>
-  <div>
+  <div v-if="contest_data">
     <div class="flex flex-row gap-3 items-center justify-between">
         <ReturnBtn />
         <h1 v-if="contest_data" class="text-xl font-bold">Contest Results for {{ contest_data.english_name }}</h1>
@@ -89,4 +89,10 @@ watch(current_page, async (newValue) => {
     </p>
     </div>
   </div>
+  <div v-else class="p-20 w-full h-30 rounded-[18px] border-4 border-gray-400 dark:border-slate-500 border-dashed flex items-center justify-center relative">
+        <div class="flex flex-col items-center gap-3 text-gray-500 dark:text-slate-400">
+          <div class="flex flex-row gap-3 items-center"><i class="fa-solid fa-bomb text-6xl"></i></div>
+        <h2 class="w-96 text-center relative">The Contest you were looking for could not be found...</h2>
+    </div>
+    </div>
 </template>

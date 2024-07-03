@@ -33,5 +33,11 @@ watch(route, async () => {
             <h1>{{ mii.nickname }}</h1>
             <img :src="mii_img" alt="">
         </div>
+        <div v-else class="p-20 w-full h-30 translate-y-14 rounded-[18px] border-4 border-gray-400 dark:border-slate-500 border-dashed flex items-center justify-center relative">
+        <div class="flex flex-col items-center gap-3 text-gray-500 dark:text-slate-400">
+          <div class="flex flex-row gap-3 items-center"><i class="fa-solid fa-bomb text-6xl"></i></div>
+        <h2 class="w-96 text-center relative">The Mii you were looking for could not be found...</h2>
+    </div>
+    </div>
     </div>
 </template>

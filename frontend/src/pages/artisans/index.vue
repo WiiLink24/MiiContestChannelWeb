@@ -5,6 +5,7 @@ import PageNavigation from '@/components/PageNavigation.vue'
 import Title from '@/components/Title.vue'
 import { onMounted, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import LoadingAnimation from '@/components/LoadingAnimation.vue'
 
 const artisans = ref()
 const isLoading = ref(false)
@@ -43,9 +44,10 @@ watch(current_page, async (newValue) => {
   <div class="container translate-y-10">
     <Title name="Artisans" />
     <div v-if="artisans">
-      <ul class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-10 mb-6 -translate-y-8">
+      <ul v-if="!isLoading" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-10 mb-6 -translate-y-8">
         <ArtisanCard v-for="artisan in artisans.data" :key="artisan.wii_number" v-bind="artisan" />
       </ul>
+      <LoadingAnimation v-if="isLoading" />
       <PageNavigation
         :current_page="current_page"
         :total_pages="artisans.total_pages"
