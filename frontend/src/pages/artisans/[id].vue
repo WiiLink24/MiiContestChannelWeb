@@ -73,14 +73,14 @@ watch(current_page, async (newValue) => {
 <template>
   <div v-if="artisan_data" class="container translate-y-10">
     <ReturnBtn />
-    <div v-if="artisan_data" class="mt-3 flex flex-row gap-6">
-      <ul class="w-48 relative">
+    <div v-if="artisan_data" class="mt-3 flex sm:flex-row flex-col gap-6">
+      <ul class="sm:w-48 w-full relative">
         <ArtisanCard v-bind="artisan_data" />
       </ul>
       <div class="pb-3 flex flex-col items-start justify-end">
-        <Title :name="artisan_data.name" />
-        <div class="-translate-y-12">
-            <div class="w-full mb-3 flex flex-row items-center justify-between gap-3 relative">
+        <Title :name="artisan_data.name" class="mobile-hide"/>
+        <div class="sm:-translate-y-12">
+            <div class="w-full mb-3 flex sm:flex-row flex-col sm:items-center items-start justify-between gap-3 relative">
         <button 
         class="p-3 pl-6 pr-6 bg-green-500/60 border-1 border-green-60 backdrop-blur-md rounded-md hover:bg-green-600 transition-all"
         @click="downloadMii(artisan_data.name, artisan_data.mii_data)"
@@ -109,7 +109,7 @@ watch(current_page, async (newValue) => {
       <h2 v-if="artisan_data" class="opacity-60">{{ artisan_data.name }} has submitted {{ artisan_data.number_of_posts }} Miis.</h2>
     </div>
     <div v-if="artisan_data && mii_data">
-      <ul v-id="!isLoading" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-10">
+      <ul v-id="!isLoading" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 sm:gap-10 gap-3">
         <MiiCard v-for="entries in mii_data" :key="entries.entry_id" v-bind="entries" />
       </ul>
       <LoadingAnimation v-if="isLoading" />

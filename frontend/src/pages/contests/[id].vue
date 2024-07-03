@@ -62,7 +62,7 @@ watch(current_page, async (newValue) => {
       <ContestCard v-bind="contest_data" />
       <hr class="mt-6 mb-6 border-t-black dark:border-t-white">
       <div v-if="entries_data">
-      <ul v-if="!isLoading" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-10">
+      <ul v-if="!isLoading" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 sm:gap-10 gap-3">
         <MiiCard
           v-for="entry in entries_data"
           :key="entry.artisan_id"

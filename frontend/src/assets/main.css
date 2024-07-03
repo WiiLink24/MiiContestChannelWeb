@@ -4,7 +4,7 @@
 
 @layer utilities {
   .container {
-    @apply max-w-screen-xl mx-auto lg:px-24 md:px-20 sm:px-10;
+    @apply max-w-screen-xl mx-auto lg:px-24 md:px-20 sm:px-10 px-4 overflow-hidden;
   }
 
   .cmoc-bg {
@@ -15,8 +15,7 @@
   @media (prefers-color-scheme: dark) {
     .cmoc-bg {
       background-color: rgba(32, 41, 58, 0.8); /* Darker for dark mode */
-      background-blend-mode: screen; /* Different blend mode for dark mode */
-      background-blend-mode: multiply;
+      background-blend-mode: multiply; /* Different blend mode for dark mode */
       box-shadow: 
       0px 0px 120px #9bd7330d, /* Dark mode shadow, slightly more visible */
       0px 0px 90px #c33ed20d,  /* Slightly lighter and smaller */

@@ -62,7 +62,7 @@ watch(current_page, async (newValue) => {
       <div v-if="plaza_new">
         <ul
         v-if="plaza_new_data"
-          class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-10 -translate-y-14"
+          class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 sm:gap-10 gap-3 -translate-y-14"
         >
           <MiiCard v-for="mii in plaza_new_data" :key="mii.entry_id" v-bind="mii" />
         </ul>

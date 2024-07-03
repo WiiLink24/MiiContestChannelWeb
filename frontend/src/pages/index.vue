@@ -76,11 +76,11 @@ const dragEnd = (e) => {
 <template>
   <div
     id="parent"
-    class="w-[calc(100%-50px)] h-[650px] rounded-[80px] rounded-t-2xl cmoc-bg z-10 overflow-hidden"
+    class="md:w-[calc(100%-50px)] md:h-[650px] h-[470px] md:rounded-[80px] md:rounded-t-2xl cmoc-bg z-10 overflow-hidden"
     style="left: 50%; transform: translate(-50%, 50px); position: relative"
   >
-    <div class="container h-screen py-20 absolute">
-      <section class="h-[500px] flex flex-col justify-between grow-0 w-1/2 space-y-2">
+    <div class="container h-screen md:py-20 py-10 absolute">
+      <section class="h-[500px] flex flex-col justify-between grow-0 md:w-1/2 space-y-2">
         <div>
           <h1 class="text-5xl font-bold">Welcome to the new CMOC Viewing Tool</h1>
           <h2 class="mt-2 text-3xl">
@@ -98,13 +98,13 @@ const dragEnd = (e) => {
             Install WiiLink</a
           >
         </div>
-        <div class="text-xl opacity-80">
+        <div class="text-xl opacity-80 mobile-hide">
           <i class="fa-solid fa-hand"></i> Here are all available contests, go ahead and play around
           with them!
         </div>
       </section>
     </div>
-    <transition-group name="fade" tag="div" class="container">
+    <transition-group name="fade" tag="div" class="container mobile-hide">
       <div v-if="contests.length > 0">
         <div
           v-for="(contest, index) in contests"
@@ -131,7 +131,7 @@ const dragEnd = (e) => {
           class="p-2 rounded-3xl border-[5px] border-white bg-[rgb(76,130,163)] shadow-2xl rotate-3 z-10 relative"
         >
           <div class="mt-2 bg-white p-1 rounded-xl flex flex-row items-center">
-            <div class="p-3 pl-6 pr-6 text-left flex flex-row items-center text-black gap-6">
+            <div class="p-3 pl-6 pr-6 text-left flex flex-row items-center gap-6" style="color:black !important;">
               <i class="fa-solid fa-triangle-exclamation text-6xl"></i>
               There are no contests available at the moment...<br />
               Once there are, they will be shown here!
@@ -141,7 +141,7 @@ const dragEnd = (e) => {
       </div>
     </transition-group>
   </div>
-  <ul class="mb-10 flex gap-1 items-center justify-center translate-y-[67px] z-0 relative">
+  <ul class="mb-10 flex gap-1 items-center justify-center translate-y-[67px] z-0 mobile-hide-flex relative">
     <li>
       <RouterLink to="/" class="header-link-index"
         ><i class="fa-solid fa-house"></i> Home</RouterLink
@@ -235,14 +235,14 @@ const dragEnd = (e) => {
       <h1 class="font-bold text-4xl">Tools</h1>
       <h2 class="opacity-60">Here are some tools we really like!</h2>
     </div>
-    <div class="mt-3 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-5 gap-3">
-      <a class="btn rounded-l-xl rounded-r-md text-center text-black" href="https://www.miicharacters.com/" @mouseenter="displayData('miichar')" @mouseleave="removeData('miichar')">Mii Characters</a>
-      <a class="btn rounded-md text-center text-black" href="https://www.miilibrary.com/" @mouseenter="displayData('miilib')" @mouseleave="removeData('miilib')">Mii Library</a>
-      <a class="btn rounded-md text-center text-black" href="https://github.com/Genwald/MiiPort/releases/tag/0.1.1" @mouseenter="displayData('miiport')" @mouseleave="removeData('miiport')">MiiPort</a>
-      <a class="btn rounded-md text-center text-black" href="https://pf2m.com/tools/mii/" @mouseenter="displayData('miirender')" @mouseleave="removeData('miirender')">Mii Renderer</a>
-      <a class="btn rounded-l-md rounded-r-xl text-center text-black" href="https://www.wiilink24.com/extras/mii" @mouseenter="displayData('miiedit')" @mouseleave="removeData('miiedit')">Mii Avatar Editor</a>
+    <div class="mt-3 mb-20 lg:mb-0 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-5 gap-3">
+      <a class="btn lg:rounded-l-xl lg:rounded-r-md rounded-xl text-center text-black" href="https://www.miicharacters.com/" @mouseenter="displayData('miichar')" @mouseleave="removeData('miichar')">Mii Characters</a>
+      <a class="btn lg:rounded-md rounded-xl text-center text-black" href="https://www.miilibrary.com/" @mouseenter="displayData('miilib')" @mouseleave="removeData('miilib')">Mii Library</a>
+      <a class="btn lg:rounded-md rounded-xl text-center text-black" href="https://github.com/Genwald/MiiPort/releases/tag/0.1.1" @mouseenter="displayData('miiport')" @mouseleave="removeData('miiport')">MiiPort</a>
+      <a class="btn lg:rounded-md rounded-xl text-center text-black" href="https://pf2m.com/tools/mii/" @mouseenter="displayData('miirender')" @mouseleave="removeData('miirender')">Mii Renderer</a>
+      <a class="btn lg:rounded-l-md lg:rounded-r-xl rounded-xl text-center text-black" href="https://www.wiilink24.com/extras/mii" @mouseenter="displayData('miiedit')" @mouseleave="removeData('miiedit')">Mii Avatar Editor</a>
     </div>
-    <div class="mb-10 dark:text-white">
+    <div class="mb-10 dark:text-white mobile-hide">
       <p id="temp" class="mt-6 p-3 border-2 border-slate-500/30 rounded-t-md rounded-b-lg flex items-center justify-center gap-3 text-black">
         <i class="fa-solid fa-question-circle"></i> Hover over a tool to view its description.
       </p>

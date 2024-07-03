@@ -100,7 +100,7 @@ watch(current_page, async (newValue) => {
       />
       <div class="flex items-center bg-gray-200/60 dark:bg-slate-500/60 backdrop-blur-sm hover:bg-gray-300 dark:hover:bg-slate-600 transition-all rounded-[4px] p-1">
         <div
-          class="mr-1 cursor-pointer dark:hover:bg-slate-500 rounded-[4px]"
+          class="mr-1 h-full flex items-center justify-center cursor-pointer dark:hover:bg-slate-500 rounded-[4px]"
           :class="{ 'bg-green-500 dark:hover:bg-green-500': search_type === 'miis' }"
           @click="search_type = 'miis'; search_results = null"
         >
@@ -113,7 +113,7 @@ watch(current_page, async (newValue) => {
               }"
             ></i>
             <label
-              class="select-none"
+              class="select-none mobile-hide"
               :class="{
                 'text-gray-400': search_type !== 'miis',
                 'text-white': search_type === 'miis'
@@ -130,7 +130,7 @@ watch(current_page, async (newValue) => {
           />
         </div>
         <div
-          class="cursor-pointer dark:hover:bg-slate-500 rounded-[4px]"
+          class="cursor-pointer h-full flex items-center justify-center dark:hover:bg-slate-500 rounded-[4px]"
           :class="{ 'bg-blue-500 dark:hover:bg-blue-500': search_type === 'artisans' }"
           @click="search_type = 'artisans'; search_results = null"
         >
@@ -143,7 +143,7 @@ watch(current_page, async (newValue) => {
               }"
             ></i>
             <label
-              class="select-none"
+              class="select-none mobile-hide"
               :class="{
                 'text-gray-400': search_type !== 'artisans',
                 'text-white': search_type === 'artisans'
@@ -171,7 +171,7 @@ watch(current_page, async (newValue) => {
     <div v-if="search_results">
   <div>
     <div v-if="search_results.length > 0 && search_type === 'miis'">
-    <ul class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-10" v-if="!isLoading">
+    <ul class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 sm:gap-10 gap-3" v-if="!isLoading">
       <MiiCard v-for="result in search_results" :key="result.entry_id" v-bind="result" />
     </ul>
     <LoadingAnimation v-if="isLoading" />
@@ -183,7 +183,7 @@ watch(current_page, async (newValue) => {
       />
   </div>
     <div v-else-if="search_results.length > 0 && search_type === 'artisans'">
-    <ul class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-10" v-if="!isLoading">
+    <ul class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 sm:gap-10 gap-3" v-if="!isLoading">
       <ArtisanCard v-for="result in search_results" :key="result.entry_id" v-bind="result" />
     </ul>
     <LoadingAnimation v-if="isLoading" />
@@ -198,7 +198,7 @@ watch(current_page, async (newValue) => {
         <div class="p-20 w-full h-30 rounded-[18px] border-4 border-gray-400 dark:border-slate-500 border-dashed flex items-center justify-center relative">
         <div class="flex flex-col items-center gap-3 text-gray-500 dark:text-slate-400">
             <i class="fa-solid fa-bomb text-6xl"></i>
-        <h2 class="w-96 text-center relative">Nothing was found... Did you type it in correctly?</h2>
+        <h2 class="sm:w-96 w-full text-center relative">Nothing was found... Did you type it in correctly?</h2>
     </div>
     </div>
     </p>
@@ -207,13 +207,13 @@ watch(current_page, async (newValue) => {
     <div v-else-if="search_type == 'miis'" class="p-20 w-full h-30 rounded-[18px] border-4 border-gray-400 dark:border-slate-500 border-dashed flex items-center justify-center relative">
         <div class="flex flex-col items-center gap-3 text-gray-500 dark:text-slate-400">
             <div class="flex flex-row gap-3 items-center"><i class="fa-solid fa-magnifying-glass text-6xl"></i><b class="p-3 pl-6 pr-6 rounded-lg text-white bg-green-500">Mii Search Mode</b></div>
-        <h2 class="w-96 text-center relative">To begin searching, type your query in the box and press the enter key or <i class="fa-solid fa-magnifying-glass"></i> Search icon. You can search for a Mii by using its Name, CMOC Contest Code, or Initals.</h2>
+        <h2 class="sm:w-96 w-full text-center relative">To begin searching, type your query in the box and press the enter key or <i class="fa-solid fa-magnifying-glass"></i> Search icon. You can search for a Mii by using its Name, CMOC Contest Code, or Initals.</h2>
     </div>
     </div>
     <div v-else-if="search_type == 'artisans'" class="p-20 w-full h-30 rounded-[18px] border-4 border-gray-400 dark:border-slate-500 border-dashed flex items-center justify-center relative">
         <div class="flex flex-col items-center gap-3 text-gray-500 dark:text-slate-400">
           <div class="flex flex-row gap-3 items-center"><i class="fa-solid fa-magnifying-glass text-6xl"></i><b class="p-3 pl-6 pr-6 rounded-lg text-white bg-blue-500">Artisan Search Mode</b></div>
-        <h2 class="w-96 text-center relative">To begin searching, type your query in the box and press the enter key or <i class="fa-solid fa-magnifying-glass"></i> Search icon. You can search for an Artisan by using its Name, or Wii Number.</h2>
+        <h2 class="sm:w-96 w-full text-center relative">To begin searching, type your query in the box and press the enter key or <i class="fa-solid fa-magnifying-glass"></i> Search icon. You can search for an Artisan by using its Name, or Wii Number.</h2>
     </div>
     </div>
   </div>

@@ -32,7 +32,7 @@ onMounted(async () => {
     </p>
     <LoadingAnimation v-if="isLoading" />
     <template v-if="top50">
-      <ul class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-10 -translate-y-14">
+      <ul class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 sm:gap-10 gap-3 -translate-y-14">
         <MiiCard
           v-for="(item, index) in top50"
           :key="item.entry_id"

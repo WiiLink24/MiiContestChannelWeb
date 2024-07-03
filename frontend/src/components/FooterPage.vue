@@ -193,7 +193,7 @@
       );
       background-color: rgb(28, 28, 28);
       top: 150px;
-      z-index: 5;
+      z-index: 0;
       background-size: cover;
     }
 

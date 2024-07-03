@@ -14,7 +14,7 @@ onMounted(async () => {
 
 <template>
     <div>
-        <ul class="grid magic_grid gap-3" v-if="active_contests">
+        <ul class="flex flex-col gap-3" v-if="active_contests">
             <div  v-for="contest in active_contests">
             <RouterLink :to="`/contests/${contest.contest_id}`">
                 <ContestCard :key="contest.id" v-bind="contest" />

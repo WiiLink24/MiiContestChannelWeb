@@ -44,7 +44,7 @@ watch(current_page, async (newValue) => {
   <div class="container translate-y-10">
     <Title name="Artisans" />
     <div v-if="artisans">
-      <ul v-if="!isLoading" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-10 mb-6 -translate-y-8">
+      <ul v-if="!isLoading" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 sm:gap-10 gap-3 mb-6 -translate-y-8">
         <ArtisanCard v-for="artisan in artisans.data" :key="artisan.wii_number" v-bind="artisan" />
       </ul>
       <LoadingAnimation v-if="isLoading" />

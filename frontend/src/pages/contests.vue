@@ -17,19 +17,19 @@ import { RouterLink, RouterView } from 'vue-router'
     >
       <RouterLink
         to="/contests/active"
-        class="flex items-center gap-2 px-4 py-2 text-white hover:bg-gray-500 dark:hover:bg-slate-500 cursor-pointer hover:no-underline rounded-[14px] rounded-r-md transition-all"
+        class="flex items-center gap-2 px-4 sm:py-2 py-3 text-white hover:bg-gray-500 dark:hover:bg-slate-500 cursor-pointer hover:no-underline rounded-[14px] rounded-r-md transition-all"
         activeClass="bg-green-500 dark:bg-green-500 hover:bg-green-500 dark:hover:bg-green-500"
       >
         <i class="fas fa-trophy"></i>
-        <span>Active Contests</span>
+        <span class="mobile-hide">Active Contests</span>
       </RouterLink>
       <RouterLink
         to="/contests/previous"
-        class="flex items-center gap-2 px-4 py-2 text-white hover:bg-gray-500 dark:hover:bg-slate-500 cursor-pointer hover:no-underline rounded-[14px] rounded-l-md transition-all"
+        class="flex items-center gap-2 px-4 sm:py-2 py-3 text-white hover:bg-gray-500 dark:hover:bg-slate-500 cursor-pointer hover:no-underline rounded-[14px] rounded-l-md transition-all"
         activeClass="bg-blue-500 dark:bg-blue-500 hover:bg-blue-500 dark:hover:bg-blue-500"
       >
         <i class="fas fa-history"></i>
-        <span>Previous Contests</span>
+        <span class="mobile-hide">Previous Contests</span>
       </RouterLink>
     </nav>
     <RouterView />
