@@ -40,7 +40,7 @@
   }
 
   .btn {
-    @apply p-4 pl-8 pr-8 rounded-lg border-2 border-gray-500 bg-gray-300 hover:bg-gray-400 dark:border-slate-800 dark:bg-slate-600 dark:hover:bg-slate-700 transition-all;
+    @apply p-4 pl-8 pr-8 border-2 border-gray-500 bg-gray-300 hover:bg-gray-400 dark:border-slate-800 dark:bg-slate-600 dark:hover:bg-slate-700 transition-all;
   }
 
   .uppercase-first-letter::first-letter {
@@ -129,6 +129,10 @@
     text-decoration: none !important;
   }
 
+  .animate-spin {
+    animation: spin 60s linear infinite;
+  }
+
   .scroll-container {
     overflow-x: hidden;
     padding-bottom:20px;
@@ -210,5 +214,29 @@
     border-radius: 8px;
     transition: 0.3s;
     overflow: hidden;
+  }
+
+  .header-link-index {
+    padding:20px;
+    padding-left:30px;
+    padding-right:30px;
+    border-radius: 0px 0px 4px 4px;
+    position: relative;
+    @apply bg-gradient-to-b from-slate-700/60 to-slate-700 border-2 border-slate-700/60;
+    transition: 0.2s;
+  }
+
+  .header-link-index:hover {
+    padding-bottom: 30px;
+    text-decoration: none !important;
+    transition: 0.2s;
+  }
+
+  li:nth-child(1) .header-link-index {
+    border-radius: 0px 0px 4px 16px;
+  }
+
+  li:nth-child(6) .header-link-index {
+    border-radius: 0px 0px 16px 4px;
   }
 }
