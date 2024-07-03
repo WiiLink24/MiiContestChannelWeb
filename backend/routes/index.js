@@ -131,9 +131,9 @@ router.post("/api/plaza/search", async (req, res) => {
     const offset = (pageNumber - 1) * PlazaPageSize;
 
     const queries = {
-      searchByInitials: "SELECT entry_id, artisan_id, initials, skill, nickname, gender, country_id, mii_data, likes, perm_likes FROM miis WHERE initials = $1 LIMIT $2 OFFSET $3",
-      searchByNickname: "SELECT entry_id, artisan_id, initials, skill, nickname, gender, country_id, mii_data, likes, perm_likes FROM miis WHERE nickname ILIKE $1 LIMIT $2 OFFSET $3",
-      searchByEntryId: "SELECT entry_id, artisan_id, initials, skill, nickname, gender, country_id, mii_data, likes, perm_likes FROM miis WHERE entry_id = $1 LIMIT $2 OFFSET $3"
+      searchByInitials: "SELECT m.*, a.is_master AS artisan_is_master, a.name AS artisan_name FROM miis m LEFT JOIN artisans a ON m.artisan_id = a.artisan_id WHERE initials = $1 LIMIT $2 OFFSET $3",
+      searchByNickname: "SELECT m.*, a.is_master AS artisan_is_master, a.name AS artisan_name FROM miis m LEFT JOIN artisans a ON m.artisan_id = a.artisan_id WHERE nickname ILIKE $1 LIMIT $2 OFFSET $3",
+      searchByEntryId: "SELECT m.*, a.is_master AS artisan_is_master, a.name AS artisan_name FROM miis m LEFT JOIN artisans a ON m.artisan_id = a.artisan_id WHERE entry_id = $1 LIMIT $2 OFFSET $3"
     }
 
     let data_response = [];

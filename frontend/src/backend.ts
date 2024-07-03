@@ -48,8 +48,8 @@ export async function fetchArtisan(artisan_id: string, page: number) {
     return response.data
 }
 
-export async function fetchContest(contest_id: number) {
-    const response = await axios.post(`${api}/api/contests/contest`, {
+export async function fetchContest(contest_id: number, page: number) {
+    const response = await axios.post(`${api}/api/contests/contest?page=${page}`, {
         contest_id: contest_id
     })
     return response.data

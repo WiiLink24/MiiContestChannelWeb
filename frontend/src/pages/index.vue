@@ -127,10 +127,10 @@ const dragEnd = (e) => {
   <div class="container translate-y-[90px]">
     <h1 class="font-bold text-4xl">Newest Miis</h1>
 <div class="mt-3 mb-8 scroll-container">
-  <div class="mt-3 inline-flex flex-row gap-3">
+  <ul class="mt-3 inline-flex flex-row gap-3">
     <MiiCard v-for="mii in newMiis" :key="mii.entry_id" v-bind="mii" style="width:300px !important; position: relative;"/>
     <MiiCard v-for="mii in newMiis" :key="`duplicate-${mii.entry_id}`" v-bind="mii" style="width:300px !important; position: relative;"/>
-  </div>
+  </ul>
 </div>
     <div class="flex flex-row items-center justify-between gap-3">
       <h1 class="font-bold text-4xl">Tools</h1>
