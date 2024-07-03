@@ -293,7 +293,7 @@ router.post("/api/artisans/artisan", async (req, res) => {
       mii_data: artisan_response.mii_data.toString("base64"),
     };
     const miis_data = miidata_response.map((item) => {
-      console.log(item);
+
       const miiDataEncoded = item.mii_data.toString("base64");
       return { ...item, mii_data: miiDataEncoded };
     });

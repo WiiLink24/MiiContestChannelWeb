@@ -12,7 +12,6 @@ const isLoading = ref(false)
 
 onMounted(async () => {
   artisans.value = await fetchArtisans(current_page.value)
-  console.log(artisans.value)
 })
 
 const route = useRoute()
