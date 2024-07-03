@@ -18,7 +18,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-    <header :class="{'backdrop-blur-md shadow-md bg-gray-400/50 dark:bg-slate-600/50 transition-all': isScrolled}" class="w-full flex items-center justify-between dark:text-white px-8 py-4 z-10 fixed">
+    <header :class="{'backdrop-blur-md shadow-md bg-gray-400/50 dark:bg-slate-600/50 transition-all': isScrolled}" class="w-full flex items-center justify-between dark:text-white md:px-8 lg:px-8 px-4 py-4 z-10 fixed">
         <img src="/img/viewingTool-logo.png" class="dark:invert !h-[50px]">
         <nav class="flex gap-10 items-center">
             <ul class="flex gap-2 items-center mobile-hide-flex">
