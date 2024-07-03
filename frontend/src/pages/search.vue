@@ -44,6 +44,7 @@ const searchQuery = async () => {
 
   if (pattern.test(searchInput)) {
     searchInput = (await decodeInput(searchInput));
+    searchInput = searchInput.toString();
   }
   if (pattern2.test(searchInput)) {
     searchInput = searchInput.replace(/-/g, '');
