@@ -28,8 +28,6 @@ onMounted(async () => {
   contest.value = await fetchContest(contestId.value, 1)
   contest_data.value = contest.value.contest_data
   entries_data.value = contest.value.entries_data_temp
-
-  console.log(entries_data.value)
     } catch (error) {
     console.error(error)
         } finally {
@@ -43,7 +41,6 @@ watch(current_page, async (newValue) => {
   contest_data.value = contest.value.contest_data
   entries_data.value = contest.value.entries_data_temp
 
-  console.log(entries_data.value)
 } catch (error) {
   console.error(error)
 } finally {

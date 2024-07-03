@@ -3,3 +3,4 @@ backend/.env
 frontend/dist
 backend/public/dist
 .DS_Store
+backend/access.log
