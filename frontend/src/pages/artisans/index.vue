@@ -53,7 +53,7 @@ watch(current_page, async (newValue) => {
       />
     </div>
     <div v-else class="p-20 w-full h-30 rounded-[18px] border-4 border-gray-400 dark:border-slate-500 border-dashed flex items-center justify-center relative">
-      <div class="flex flex-col items-center gap-3 text-gray-200 dark:text-slate-400">
+      <div class="flex flex-col items-center gap-3 text-gray-500 dark:text-slate-400">
           <i class="fa-solid fa-bomb text-6xl"></i>
           <h2 class="w-96 text-center relative">Could not establish a connection to the Plaza database, please try again later...</h2>
       </div>

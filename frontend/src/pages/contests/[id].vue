@@ -60,7 +60,7 @@ watch(current_page, async (newValue) => {
     </div>
     <div v-if="contest" class="mt-3">
       <ContestCard v-bind="contest_data" />
-      <hr class="mt-6 mb-6">
+      <hr class="mt-6 mb-6 border-t-black dark:border-t-white">
       <div v-if="entries_data">
       <ul v-if="!isLoading" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-10">
         <MiiCard
@@ -81,7 +81,7 @@ watch(current_page, async (newValue) => {
     </div>
       <p v-else class="text-red-500">
         <div class="p-20 w-full h-30 rounded-[18px] border-4 border-gray-400 dark:border-slate-500 border-dashed flex items-center justify-center relative">
-        <div class="flex flex-col items-center gap-3 text-gray-200 dark:text-slate-400">
+        <div class="flex flex-col items-center gap-3 text-gray-500 dark:text-slate-400">
             <i class="fa-solid fa-bomb text-6xl"></i>
         <h2 class="w-96 text-center relative">No Miis have been submitted for this contest. Check back later!</h2>
     </div>

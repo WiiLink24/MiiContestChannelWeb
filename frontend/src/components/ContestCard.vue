@@ -53,7 +53,7 @@ const isNew = computed(() => {
             alt="Thumbnail Preview"
             class="p-1 w-32 h-32 rounded-xl"
           />
-          <h2 id="contestName" class="mr-6 col-start-1 col-span-full text-2xl text-black">
+          <h2 id="contestName" class="mr-6 col-start-1 col-span-full text-2xl" style="color:black !important;">
             {{ english_name }} <b v-if="has_souvenir"> | <i class="fa-solid fa-gift"></i></b>
           </h2>
         </div>

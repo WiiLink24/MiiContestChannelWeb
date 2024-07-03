@@ -54,7 +54,7 @@ const isMaster = computed(() => {
       <div class="z-10 flex flex-col w-full items-center justify-between">
         <span class="self-end text-2xl" v-html="countryFlagHtml"></span>
         <img class="w-28 h-30 bottom-3 relative" :src="mii_img" />
-        <h1 class="text-3xl relative bottom-5 text-center">{{ name }}</h1>
+        <h1 class="text-3xl relative bottom-5 text-center text-black">{{ name }}</h1>
       </div>
       <div class="blur"></div>
     </RouterLink>

@@ -103,12 +103,12 @@ const genderIcon = computed(() => {
     backgroundColor: isTooltipHovered ? '#36d14160' : '',
     border: isTooltipHovered ? '1px solid green' : ''
     }"
-    class="p-3 rounded-xl border flex flex-col justify-between relative z-20 dark:border-slate-600/60 dark:bg-slate-700/60 dark:text-white hover:shadow-xl transition-shadow overflow-hidden backdrop-blur-md bg-opacity-50"
+    class="p-3 rounded-xl border flex flex-col justify-between relative z-20 bg-gray-100 dark:border-slate-600/60 dark:bg-slate-700/60 dark:text-white hover:shadow-xl transition-shadow overflow-hidden backdrop-blur-md bg-opacity-50"
     ref="card"
   >
     <span
       v-if="ranking"
-      class="-top-4 text-7xl font-bold text-white opacity-5 z-0 absolute select-none self-start -ml-2"
+      class="-top-4 text-7xl font-bold text-white opacity-5 z-0 absolute select-none self-start text-black -ml-2"
       :class="{ 'mb-[7.5rem]' : !nickname }"
       >{{ ranking }}</span
     >
@@ -142,7 +142,7 @@ const genderIcon = computed(() => {
           @click="downloadMii([contest_id, ranking], mii_data)"
         />
       </div>
-      <h1 class="text-3xl relative bottom-3 text-center flex flex-col gap-1">{{ nickname }} <p class="text-sm opacity-60">{{ entry_id }} 
+      <h1 class="text-3xl relative bottom-3 text-center flex flex-col gap-1">{{ nickname }} <p class="text-sm text-black opacity-60">{{ entry_id }} 
         <i :class="[
       'cursor-pointer', 
       'transition-all', 
@@ -155,11 +155,11 @@ const genderIcon = computed(() => {
       </p></h1>
     </div>
     <span class="w-full text-2xl flex items-end justify-between gap-1 flex-no-wrap z-10"
-        ><span class="flex flex-col gap-1"><span><i class="fa-solid fa-thumbs-up text-xl"></i> {{ perm_likes }}</span><span v-if="artisan_name" class="text-sm opacity-60">by <RouterLink v-if="artisan_is_master" :to="`/artisans/${artisan_id}`" class="p-1 pl-2 pr-2 text-sm bg-orange-400 rounded-full">◆{{ artisan_name }}◆</RouterLink><RouterLink v-else :to="`/artisans/${artisan_id}`" class="underline text-sm">{{ artisan_name }}</RouterLink></span></span
+        ><span class="flex flex-col gap-1"><span><i class="fa-solid fa-thumbs-up text-xl"></i> {{ perm_likes }}</span><span v-if="artisan_name" class="text-sm opacity-60">by <RouterLink v-if="artisan_is_master" :to="`/artisans/${artisan_id}`" class="p-1 pl-2 pr-2 text-sm text-black bg-orange-400 rounded-full">◆{{ artisan_name }}◆</RouterLink><RouterLink v-else :to="`/artisans/${artisan_id}`" class="underline text-sm text-black">{{ artisan_name }}</RouterLink></span></span
         ><span class="flex flex-col gap-1"><i :class="genderIcon" class="text-right"></i><span v-if="skill" class="text-sm opacity-60">{{ skillName.name }}</span></span></span
       >
     <span
-      class="bottom-0 text-8xl font-bold text-white opacity-5 absolute -mr-3.5 -mb-4 select-none self-end z-0"
+      class="bottom-0 text-8xl font-bold text-white opacity-5 absolute -mr-3.5 -mb-4 text-black select-none self-end z-0"
       >{{ initials }}</span
     >
     <div class="blur"></div>

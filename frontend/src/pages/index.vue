@@ -80,7 +80,7 @@ const dragEnd = (e) => {
     style="left: 50%; transform: translate(-50%, 50px); position: relative"
   >
     <div class="container h-screen py-20 absolute">
-      <section class="h-[500px] flex flex-col justify-between grow-0 w-1/2 space-y-2 text-white">
+      <section class="h-[500px] flex flex-col justify-between grow-0 w-1/2 space-y-2">
         <div>
           <h1 class="text-5xl font-bold">Welcome to the new CMOC Viewing Tool</h1>
           <h2 class="mt-2 text-3xl">
@@ -197,25 +197,31 @@ const dragEnd = (e) => {
         <i class="-right-10 -top-10 text-9xl animate-spin text-yellow-300/60 fa-solid fa-certificate absolute"></i>
         <div>
           <h1 class="p-2 pl-4 pr-4 rounded-t-lg rounded-b-md bg-slate-500/30 text-2xl font-bold"><i class="fa-solid fa-hammer"></i> Improved infrastructure</h1>
-          <p class="mt-1 mb-6 p-3 border-2 border-slate-500/30 rounded-t-md rounded-b-lg">
+          <p class="mt-1 mb-6 p-3 border-2 border-slate-500/30 rounded-t-md rounded-b-lg text-black dark:text-white">
             We have improved our infrastructure to make the service faster and more reliable. It is now much easier to post new contests and manage data, so expect more frequent contests!
           </p>
         </div>
         <div>
           <h1 class="p-2 pl-4 pr-4 rounded-t-lg rounded-b-md bg-slate-500/30 text-2xl font-bold"><i class="fa-solid fa-bug"></i> Bug fixes</h1>
-          <p class="mt-1 mb-6 p-3 border-2 border-slate-500/30 rounded-t-md rounded-b-lg">
+          <p class="mt-1 mb-6 p-3 border-2 border-slate-500/30 rounded-t-md rounded-b-lg text-black dark:text-white">
             We have fixed a lot of bugs, meaning you will experience a smoother experience in the Channel.
           </p>
         </div>
         <div>
           <h1 class="p-2 pl-4 pr-4 rounded-t-lg rounded-b-md bg-slate-500/30 text-2xl font-bold"><i class="fa-solid fa-globe"></i> New website</h1>
-          <p class="mt-1 mb-6 p-3 border-2 border-slate-500/30 rounded-t-md rounded-b-lg">
+          <p class="mt-1 mb-6 p-3 border-2 border-slate-500/30 rounded-t-md rounded-b-lg text-black dark:text-white">
             We have updated our website to make it more user-friendly and easier to navigate. We have also added new features to make it easier to find the content you are looking for.
           </p>
       </div>
       <div>
+        <h1 class="p-2 pl-4 pr-4 rounded-t-lg rounded-b-md bg-slate-500/30 text-2xl font-bold"><i class="fa-solid fa-code"></i> New API</h1>
+        <p class="mt-1 mb-6 p-3 border-2 border-slate-500/30 rounded-t-md rounded-b-lg text-black dark:text-white">
+          We have created a new API that allows developers to access the data on the Channel. This will make it easier to create new tools and services that use the data from the Channel.
+        </p>
+      </div>
+      <div>
         <h1 class="p-2 pl-4 pr-4 rounded-t-lg rounded-b-md bg-slate-500/30 text-2xl font-bold"><i class="fa-solid fa-gavel"></i> Easier moderation</h1>
-        <p class="mt-1 mb-6 p-3 border-2 border-slate-500/30 rounded-t-md rounded-b-lg">
+        <p class="mt-1 mb-6 p-3 border-2 border-slate-500/30 rounded-t-md rounded-b-lg text-black dark:text-white">
           We have added new moderation tools to make it easier to manage the content on the Channel. This will help us keep the Channel safe and fun for everyone.
         </p>
       </div>
@@ -230,29 +236,29 @@ const dragEnd = (e) => {
       <h2 class="opacity-60">Here are some tools we really like!</h2>
     </div>
     <div class="mt-3 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-5 gap-3">
-      <a class="btn rounded-l-xl rounded-r-md text-center" href="https://www.miicharacters.com/" @mouseenter="displayData('miichar')" @mouseleave="removeData('miichar')">Mii Characters</a>
-      <a class="btn rounded-md text-center" href="https://www.miilibrary.com/" @mouseenter="displayData('miilib')" @mouseleave="removeData('miilib')">Mii Library</a>
-      <a class="btn rounded-md text-center" href="https://github.com/Genwald/MiiPort/releases/tag/0.1.1" @mouseenter="displayData('miiport')" @mouseleave="removeData('miiport')">MiiPort</a>
-      <a class="btn rounded-md text-center" href="https://pf2m.com/tools/mii/" @mouseenter="displayData('miirender')" @mouseleave="removeData('miirender')">Mii Renderer</a>
-      <a class="btn rounded-l-md rounded-r-xl text-center" href="https://www.wiilink24.com/extras/mii" @mouseenter="displayData('miiedit')" @mouseleave="removeData('miiedit')">Mii Avatar Editor</a>
+      <a class="btn rounded-l-xl rounded-r-md text-center text-black" href="https://www.miicharacters.com/" @mouseenter="displayData('miichar')" @mouseleave="removeData('miichar')">Mii Characters</a>
+      <a class="btn rounded-md text-center text-black" href="https://www.miilibrary.com/" @mouseenter="displayData('miilib')" @mouseleave="removeData('miilib')">Mii Library</a>
+      <a class="btn rounded-md text-center text-black" href="https://github.com/Genwald/MiiPort/releases/tag/0.1.1" @mouseenter="displayData('miiport')" @mouseleave="removeData('miiport')">MiiPort</a>
+      <a class="btn rounded-md text-center text-black" href="https://pf2m.com/tools/mii/" @mouseenter="displayData('miirender')" @mouseleave="removeData('miirender')">Mii Renderer</a>
+      <a class="btn rounded-l-md rounded-r-xl text-center text-black" href="https://www.wiilink24.com/extras/mii" @mouseenter="displayData('miiedit')" @mouseleave="removeData('miiedit')">Mii Avatar Editor</a>
     </div>
-    <div class="mb-10">
-      <p id="temp" class="mt-6 p-3 border-2 border-slate-500/30 rounded-t-md rounded-b-lg flex items-center justify-center gap-3">
+    <div class="mb-10 dark:text-white">
+      <p id="temp" class="mt-6 p-3 border-2 border-slate-500/30 rounded-t-md rounded-b-lg flex items-center justify-center gap-3 text-black">
         <i class="fa-solid fa-question-circle"></i> Hover over a tool to view its description.
       </p>
-      <p id="miichar" class="hidden mt-6 p-3 border-2 border-slate-500/30 rounded-t-md rounded-b-lg">
+      <p id="miichar" class="hidden mt-6 p-3 border-2 border-slate-500/30 rounded-t-md rounded-b-lg text-black">
         <i class="fa-solid fa-info-circle"></i> Mii Characters is a website where you can find all kinds of Mii Characters, from popular characters to original creations. You can also submit your own Mii Characters to share with the world!
       </p>
-      <p id="miilib" class="hidden mt-6 p-3 border-2 border-slate-500/30 rounded-t-md rounded-b-lg">
+      <p id="miilib" class="hidden mt-6 p-3 border-2 border-slate-500/30 rounded-t-md rounded-b-lg text-black">
         <i class="fa-solid fa-info-circle"></i> Mii Library is a website where you can find all kinds of Mii Characters, from popular characters to original creations. You can also submit your own Mii Characters to share with the world!
       </p>
-      <p id="miiport" class="hidden mt-6 p-3 border-2 border-slate-500/30 rounded-t-md rounded-b-lg">
+      <p id="miiport" class="hidden mt-6 p-3 border-2 border-slate-500/30 rounded-t-md rounded-b-lg text-black">
         <i class="fa-solid fa-info-circle"></i> MiiPort is a tool that allows you to transfer Mii Characters between your Wii and your computer. You can use it to back up your Mii Characters, share them with friends, or even edit them on your computer!
       </p>
-      <p id="miirender" class="hidden mt-6 p-3 border-2 border-slate-500/30 rounded-t-md rounded-b-lg">
+      <p id="miirender" class="hidden mt-6 p-3 border-2 border-slate-500/30 rounded-t-md rounded-b-lg text-black">
         <i class="fa-solid fa-info-circle"></i> Mii Renderer is a tool that allows you to render Mii Characters in high resolution. You can use it to create high-quality images of your Mii Characters for use in videos, artwork, or other projects!
       </p>
-      <p id="miiedit" class="hidden mt-6 p-3 border-2 border-slate-500/30 rounded-t-md rounded-b-lg">
+      <p id="miiedit" class="hidden mt-6 p-3 border-2 border-slate-500/30 rounded-t-md rounded-b-lg text-black">
         <i class="fa-solid fa-info-circle"></i> Mii Avatar Editor is a tool that allows you to create custom Mii Characters. You can choose from a wide range of features to create a Mii that looks just like you, or create a completely original character!
       </p>
     </div>

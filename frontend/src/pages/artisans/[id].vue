@@ -89,13 +89,13 @@ watch(current_page, async (newValue) => {
         >◆ Master Mii Artisan ◆
         </span>
         </div>
-        <p class="flex flex-col text-xl">
+        <p class="flex flex-col text-xl text-black">
           <span class="opacity-30 text-sm">Wii Number</span>{{ formatWiiNumber(artisan_data.wii_number) }}
         </p>
-        <div class="flex flex-row items-center">
-          <p class="flex flex-col justify-end text-left">
+        <div class="flex flex-row items-center text-black">
+          <p class="flex flex-col justify-end text-left text-black">
             <span class="opacity-30 text-sm">Last posted on </span>
-            <p id="lastPost" class="text-xl">
+            <p id="lastPost" class="text-xl text-black">
               {{ lastPostFormatted }}
           </p>
           </p>
@@ -103,7 +103,7 @@ watch(current_page, async (newValue) => {
     </div>
       </div>
     </div>
-    <hr class="pb-3 opacity-5" />
+    <hr class="pb-3 opacity-5 border-t-black dark:border-t-white" />
     <div class="mt-6 mb-3 flex flex-row items-center justify-between">
       <h1 class="font-bold text-4xl">Miis</h1>
       <h2 v-if="artisan_data" class="opacity-60">{{ artisan_data.name }} has submitted {{ artisan_data.number_of_posts }} Miis.</h2>
@@ -123,7 +123,7 @@ watch(current_page, async (newValue) => {
       v-else-if="artisan_data && !mii_data"
       class="p-20 w-full h-30 rounded-[18px] border-4 border-gray-400 dark:border-slate-500 border-dashed flex items-center justify-center relative"
     >
-      <div class="flex flex-col items-center gap-3 text-gray-200 dark:text-slate-400">
+      <div class="flex flex-col items-center gap-3 text-gray-500 dark:text-slate-400">
         <i class="fa-solid fa-magnifying-glass text-6xl"></i>
         <h2 class="w-96 text-center relative">
           {{ artisan_data.name }} has posted no Miis. Once they do, they will be shown here...
