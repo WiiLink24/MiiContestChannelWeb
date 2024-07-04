@@ -2,11 +2,16 @@ import './assets/main.css'
 
 import { createApp } from 'vue'
 import App from './App.vue'
+import { createHead } from 'unhead'
+
+
 
 import { createRouter, createWebHistory } from 'vue-router/auto'
 import { routes } from 'vue-router/auto-routes'
 
 const app = createApp(App)
+
+createHead()
 
 app.use(
   createRouter({
