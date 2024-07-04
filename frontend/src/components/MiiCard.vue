@@ -119,13 +119,13 @@ const genderIcon = computed(() => {
       @mouseleave="isTooltipHovered = false">
         <span
           class="top-2 left-2 tooltip rounded shadow-lg p-2 pl-3 pr-3 bg-green-600 hover:bg-green-700 text-white cursor-pointer absolute"
-          @click="downloadMii(nickname, mii_data)"
+          @click="downloadMii(nickname, entry_id, mii_data)"
           ><i class="fa-solid fa-download"></i
         ></span>
         <img
           class="w-28 bottom-3 cursor-pointer relative"
           :src="mii_img"
-          @click="downloadMii(nickname, mii_data)"
+          @click="downloadMii(nickname, entry_id, mii_data)"
         />
       </div>
       <div v-else class="has-tooltip"
@@ -133,13 +133,13 @@ const genderIcon = computed(() => {
       @mouseleave="isTooltipHovered = false">
         <span
           class="top-2 left-2 tooltip rounded shadow-lg p-2 pl-3 pr-3 bg-green-600 hover:bg-green-700 text-white cursor-pointer absolute"
-          @click="downloadMii([contest_id, ranking], mii_data)"
+          @click="downloadMii([contest_id, ranking], entry_id, mii_data)"
           ><i class="fa-solid fa-download"></i
         ></span>
         <img
           class="w-28 h-30 bottom-3 cursor-pointer relative"
           :src="mii_img"
-          @click="downloadMii([contest_id, ranking], mii_data)"
+          @click="downloadMii([contest_id, ranking], entry_id, mii_data)"
         />
       </div>
       <h1 class="text-3xl relative bottom-3 text-center flex flex-col gap-1">{{ nickname }} <p class="text-sm text-black opacity-60">{{ entry_id }} 

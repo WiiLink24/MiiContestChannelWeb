@@ -76,7 +76,7 @@ const dragEnd = (e) => {
 <template>
   <div
     id="parent"
-    class="lg:w-[calc(100%-50px)] lg:h-[650px] lg:rounded-[80px] lg:rounded-t-2xl cmoc-bg z-10 overflow-hidden"
+    class="lg:w-[calc(100%-50px)] lg:h-[650px] lg:rounded-[80px] lg:rounded-t-2xl border-2 border-gray-200 dark:border-slate-600 cmoc-bg z-10 overflow-hidden"
     style="left: 50%; transform: translate(-50%, 50px); position: relative"
   >
     <div class="container lg:py-20 py-10 lg:absolute relative">
