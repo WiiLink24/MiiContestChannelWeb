@@ -7,6 +7,15 @@ import Title from '@/components/Title.vue'
 import PageNavigation from '@/components/PageNavigation.vue'
 import { useRoute } from 'vue-router'
 import LoadingAnimation from '@/components/LoadingAnimation.vue'
+import { useHead } from '@unhead/vue'
+
+useHead({
+  title: 'Search | CMOC Viewing Tool',
+  meta: [
+    { name: 'description', content: 'Search all of our Mii database and download them for yourself!'},
+    { property: 'og:image', content: '/img/cmocseobg.png' },
+  ],
+})
 
 let search_field = ref('')
 let search_type = ref('miis')

@@ -7,6 +7,15 @@ import ReturnBtn from '@/components/ReturnBtn.vue'
 import ContestCard from '@/components/ContestCard.vue'
 import PageNavigation from '@/components/PageNavigation.vue'
 import LoadingAnimation from '@/components/LoadingAnimation.vue'
+import { useHead } from '@unhead/vue'
+
+useHead({
+  title: 'Contest View | CMOC Viewing Tool',
+  meta: [
+    { name: 'description', content: 'View all running and past contests of the service, as well as information associated to them!'},
+    { property: 'og:image', content: '/img/cmocseobg.png' },
+  ],
+})
 
 let page_total
 const isLoading = ref(false)

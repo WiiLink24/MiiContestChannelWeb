@@ -4,6 +4,15 @@ import MiiCard from '@/components/MiiCard.vue'
 import Title from '@/components/Title.vue'
 import LoadingAnimation from '@/components/LoadingAnimation.vue'
 import { fetchPlazaTop } from '@/backend'
+import { useHead } from '@unhead/vue'
+
+useHead({
+  title: 'Top 50 | CMOC Viewing Tool',
+  meta: [
+    { name: 'description', content: 'Top 50 Miis currently in the service!'},
+    { property: 'og:image', content: '/img/cmocseobg.png' },
+  ],
+})
 
 const top50 = ref()
 const isLoading = ref(true)

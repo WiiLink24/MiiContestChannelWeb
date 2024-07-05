@@ -3,6 +3,15 @@ import { ref, onMounted, watch } from 'vue'
 import { fetchMii, renderMii } from '@/backend';
 import { useRoute } from 'vue-router'
 import LoadingAnimation from '@/components/LoadingAnimation.vue';
+import { useHead } from '@unhead/vue'
+
+useHead({
+  title: 'Mii View | CMOC Viewing Tool',
+  meta: [
+    { name: 'description', content: 'Detailed information about a specific Mii!'},
+    { property: 'og:image', content: '/img/cmocseobg.png' },
+  ],
+})
 
 const route = useRoute()
 

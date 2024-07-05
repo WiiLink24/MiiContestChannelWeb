@@ -9,6 +9,15 @@ import MiiCard from '@/components/MiiCard.vue'
 import Title from '@/components/Title.vue'
 import PageNavigation from '@/components/PageNavigation.vue'
 import LoadingAnimation from '@/components/LoadingAnimation.vue'
+import { useHead } from '@unhead/vue'
+
+useHead({
+  title: 'Artisan View | CMOC Viewing Tool',
+  meta: [
+    { name: 'description', content: 'Detailed information about a specific Mii Artisan, including all their posted Miis for you to download!'},
+    { property: 'og:image', content: '/img/cmocseobg.png' },
+  ],
+})
 
 let page_total
 const isLoading = ref(false)

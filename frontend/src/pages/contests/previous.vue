@@ -2,6 +2,15 @@
 import { fetchContests } from '@/backend';
 import { ref, onMounted } from 'vue';
 import ContestCard from '@/components/ContestCard.vue';
+import { useHead } from '@unhead/vue'
+
+useHead({
+  title: 'Previous Contests | CMOC Viewing Tool',
+  meta: [
+    { name: 'description', content: 'View all running and past contests of the service, as well as information associated to them!'},
+    { property: 'og:image', content: '/img/cmocseobg.png' },
+  ],
+})
 
 const ended_contests = ref();
 

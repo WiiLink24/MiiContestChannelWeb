@@ -8,9 +8,10 @@ import MiiCard from '@/components/MiiCard.vue'
 import { useHead } from '@unhead/vue'
 
 useHead({
-  title: 'Home',
+  title: 'Home | CMOC Viewing Tool',
   meta: [
-    { name: 'description', content: 'Learn more about us.' },
+    { name: 'description', content: 'Get updated info on all running contests, as well as download your favorite Mii Characters from our service!'},
+    { property: 'og:image', content: '/img/cmocseobg.png' },
   ],
 })
 

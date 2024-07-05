@@ -6,6 +6,15 @@ import Title from '@/components/Title.vue'
 import { onMounted, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import LoadingAnimation from '@/components/LoadingAnimation.vue'
+import { useHead } from '@unhead/vue'
+
+useHead({
+  title: 'Artisans | CMOC Viewing Tool',
+  meta: [
+    { name: 'description', content: 'Here are all the people that make the amazing Miis you see on the Plaza!'},
+    { property: 'og:image', content: '/img/cmocseobg.png' },
+  ],
+})
 
 const artisans = ref()
 const isLoading = ref(false)

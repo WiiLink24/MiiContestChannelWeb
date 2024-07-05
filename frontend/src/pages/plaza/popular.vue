@@ -6,6 +6,15 @@ import MiiCard from '@/components/MiiCard.vue'
 import Title from '@/components/Title.vue'
 import PageNavigation from '@/components/PageNavigation.vue'
 import LoadingAnimation from '@/components/LoadingAnimation.vue'
+import { useHead } from '@unhead/vue'
+
+useHead({
+  title: 'Popular | CMOC Viewing Tool',
+  meta: [
+    { name: 'description', content: 'Up and rising Miis in our service, download them for yourself!'},
+    { property: 'og:image', content: '/img/cmocseobg.png' },
+  ],
+})
 
 const plaza_new = ref()
 const plaza_new_data = ref()

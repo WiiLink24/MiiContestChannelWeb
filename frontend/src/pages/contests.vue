@@ -1,7 +1,15 @@
 <script setup lang="ts">
 import Title from '@/components/Title.vue'
-
 import { RouterLink, RouterView } from 'vue-router'
+import { useHead } from '@unhead/vue'
+
+useHead({
+  title: 'Contests | CMOC Viewing Tool',
+  meta: [
+    { name: 'description', content: 'View all running and past contests of the service, as well as information associated to them!'},
+    { property: 'og:image', content: '/img/cmocseobg.png' },
+  ],
+})
 
 </script>
 
