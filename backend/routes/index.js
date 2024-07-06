@@ -1,7 +1,8 @@
 var express = require("express");
 var router = express.Router();
 
-const { validateFriendCode } = require("../utils/number_test");
+const { isValidWiiNumber } = require("../utils/number_test");
+const { parse } = require("path");
 
 require("dotenv").config();
 const pgp = require("pg-promise")(/* options */);
@@ -9,6 +10,7 @@ const pgp = require("pg-promise")(/* options */);
 const db = pgp(
   `postgres://${process.env.POSTGRES_USERNAME}:${process.env.POSTGRES_PASSWORD}@${process.env.POSTGRES_HOST}/${process.env.POSTGRES_DB}`
 );
+
 
 //pagination settings
 const PlazaPageSize = 50;
@@ -369,7 +371,7 @@ router.post("/api/artisans/search", async (req, res) => {
 router.post("/api/testnumber", async (req, res) => {
   try {
     const { number } = req.body;
-    const isValid = validateFriendCode(number);
+    const isValid = isValidWiiNumber(number);
     res.json({ isValid });
   } catch (error) {
     console.error(error);
