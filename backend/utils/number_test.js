@@ -77,8 +77,9 @@ function unscrambleId(wiiNumber) {
 
 function loadWiiNumber(wiiNumber) {
     const unscrambled = unscrambleId(wiiNumber);
+    console.log(unscrambled)
     return new WiiNumber(
-        unscrambled >> 15n,
+        (unscrambled >> 15n) & 0xFFFFFFFFn,
         (unscrambled >> 10n) & 0x1Fn,
         (unscrambled >> 47n) & 7n,
         (unscrambled >> 50n) & 7n,
@@ -94,13 +95,14 @@ function isValidWiiNumber(numberString) {
     }
     
     const wiiNumber = BigInt(cleanedNumber)
-    console.log(wiiNumber);
-    const loadedWiiNumber = loadWiiNumber(wiiNumber);
-    return loadedWiiNumber.getHollywoodID() == 0x0403AC68;
-}
 
-const isValid = isValidWiiNumber('3418-9548-0758-2246');
-console.log(isValid);
+    const loadedWiiNumber = loadWiiNumber(wiiNumber);
+    if (!loadedWiiNumber.checkWiiNumber()) {
+        return false;
+    }
+
+    return loadedWiiNumber.getHollywoodID() != 0x0403AC68n;
+}
 
 module.exports = {
   isValidWiiNumber
