@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { fetchArtisan, renderMii, downloadMii, formatWiiNumber } from '@/backend'
 import { formatDate } from '@/date_format'
+import { isValidWiiNumber } from 'nwc24js'
 import { onMounted, ref, computed, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import ReturnBtn from '@/components/ReturnBtn.vue'
@@ -33,6 +34,7 @@ const artisan = ref()
 const artisan_data = ref()
 const mii_data = ref()
 const mii_img = ref()
+const isArtisanNumberValid = ref(false)
 
 onMounted(async () => {
   try {
@@ -41,6 +43,9 @@ onMounted(async () => {
   artisan_data.value = artisan.value.artisan_data;
   page_total = artisan.value.entries_data.total_pages;
   mii_data.value = artisan.value.entries_data.miis_data;
+  console.log(formatWiiNumber(artisan_data.value.wii_number))
+  console.log(isValidWiiNumber(formatWiiNumber(artisan_data.value.wii_number)))
+  isArtisanNumberValid.value = isValidWiiNumber(formatWiiNumber(artisan_data.value.wii_number))
 
   if (artisan_data.value && artisan_data.value.mii_data) {
     mii_img.value = await renderMii(artisan_data.value.mii_data);
@@ -100,6 +105,8 @@ watch(current_page, async (newValue) => {
         </div>
         <p class="flex flex-col text-xl text-black">
           <span class="opacity-30 text-sm">Wii Number</span>{{ formatWiiNumber(artisan_data.wii_number) }}
+          <span v-if="isArtisanNumberValid" class="text-green-500">✓</span>
+          <span v-else class="text-red-500">✗</span>
         </p>
         <div class="flex flex-row items-center text-black">
           <p class="flex flex-col justify-end text-left text-black">
