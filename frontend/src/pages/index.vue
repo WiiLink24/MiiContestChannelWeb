@@ -257,10 +257,10 @@ const dragEnd = (e) => {
         <i class="fa-solid fa-question-circle"></i> Hover over a tool to view its description.
       </p>
       <p id="miichar" class="hidden mt-6 p-3 border-2 border-slate-500/30 rounded-t-md rounded-b-lg text-black">
-        <i class="fa-solid fa-info-circle"></i> Mii Characters is a website where you can find all kinds of Mii Characters, from popular characters to original creations. You can also submit your own Mii Characters to share with the world!
+        <i class="fa-solid fa-info-circle"></i> Mii Characters is a website where you can find all kinds of Mii Characters, from popular characters to original creations.
       </p>
       <p id="miilib" class="hidden mt-6 p-3 border-2 border-slate-500/30 rounded-t-md rounded-b-lg text-black">
-        <i class="fa-solid fa-info-circle"></i> Mii Library is a website where you can find all kinds of Mii Characters, from popular characters to original creations. You can also submit your own Mii Characters to share with the world!
+        <i class="fa-solid fa-info-circle"></i> Mii Library is a website where you can find all kinds of Mii Characters, from popular characters to original creations.
       </p>
       <p id="miiport" class="hidden mt-6 p-3 border-2 border-slate-500/30 rounded-t-md rounded-b-lg text-black">
         <i class="fa-solid fa-info-circle"></i> MiiPort is a tool that allows you to transfer Mii Characters between your Wii and your computer. You can use it to back up your Mii Characters, share them with friends, or even edit them on your computer!

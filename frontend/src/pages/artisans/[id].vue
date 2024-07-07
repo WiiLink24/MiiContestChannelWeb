@@ -106,7 +106,7 @@ watch(current_page, async (newValue) => {
         <p class="flex flex-col text-xl text-black">
           <span class="opacity-30 text-sm">Wii Number</span>
           <div class="flex flex-row gap-3">{{ formatWiiNumber(artisan_data.wii_number) }}
-          <span v-if="isArtisanNumberValid" class="text-green-500">✓</span>
+          <span v-if="isArtisanNumberValid" class="text-green-500"><i class="fa-solid fa-check"></i></span>
           <span v-else class="text-red-500"><i class="fa-solid fa-triangle-exclamation text-yellow-300 cursor-pointer" onmouseover="document.getElementById('dolWarn').style.opacity = 1;" onmouseleave="document.getElementById('dolWarn').style.opacity = 0;"></i></span>
           <div id="dolWarn" class="left-full translate-x-3 absolute opacity-0 bg-gray-300 dark:bg-slate-500 text-black p-2 rounded-md text-sm z-10 w-40 transition-all">This Wii Number was generated on <u>Dolphin Emulator.</u></div>
         </div>
