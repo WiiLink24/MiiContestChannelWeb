@@ -19,7 +19,7 @@ onUnmounted(() => {
 
 <template>
     <header :class="{'backdrop-blur-md shadow-md bg-gray-400/50 dark:bg-slate-600/50 transition-all': isScrolled}" class="w-full flex items-center justify-between dark:text-white md:px-8 lg:px-8 px-4 py-4 z-10 fixed">
-        <img src="/img/viewingTool-logo.png" class="dark:invert !h-[50px]">
+        <img src="/img/viewingTool-logo.png" alt="WiiLink Mii Contest Channel Viewer Logo" class="dark:invert !h-[50px]">
         <nav class="flex gap-10 items-center">
             <ul class="flex gap-2 items-center mobile-hide-flex">
                 <li><RouterLink to="/" class="header-link text-black" active-class="bg-gray-300/80 dark:bg-white/20 scale-[0.97] transition"><i class="fa-solid fa-house"></i> Home</RouterLink></li>

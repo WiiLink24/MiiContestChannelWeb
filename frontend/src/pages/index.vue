@@ -103,6 +103,7 @@ const dragEnd = (e) => {
             href="https://www.wiilink24.com/"
             ><img
               src="/img/favicon.png"
+              alt="WiiLink Logo"
               style="filter: brightness(10000); height: 20px !important"
             />
             Install WiiLink</a

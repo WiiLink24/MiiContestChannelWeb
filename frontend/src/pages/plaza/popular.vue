@@ -60,6 +60,7 @@ watch(current_page, async (newValue) => {
   <img
     src="https://rc24.xyz/goodies/wallpapers/CMO_Channel_BG_blue_1600x900.png"
     class="w-full absolute z-0 blur-sm dissolve"
+    alt="CMOC Background Image"
   />
   <div class="container translate-y-10">
     <Title name="Popular" />

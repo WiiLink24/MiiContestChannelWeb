@@ -40,7 +40,7 @@ watch(route, async () => {
         <LoadingAnimation v-if="isLoading" />
         <div v-else-if="mii">
             <h1>{{ mii.nickname }}</h1>
-            <img :src="mii_img" alt="">
+            <img :src="mii_img" :alt="`${mii.nickame} Mii`">
         </div>
         <div v-else class="p-20 w-full h-30 translate-y-14 rounded-[18px] border-4 border-gray-400 dark:border-slate-500 border-dashed flex items-center justify-center relative">
         <div class="flex flex-col items-center gap-3 text-gray-500 dark:text-slate-400">

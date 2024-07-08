@@ -61,6 +61,7 @@ const isNew = computed(() => {
       <img
         id="souvenirPreview2"
         class="w-80 hidden rounded-3xl shadow-2xl z-0 absolute !right-0 -translate-x-full -translate-y-[70%] rotate-3"
+        alt="Thumbnail Preview"
       />
   </li>
 </template>

@@ -125,6 +125,7 @@ const genderIcon = computed(() => {
         <img
           class="w-28 bottom-3 cursor-pointer relative"
           :src="mii_img"
+          :alt="`${nickname} Mii`"
           @click="downloadMii(nickname, entry_id, mii_data)"
         />
       </div>
@@ -139,6 +140,7 @@ const genderIcon = computed(() => {
         <img
           class="w-28 h-30 bottom-3 cursor-pointer relative"
           :src="mii_img"
+          :alt="`${nickname} Mii`"
           @click="downloadMii([contest_id, ranking], entry_id, mii_data)"
         />
       </div>

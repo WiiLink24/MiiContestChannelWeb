@@ -7,6 +7,7 @@
             loading="lazy"
             class="footer-logo logo"
             src="/img/viewingTool-logo.png"
+            alt="WiiLink Mii Contest Channel Viewer Logo"
             height="60px"
             style="filter:invert(1); z-index:0;"
           />
@@ -32,7 +33,7 @@
             style="color:#ffffff80; margin-top:-10px; opacity:0.7; margin-right:8px; text-align:left;"
           >
             <a href="https://www.wiilink24.com" style="margin-right:5px; display:flex; flex-direction: row; align-items: center; gap:4px;"
-              ><img src="/img/favicon.png" style="filter:brightness(10000); height:20px !important;"> WiiLink Main Site</a
+              ><img src="/img/favicon.png" alt="WiiLink Logo" style="filter:brightness(10000); height:20px !important;"> WiiLink Main Site</a
             >
           </p>
         </div>
