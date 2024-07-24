@@ -12,7 +12,7 @@ const twemoji = ref(null)
 // Import twemoji from the CDN
 onMounted(() => {
   const script = document.createElement('script')
-  script.src = 'https://unpkg.com/twemoji@latest/dist/twemoji.min.js'
+  script.src = 'https://cdn.jsdelivr.net/npm/@twemoji/api@latest/dist/twemoji.min.js'
   script.crossOrigin = 'anonymous'
   script.onload = () => {
     twemoji.value = window.twemoji

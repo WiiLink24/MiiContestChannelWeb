@@ -21,7 +21,7 @@ var accessLogStream = fs.createWriteStream(path.join(__dirname, "access.log"), {
 });
 
 app.use(express.json());
-app.use(cors(corsOptions));
+app.use(cors(/* corsOptions */));
 app.use(express.static(path.join(__dirname, "public/dist")));
 app.use(helmet());
 app.use(morgan('combined', { stream: accessLogStream }))
