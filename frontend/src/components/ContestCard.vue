@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { Contest } from '@/types';
 import { defineProps, computed, ref, watch } from 'vue'
+const url = import.meta.env.VITE_CMOC_SERVER
 
 const props = defineProps<Contest>()
 const hover = ref(false)
@@ -49,7 +50,7 @@ const isNew = computed(() => {
         </div>
         <div class="mt-2 bg-white p-1 rounded-xl flex flex-row items-center justify-between">
           <img
-            :src="`http://127.0.0.1:9011/assets/contest/${contest_id}/thumbnail.jpg`"
+            :src="`${url}/assets/contest/${contest_id}/thumbnail.jpg`"
             alt="Thumbnail Preview"
             class="p-1 w-32 h-32 rounded-xl"
           />
