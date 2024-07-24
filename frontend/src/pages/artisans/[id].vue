@@ -43,8 +43,6 @@ onMounted(async () => {
   artisan_data.value = artisan.value.artisan_data;
   page_total = artisan.value.entries_data.total_pages;
   mii_data.value = artisan.value.entries_data.miis_data;
-  console.log(formatWiiNumber(artisan_data.value.wii_number))
-  console.log(isValidWiiNumber(formatWiiNumber(artisan_data.value.wii_number)))
   isArtisanNumberValid.value = isValidWiiNumber(formatWiiNumber(artisan_data.value.wii_number))
 
   if (artisan_data.value && artisan_data.value.mii_data) {

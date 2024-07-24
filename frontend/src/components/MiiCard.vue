@@ -35,7 +35,6 @@ const countryFlagHtml = computed(() => {
   if (twemoji.value && country_flag.value) {
     return twemoji.value.parse(country_flag.value)
   }
-  console.log(countryFlagHtml)
   return ''
 })
 
