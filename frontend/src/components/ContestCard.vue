@@ -48,7 +48,7 @@ const isNew = computed(() => {
             {{ status }} <span class="opacity-60">({{ contest_id }})</span> <div v-if="isNew" class="ml-3 box sb4">New!</div>  <div v-if="daysRemaining <= 2 && daysRemaining >= 0" class="ml-3 box-red sb4-red">Closing soon!</div>
           </p>
         </div>
-        <div class="mt-2 bg-white p-1 rounded-xl flex flex-row items-center justify-between">
+        <div class="mt-2 bg-white p-1 rounded-xl flex flex-row gap-5 items-center justify-between">
           <img
             :src="`${url}/assets/contest/${contest_id}/thumbnail.jpg`"
             alt="Thumbnail Preview"

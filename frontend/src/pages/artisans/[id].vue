@@ -91,13 +91,13 @@ watch(current_page, async (newValue) => {
       </ul>
       <div class="pb-3 flex flex-col items-start justify-end">
         <Title :name="artisan_data.name" class="mobile-hide"/>
-        <div class="sm:-translate-y-12">
-            <div class="w-full mb-3 flex sm:flex-row flex-col sm:items-center items-start justify-between gap-3 relative">
+        <div class="sm:-translate-y-12" style="width:100%;">
+            <div class="w-full mb-3 flex sm:flex-row sm:w-full flex-col sm:items-center items-start justify-between gap-3 relative">
         <button 
-        class="p-3 pl-6 pr-6 bg-green-500/60 border-1 border-green-60 backdrop-blur-md rounded-md hover:bg-green-600 transition-all"
+        class="p-3 pl-6 pr-6 sm-width bg-green-500/60 border-1 border-green-60 backdrop-blur-md rounded-md hover:bg-green-600 transition-all"
         @click="downloadMii(artisan_data.name, artisan_data.mii_data)"
         ><i class="fa-solid fa-download"></i> Download {{ artisan_data.name }}'s Mii</button>
-        <span v-if="artisan_data.is_master" class="p-1 pl-2 pr-2 text-md font-bold select-none rounded-full bg-orange-400"
+        <span v-if="artisan_data.is_master" class="sm-width p-1 pl-2 pr-2 text-md font-bold text-center select-none rounded-full bg-orange-400"
         >◆ Master Mii Artisan ◆
         </span>
         </div>
@@ -105,8 +105,7 @@ watch(current_page, async (newValue) => {
           <span class="opacity-30 text-sm">Wii Number</span>
           <div class="flex flex-row gap-3">{{ formatWiiNumber(artisan_data.wii_number) }}
           <span v-if="isArtisanNumberValid" class="text-green-500"><i class="fa-solid fa-check"></i></span>
-          <span v-else class="text-red-500"><i class="fa-solid fa-triangle-exclamation text-yellow-300 cursor-pointer" onmouseover="document.getElementById('dolWarn').style.opacity = 1;" onmouseleave="document.getElementById('dolWarn').style.opacity = 0;"></i></span>
-          <div id="dolWarn" class="left-full translate-x-3 absolute opacity-0 bg-gray-300 dark:bg-slate-500 text-black p-2 rounded-md text-sm z-10 w-40 transition-all">This Wii Number was generated on <u>Dolphin Emulator.</u></div>
+          <span v-else class="text-red-500"><i class="fa-solid fa-triangle-exclamation text-yellow-300 cursor-pointer" title="This Wii Number was generated on Dolphin Emulator." onmouseover="document.getElementById('dolWarn').style.opacity = 1;" onmouseleave="document.getElementById('dolWarn').style.opacity = 0;"></i></span>
         </div>
         </p>
         <div class="flex flex-row items-center text-black">
@@ -121,9 +120,9 @@ watch(current_page, async (newValue) => {
       </div>
     </div>
     <hr class="pb-3 opacity-5 border-t-black dark:border-t-white" />
-    <div class="mt-6 mb-3 flex flex-row items-center justify-between">
+    <div class="mt-6 mb-3 flex flex-row gap-5 items-center justify-between">
       <h1 class="font-bold text-4xl">Miis</h1>
-      <h2 v-if="artisan_data" class="opacity-60">{{ artisan_data.name }} has submitted {{ artisan_data.number_of_posts }} Miis.</h2>
+      <h2 v-if="artisan_data" class="opacity-60 text-right">{{ artisan_data.name }} has submitted {{ artisan_data.number_of_posts }} Miis.</h2>
     </div>
     <div v-if="artisan_data && mii_data">
       <ul v-id="!isLoading" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 sm:gap-10 gap-3">
@@ -155,3 +154,14 @@ watch(current_page, async (newValue) => {
     </div>
     </div>
 </template>
+
+<style>
+  .sm-width {
+    width:auto;
+  }
+  @media only screen and (max-width: 640px) {
+    .sm-width {
+      width:100%;
+    }
+  }
+</style>

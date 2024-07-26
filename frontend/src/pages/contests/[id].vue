@@ -47,9 +47,9 @@ onMounted(async () => {
 watch(current_page, async (newValue) => {
   try {
     contest.value = await fetchContest(contestId.value, current_page.value)
-  contest_data.value = contest.value.contest_data
+  contest_data.value = contest.value.contest_dat
   entries_data.value = contest.value.entries_data_temp
-
+    
 } catch (error) {
   console.error(error)
 } finally {
@@ -73,7 +73,6 @@ watch(current_page, async (newValue) => {
           v-for="entry in entries_data"
           :key="entry.artisan_id"
           v-bind="entry"
-          :ranking="entry.rank"
           :contest_id="contest_data.contest_id"
         />
       </ul>
@@ -89,7 +88,7 @@ watch(current_page, async (newValue) => {
         <div class="p-20 w-full h-30 rounded-[18px] border-4 border-gray-400 dark:border-slate-500 border-dashed flex items-center justify-center relative">
         <div class="flex flex-col items-center gap-3 text-gray-500 dark:text-slate-400">
             <i class="fa-solid fa-bomb text-6xl"></i>
-        <h2 class="w-96 text-center relative">No Miis have been submitted for this contest. Check back later!</h2>
+        <h2 class="w-96 text-center relative">Coming soon!</h2>
     </div>
     </div>
     </p>

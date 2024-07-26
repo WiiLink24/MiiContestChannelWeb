@@ -23,6 +23,14 @@ onMounted(async () => {
   newMiis.value = await fetchPlazaNew(1)
   newMiis.value = newMiis.value.data
   contests.value = await fetchContests()
+  
+  // Filter out contests with specific statuses
+  contests.value = contests.value.filter(contest => 
+    !["waiting", "judging", "results", "closed"].includes(contest.status)
+  );
+
+  console.log(contests.value)
+
   const container = document.querySelector('.cmoc-bg')
   if (container) {
     const { width, height } = container.getBoundingClientRect()
@@ -99,7 +107,7 @@ const dragEnd = (e) => {
           </h2>
           <br />
           <a
-            class="inline-flex flex-row gap-1 items-center bg-[#2bca38] hover:bg-green-600 hover:scale-105 hover:shadow-xl hover:shadow-green-400/10 hover:no-underline transition-all px-8 py-3 rounded-xl text-white border-2 border-gray-200/10"
+            class="w-full sm:w-auto justify-center inline-flex flex-row gap-1 items-center bg-[#2bca38] hover:bg-green-600 hover:scale-105 hover:shadow-xl hover:shadow-green-400/10 hover:no-underline transition-all px-8 py-3 rounded-xl text-white border-2 border-gray-200/10"
             href="https://www.wiilink24.com/"
             ><img
               src="/img/favicon.png"

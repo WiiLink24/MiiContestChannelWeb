@@ -1,21 +1,28 @@
 <script setup lang="ts">
 import ReturnBtn from '@/components/ReturnBtn.vue'
-import Title from '@/components/Title.vue';
+import Title from '@/components/Title.vue'
 import { useHead } from '@unhead/vue'
 
 useHead({
   title: '404 | CMOC Viewing Tool',
   meta: [
-    { name: 'description', content: 'The content you were looking for could not be found...'},
-    { property: 'og:image', content: '/img/cmocseobg.png' },
-  ],
+    { name: 'description', content: 'The content you were looking for could not be found...' },
+    { property: 'og:image', content: '/img/cmocseobg.png' }
+  ]
 })
-</script> 
+</script>
 
 <template>
-    <div class="translate-y-20 pt-20 pb-20 container border-4 border-dashed border-gray-300 dark:border-slate-600 rounded-2xl flex flex-col items-center">
-        <ReturnBtn class="top-5 left-5 absolute" />
-        <Title name="404" />
-        <p class="text-3xl font-bold">Page not found</p>
-    </div>
+  <div
+    class="translate-y-20 pt-48 pb-48 container rounded-2xl flex flex-col items-center"
+  >
+    <ReturnBtn class="top-5 left-5 absolute" />
+    <h1
+      id="title"
+      class="text-9xl outline-text uppercase whitespace-nowrap text-ellipsis z-5 relative flex items-center justify-between overflow-hidden"
+    >
+      404
+    </h1>
+    <p class="text-3xl font-bold">Page not found</p>
+  </div>
 </template>
