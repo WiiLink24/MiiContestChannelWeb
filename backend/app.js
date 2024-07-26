@@ -6,6 +6,9 @@ const helmet = require("helmet");
 var morgan = require('morgan')
 var fs = require("fs");
 
+require("./instrument.js");
+const Sentry = require("@sentry/node");
+
 var indexRouter = require("./routes/index");
 var port = 3000
 
@@ -32,6 +35,7 @@ app.use(function (req, res, next) {
 });
 
 app.use("/", indexRouter);
+Sentry.setupExpressErrorHandler(app);
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
@@ -44,6 +48,10 @@ app.use(limiter);
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "public/dist/index.html"));
+});
+
+app.get("/debug-sentry", function mainHandler(req, res) {
+  throw new Error("My first Sentry error!");
 });
 
 app.listen(port, () => {
