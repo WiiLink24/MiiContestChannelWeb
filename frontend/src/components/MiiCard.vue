@@ -65,6 +65,18 @@ const copyToClipboard = (text) => {
   navigator.clipboard.writeText(text)
 }
 
+const openReportModal = (entry_id, nickname, miiFace, miiCreator, miiFlag, miiGender) => {
+  document.getElementById('report-modal').classList.remove('hidden')
+  document.body.style.overflow = 'hidden'
+  document.getElementById('report-modal-mii-name').innerText = nickname
+  document.getElementById('report-modal-mii-id').innerText = entry_id
+  document.getElementById('report-mii-id').value = entry_id
+  document.getElementById('report-modal-mii-face').src = miiFace
+  document.getElementById('report-modal-mii-creator').innerText = miiCreator
+  document.getElementById('report-modal-mii-flag').innerHTML = miiFlag
+  document.getElementById('report-modal-mii-gender').innerHTML = "<i class='"+ miiGender + "'></i>"
+}
+
 const rankingClass = computed(() => {
   switch (props.ranking) {
     case 1:
@@ -103,16 +115,21 @@ const genderIcon = computed(() => {
     backgroundColor: isTooltipHovered ? '#36d14160' : '',
     border: isTooltipHovered ? '1px solid green' : ''
     }"
-    class="p-3 rounded-xl border flex flex-col justify-between relative z-20 bg-gray-100 dark:border-slate-600/60 dark:bg-slate-700/60 dark:text-white hover:shadow-xl transition-shadow overflow-hidden backdrop-blur-md bg-opacity-50"
+    class="p-3 has-report rounded-xl border flex flex-col justify-between relative z-20 bg-gray-100 dark:border-slate-600/60 dark:bg-slate-700/60 dark:text-white hover:shadow-xl transition-shadow overflow-hidden backdrop-blur-md bg-opacity-50"
     ref="card"
   >
+  <span
+          class="top-2 left-2 report rounded shadow-lg p-2 pl-3 pr-3 bg-red-600 hover:bg-red-700 text-white cursor-pointer absolute"
+          @click="openReportModal(entry_id, nickname, mii_img, artisan_name, countryFlagHtml, genderIcon)"
+          ><i class="fa-solid fa-triangle-exclamation"></i
+        ></span>
     <span
       v-if="ranking"
       class="-top-4 text-7xl font-bold text-white opacity-5 z-0 absolute select-none self-start text-black -ml-2"
       :class="{ 'mb-[7.5rem]' : !nickname }"
       >{{ ranking }}</span
     >
-    <div class="z-10 flex flex-col w-full items-center">
+    <div class="z-10 flex flex-col w-full items-center hover:z-30">
       <span class="self-end text-2xl" v-html="countryFlagHtml"></span>
       <div v-if="nickname" class="has-tooltip"
       @mouseenter="isTooltipHovered = true"

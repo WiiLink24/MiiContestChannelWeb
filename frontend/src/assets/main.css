@@ -33,12 +33,16 @@
     }
   }
 
-  .tooltip {
+  .tooltip, .report {
     @apply invisible absolute;
   }
   
   .has-tooltip:hover .tooltip {
     @apply visible z-50;
+  }
+
+  .has-report:hover .report {
+    @apply visible z-20;
   }
 
   .text-black {
