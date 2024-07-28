@@ -4,6 +4,8 @@ const closeReportModal = () => {
     document.getElementById('report-modal').classList.add('hidden');
     document.body.style.overflow = 'auto';
 }
+
+const post_url = import.meta.env.VITE_API_URL + '/report';
 </script>
 
 <template>
@@ -25,10 +27,10 @@ const closeReportModal = () => {
                         <div class="flex flex-col">
                             <p class="text-black dark:text-white m-0 text-md opacity-30">Would you like to report the
                                 Mii</p> <span id="report-modal-mii-name" class="text-black dark:text-white"></span>
-                                <p class="text-black dark:text-white flex items-center gap-3"><span id="report-modal-mii-creator"
-                            class="text-black dark:text-white"></span> | <span id="report-modal-mii-flag"
-                            class="text-black dark:text-white"></span> | <span id="report-modal-mii-gender"
-                            class="text-black dark:text-white"></span></p>
+                            <p class="text-black dark:text-white flex items-center gap-3"><span
+                                    id="report-modal-mii-creator" class="text-black dark:text-white"></span> | <span
+                                    id="report-modal-mii-flag" class="text-black dark:text-white"></span> | <span
+                                    id="report-modal-mii-gender" class="text-black dark:text-white"></span></p>
                         </div>
                         <div class="flex flex-col">
                             <p class="text-black dark:text-white m-0 text-md opacity-30">with the ID</p> <span
@@ -38,9 +40,12 @@ const closeReportModal = () => {
                 </div>
             </div>
 
-            <form action="localhost:3000/report">
-                <input type="hidden" id="report-mii-id" name="report-mii-id">
-                <input id="report-reason" name="report-reason" placeholder="Reason for reporting (optional)"
+            <form :action='post_url' method="post" enctype="multipart/form-data">
+                <input type="hidden" id="report-mii-name" name="report_mii_name">
+                <input type="hidden" id="report-mii-id" name="report_mii_id">
+                <input type="hidden" id="report-mii-img" name="report_mii_img">
+                <input type="hidden" id="report-creator" name="report_creator">
+                <input id="report-reason" name="report_reason" placeholder="Reason for reporting (optional)"
                     class="w-full h-20 mt-3 pl-10 bg-gray-500/80 dark:bg-slate-500/80 border-2 border-white/5 text-white rounded-t-2xl rounded-b-md"></input>
                 <button type="submit"
                     class="w-full mt-2 pt-3 pb-3 rounded-t-md rounded-b-2xl bg-red-500 hover:bg-red-600 text-white font-bold transition-all">Report</button>

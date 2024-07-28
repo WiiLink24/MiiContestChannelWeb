@@ -1,7 +1,10 @@
 var express = require("express");
 var router = express.Router();
+var cors = require("cors");
+var rateLimit = require("express-rate-limit");
 
 const { isValidWiiNumber } = require("../utils/number_test");
+const { decodeEntry } = require("../utils/entry");
 const { parse } = require("path");
 
 require("dotenv").config();
@@ -10,6 +13,18 @@ const pgp = require("pg-promise")(/* options */);
 const db = pgp(
   `postgres://${process.env.POSTGRES_USERNAME}:${process.env.POSTGRES_PASSWORD}@${process.env.POSTGRES_HOST}/${process.env.POSTGRES_DB}`
 );
+
+var corsOptions = {
+  origin: ['http://localhost:5173', 'http://localhost:3000', 'https://miicontest.wiilink.ca'],
+  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
+
+const limiter = rateLimit({
+	windowMs: 60 * 60 * 1000, // 15 minutes
+	limit: 20, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
+	standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
+	legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+})
 
 
 //pagination settings
@@ -373,6 +388,43 @@ router.post("/api/testnumber", async (req, res) => {
     const { number } = req.body;
     const isValid = isValidWiiNumber(number);
     res.json({ isValid });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+router.post('/report', cors(corsOptions), limiter, async (req, res) => {
+  try {
+    //get the data from the FormData
+    const form = req.fields;
+    console.log(form)
+    //send the data to a webhook
+    const entry = decodeEntry(form.report_mii_id)
+    const reason = form.report_reason || 'No reason provided';
+    const webhook = process.env.DISCORD_WEBHOOK;
+    const axios = require('axios');
+    const data = {
+      content: 'A new Mii Contest Channel report has been submitted!',
+      username: 'WiiLink Mii Contest Channel',
+      embeds: [{
+        title: form.report_mii_name,
+        type: 'rich',
+        description: `Entry ID: ${entry}\nCreator: ${form.report_creator}\nReason: ${reason}`,
+        url: `https://miicontestp.wii.rc24.xyz/panel/plaza/details/${entry}`,
+        color: 0x00ff00,
+        thumbnail: {
+          url: form.report_mii_img
+        },
+        footer: {
+          text: 'WiiLink Mii Contest Channel'
+        },
+        timestamp: new Date(),
+      }]
+    }
+    const response = await axios.post(webhook, data);
+    //redirect to the previous page
+    res.redirect('back');
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal server error" });

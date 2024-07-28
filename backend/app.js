@@ -5,6 +5,7 @@ const { rateLimit } = require("express-rate-limit");
 const helmet = require("helmet");
 var morgan = require('morgan')
 var fs = require("fs");
+const formidableMiddleware = require('express-formidable');
 
 var indexRouter = require("./routes/index");
 var port = 3000
@@ -30,6 +31,7 @@ app.use(function (req, res, next) {
   res.setHeader('Content-Security-Policy', "default-src * 'unsafe-inline' 'unsafe-eval'; script-src * 'unsafe-inline' 'unsafe-eval'; style-src * 'unsafe-inline'; img-src * data:; connect-src *; font-src *; object-src *; media-src *; frame-src *;");
   next();
 });
+app.use(formidableMiddleware());
 
 app.use("/", indexRouter);
 
