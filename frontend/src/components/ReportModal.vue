@@ -7,7 +7,7 @@ const closeReportModal = () => {
 
 <template>
     <div id="report-modal"
-        class="w-full h-full top-0 left-0 bg-gray-300/45 dark:bg-slate-700/45 backdrop-blur-md flex items-center justify-center hidden z-[1000000] fixed">
+        class="w-full h-full top-0 left-0 pt-10 pl-3 pr-3  bg-gray-300/45 dark:bg-slate-700/45 backdrop-blur-md sm:flex items-center justify-center hidden z-[1000000] overflow-scroll fixed">
         <div>
             <div class="flex items-center justify-between">
                 <img src="/img/safetyMonitoring-logo.png" class="mb-3 dark:invert" style="height:60px;">
@@ -17,23 +17,23 @@ const closeReportModal = () => {
                 </div>
             </div>
             <hr class="mt-6 mb-3 border-black dark:border-white">
-            <div class="mb-5 flex flex-row gap-3 items-center">
+            <div class="mb-5 flex sm:flex-row flex-col gap-3 items-center">
                 <img id="report-modal-mii-face" class="w-28 h-30 rounded-lg" alt="Mii Image">
                 <div class="flex flex-col">
-                    <h2 class="text-4xl flex flex-row items-center gap-10">
+                    <h2 class="text-4xl flex sm:flex-row flex-col sm:items-start gap-10">
                         <div class="flex flex-col">
                             <p class="text-black dark:text-white m-0 text-md opacity-30">Would you like to report the
                                 Mii</p> <span id="report-modal-mii-name" class="text-black dark:text-white"></span>
+                                <p class="text-black dark:text-white flex items-center gap-3"><span id="report-modal-mii-creator"
+                            class="text-black dark:text-white"></span> | <span id="report-modal-mii-flag"
+                            class="text-black dark:text-white"></span> | <span id="report-modal-mii-gender"
+                            class="text-black dark:text-white"></span></p>
                         </div>
                         <div class="flex flex-col">
                             <p class="text-black dark:text-white m-0 text-md opacity-30">with the ID</p> <span
                                 id="report-modal-mii-id" class="text-black dark:text-white"></span>
                         </div>
                     </h2>
-                    <p class="text-black dark:text-white flex items-center gap-3"><span id="report-modal-mii-creator"
-                            class="text-black dark:text-white"></span> | <span id="report-modal-mii-flag"
-                            class="text-black dark:text-white"></span> | <span id="report-modal-mii-gender"
-                            class="text-black dark:text-white"></span></p>
                 </div>
             </div>
 
