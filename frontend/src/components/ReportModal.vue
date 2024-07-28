@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const closeReportModal = () => {
+    document.getElementById('report-modal').classList.add('sm:hidden');
     document.getElementById('report-modal').classList.add('hidden');
     document.body.style.overflow = 'auto';
 }
@@ -7,7 +8,7 @@ const closeReportModal = () => {
 
 <template>
     <div id="report-modal"
-        class="w-full h-full top-0 left-0 pt-10 pl-3 pr-3  bg-gray-300/45 dark:bg-slate-700/45 backdrop-blur-md sm:flex items-center justify-center hidden z-[1000000] overflow-scroll fixed">
+        class="w-full h-full top-0 left-0 pt-10 pl-3 pr-3  bg-gray-300/45 dark:bg-slate-700/45 backdrop-blur-md sm:flex block items-center justify-center sm:hidden hidden z-[1000000] overflow-scroll fixed">
         <div>
             <div class="flex items-center justify-between">
                 <img src="/img/safetyMonitoring-logo.png" class="mb-3 dark:invert" style="height:60px;">

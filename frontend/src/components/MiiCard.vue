@@ -66,6 +66,7 @@ const copyToClipboard = (text) => {
 }
 
 const openReportModal = (entry_id, nickname, miiFace, miiCreator, miiFlag, miiGender) => {
+  document.getElementById('report-modal').classList.remove('sm:hidden')
   document.getElementById('report-modal').classList.remove('hidden')
   document.body.style.overflow = 'hidden'
   document.getElementById('report-modal-mii-name').innerText = nickname
