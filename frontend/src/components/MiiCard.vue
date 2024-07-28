@@ -60,6 +60,7 @@ const encodeEntryId = (entry_id) => {
 };
 
 const entry_id = encodeEntryId(props.entry_id)
+const basic_entry_id = props.entry_id
 
 const copyToClipboard = (text) => {
   navigator.clipboard.writeText(text)
@@ -71,7 +72,7 @@ const openReportModal = (entry_id, nickname, miiFace, miiCreator, miiFlag, miiGe
   document.body.style.overflow = 'hidden'
   document.getElementById('report-modal-mii-name').innerText = nickname
   document.getElementById('report-modal-mii-id').innerText = entry_id
-  document.getElementById('report-mii-id').value = entry_id
+  document.getElementById('report-mii-id').value = basic_entry_id
   document.getElementById('report-mii-img').value = miiFace
   document.getElementById('report-mii-name').value = nickname
   document.getElementById('report-creator').value = miiCreator

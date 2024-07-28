@@ -400,7 +400,6 @@ router.post('/report', cors(corsOptions), limiter, async (req, res) => {
     const form = req.fields;
     console.log(form)
     //send the data to a webhook
-    const entry = decodeEntry(form.report_mii_id)
     const reason = form.report_reason || 'No reason provided';
     const webhook = process.env.DISCORD_WEBHOOK;
     const axios = require('axios');
@@ -410,8 +409,8 @@ router.post('/report', cors(corsOptions), limiter, async (req, res) => {
       embeds: [{
         title: form.report_mii_name,
         type: 'rich',
-        description: `Entry ID: ${entry}\nCreator: ${form.report_creator}\nReason: ${reason}`,
-        url: `https://miicontestp.wii.rc24.xyz/panel/plaza/details/${entry}`,
+        description: `Entry ID: ${form.report_mii_id}\nCreator: ${form.report_creator}\nReason: ${reason}`,
+        url: `https://miicontestp.wii.rc24.xyz/panel/plaza/details/${form.report_mii_id}`,
         color: 0x00ff00,
         thumbnail: {
           url: form.report_mii_img
