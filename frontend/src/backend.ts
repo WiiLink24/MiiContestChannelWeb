@@ -106,24 +106,42 @@ export function renderMii(base64String: string) {
     })
 }
 
-export function downloadMii(name: string | [number, number],  entry_id:string, mii_data: any) {
-      const blob = new Blob([mii_data], { type: 'application/octet-stream' })
-      const url = window.URL.createObjectURL(blob)
-      const a = document.createElement('a')
+  export function downloadMii(name: string | [number, number],  entry_id:string, mii_data: any) {
+  // Decode base64 string
+  let binaryString = atob(mii_data);
+  let binaryLen = binaryString.length;
+  // Create binary array from base64 decoded string
+  let bytes = new Uint8Array(binaryLen);
+  // Fill the binary array
+  for (let i = 0; i < binaryLen; i++) {
+    let ascii = binaryString.charCodeAt(i);
+    bytes[i] = ascii;
+  }
 
-      a.href = url
-      if (typeof name === 'string') {
-        a.download = `${name} (${entry_id}).mii`;
-      } else if (Array.isArray(name) && name.length === 2) {
-        a.download = `Contest_${name} (${entry_id}).mii`;
-      }
-      
-      document.body.appendChild(a)
-      a.click()
+  // Create a blob object
+  let blob = new Blob([bytes], { type: "application/octet-stream" });
 
-      window.URL.revokeObjectURL(url)
-      a.remove()
-    }
+  // Create a URL for the blob
+  let url = URL.createObjectURL(blob);
+
+  // Create a link element
+  let link = document.createElement("a");
+  link.href = url;
+  link.download = `${name}-(${entry_id}).miigx`; // The name of the downloaded file
+
+  // Append the link to the document
+  document.body.appendChild(link);
+
+  // Trigger the download by clicking the link
+  link.click();
+
+  // Remove the link from the document
+  document.body.removeChild(link);
+
+  // Revoke the object URL after the download
+  URL.revokeObjectURL(url);
+}
+
 
 export function formatWiiNumber(wii_number: number) {
   return wii_number.toString().padStart(15, '0').replace(/(\d{4})(?=\d)/g, '$1-');
