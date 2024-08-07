@@ -121,7 +121,10 @@ router.get("/api/plaza/all", async (req, res) => {
 
 router.post("/api/plaza/mii", async (req, res) => {
   try {
-    const { entry_id } = req.body;
+    const { entry_code } = req.body;
+    const entry_id = decodeEntry(entry_code.replace(/-/g, ""));
+    console.log(entry_code, entry_id);
+
     const data_response = await db.oneOrNone(
       "SELECT entry_id, artisan_id, initials, skill, nickname, gender, country_id, mii_data, likes, perm_likes FROM miis WHERE entry_id = $1",
       [entry_id]
@@ -398,7 +401,6 @@ router.post('/report', cors(corsOptions), limiter, async (req, res) => {
   try {
     //get the data from the FormData
     const form = req.fields;
-    console.log(form)
     //send the data to a webhook
     const reason = form.report_reason || 'No reason provided';
     const webhook = process.env.DISCORD_WEBHOOK;

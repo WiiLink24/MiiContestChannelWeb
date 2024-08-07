@@ -100,11 +100,11 @@ https://miicontest.wiilink.ca/api/plaza/all
 https://miicontest.wiilink.ca/api/plaza/mii
 ```
 
-Use the Entry ID to fetch.
+Use the channel's entry code to fetch.
 
 ```json
 {
-    "entry_id": 100106228
+    "entry_code": "5403-6703-1484"
 }
 ```
 

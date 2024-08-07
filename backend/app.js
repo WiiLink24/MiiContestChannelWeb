@@ -31,7 +31,7 @@ app.use(function (req, res, next) {
   res.setHeader('Content-Security-Policy', "default-src * 'unsafe-inline' 'unsafe-eval'; script-src * 'unsafe-inline' 'unsafe-eval'; style-src * 'unsafe-inline'; img-src * data:; connect-src *; font-src *; object-src *; media-src *; frame-src *;");
   next();
 });
-app.use(formidableMiddleware());
+/* app.use(formidableMiddleware()); */
 
 app.use("/", indexRouter);
 
