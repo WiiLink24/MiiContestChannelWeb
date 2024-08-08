@@ -2,11 +2,9 @@
 import { RouterView, RouterLink } from 'vue-router'
 import HeaderPage from '@/components/HeaderPage.vue'
 import FooterPage from '@/components/FooterPage.vue'
-import ReportModal from './components/ReportModal.vue';
 </script>
 
 <template>
-  <ReportModal />
   <HeaderPage />
   <main class="bg-white dark:bg-slate-800 dark:text-white translate-y-10">
     <Suspense>
