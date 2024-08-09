@@ -8,7 +8,7 @@ import MiiCard from '@/components/MiiCard.vue'
 import { useHead } from '@unhead/vue'
 
 useHead({
-  title: 'Home | CMOC Viewing Tool',
+  title: 'Home | MCC Viewing Tool',
   meta: [
     { name: 'description', content: 'Get updated info on all running contests, as well as download your favorite Mii Characters from our service!'},
     { property: 'og:image', content: '/img/cmocseobg.png' },
@@ -100,7 +100,7 @@ const dragEnd = (e) => {
     <div class="container lg:py-20 py-10 lg:absolute relative">
       <section class="lg:h-[500px] flex flex-col justify-between grow-0 lg:w-1/2 space-y-2">
         <div>
-          <h1 class="text-5xl font-bold">Welcome to the new CMOC Viewing Tool</h1>
+          <h1 class="text-5xl font-bold">Welcome to the new MCC Viewing Tool</h1>
           <h2 class="mt-2 text-3xl">
             Get updated info on all running contests, as well as download your favorite Mii
             Characters from our service.
@@ -211,7 +211,7 @@ const dragEnd = (e) => {
       </ul>
     </div>
     <div class="mt-6 mb-10">
-      <h1 class="font-bold text-4xl">What's new on the Check Mii Out Channel?</h1>
+      <h1 class="font-bold text-4xl">What's new on the Mii Contest Channel?</h1>
       <div class="p-6 mt-3 border-4 border-slate-600 border-dashed rounded-3xl block relative">
         <i class="-right-10 -top-10 text-9xl animate-spin text-yellow-300/60 fa-solid fa-certificate absolute"></i>
         <div>
