@@ -24,13 +24,21 @@ var accessLogStream = fs.createWriteStream(path.join(__dirname, "access.log"), {
 app.use(express.json());
 app.use(cors());
 app.use(express.static(path.join(__dirname, "public/dist")));
-app.use(helmet());
+app.use(helmet({
+  contentSecurityPolicy: {
+    useDefaults: false,
+    directives: {
+      defaultSrc: ["'self'", "'unsafe-inline'"],
+      styleSrc: ["'self'", "'unsafe-inline'", "fonts.googleapis.com", "fonts.gstatic.com"],
+      scriptSrc: ["'self'", "fontawesome.com", "kit.fontawesome.com", "unpkg.com", "cdn.jsdelivr.net", "'unsafe-inline'"],
+      imgSrc: ["'self'", "rc24.xyz", "studio.mii.nintendo.com", "cdn.jsdelivr.net", "'unsafe-inline'"],
+      connectSrc: ["'self'", "ka-f.fontawesome.com", "miicontestp.wii.rc24.xyz", "'unsafe-inline'"],
+      fontSrc: ["'self'", "fonts.gstatic.com", "ka-f.fontawesome.com", "kit.fontawesome.com", "'unsafe-inline'"],
+    }
+  }
+}));
 app.use(morgan('combined', { stream: accessLogStream }))
 app.set("trust proxy", true);
-app.use(function (req, res, next) {
-  res.setHeader('Content-Security-Policy', "default-src * 'unsafe-inline' 'unsafe-eval'; script-src * 'unsafe-inline' 'unsafe-eval'; style-src * 'unsafe-inline'; img-src * data:; connect-src *; font-src *; object-src *; media-src *; frame-src *;");
-  next();
-});
 /* app.use(formidableMiddleware()); */
 
 app.use("/", indexRouter);
