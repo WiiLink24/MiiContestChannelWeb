@@ -49,7 +49,7 @@ app.get("*", (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`MCC Viewer is running on ${port}`);
+  console.log(`Mii Contest Viewer is running on ${port}`);
 });
 
 module.exports = app;

@@ -151,7 +151,7 @@
   
       <hr class="hr" style={display} />
       <div class="footer-holder" style={display}>
-        <h4 class="slogan">The WiiLink MCC Viewing Tool is a website where you can check all Miis posted into the Mii Contest Channel, as well as download them and view contests!
+        <h4 class="slogan">The WiiLink Mii Contest Viewing Tool is a website where you can check all Miis posted into the Mii Contest Channel, as well as download them and view contests!
         <br><br>
         © 2020-2024 <b style="font-family:Rubik;">WiiLink</b><b style="font-family:Gilroy;">
           Team</b
