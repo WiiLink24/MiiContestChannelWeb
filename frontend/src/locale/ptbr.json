@@ -1,7 +1,6 @@
 {
 	"loading": "Getting the latest data for you. Hang tight!",
 	"return": "Go back to the previous page",
-	
 	"header": {
 		"home": "Home",
 		"popular": "Popular",
@@ -10,7 +9,6 @@
 		"contests": "Contests",
 		"search": "Search..."
 	},
-
 	"main": {
 		"welcome": "Welcome to the new CMOC Viewing Tool",
 		"description": "Get updated info on all running contests, as well as download your favorite Mii Characters from our service.",
@@ -40,7 +38,6 @@
 		"tools": "Tools",
 		"tools_desc": "Here are some tools we really like!"
 	},
-
 	"tools": {
 		"mii_char": "Mii Characters",
 		"mii_lib": "Mii Library",
@@ -54,7 +51,6 @@
 		"mii_render_desc": "Mii Renderer is a tool that allows you to render Mii Characters in high resolution. You can use it to create high-quality images of your Mii Characters for use in videos, artwork, or other projects!",
 		"mii_edit_desc": "Mii Avatar Editor is a tool that allows you to create custom Mii Characters. You can choose from a wide range of features to create a Mii that looks just like you, or create a completely original character!"
 	},
-	
 	"search": {
 		"title": "Search",
 		"field": "Search for Miis or Artisans by Name, ID or Initials...",
@@ -65,7 +61,6 @@
 		"miis": "Miis",
 		"artisans": "Artisans"
 	},
-
 	"contests": {
 		"title": "Contests",
 		"active": "Active Contests",
@@ -79,24 +74,23 @@
 		"day_remaining": "day remaining",
 		"days_remaining": "days remaining",
 		"new": "New!",
-		"closing_soon": "Closing soon!"
+		"closing_soon": "Closing soon!",
+		"previous_judged": "Contests being judged",
+		"previous_results": "Contests displaying results",
+		"previous_closed": "Closed contests"
 	},
-	
 	"mii_not_found": "The Mii you were looking for could not be found...",
-	
 	"plaza": {
 		"n": "There is",
 		"miis": "Miis in the Plaza!",
 		"title": "Popular",
 		"database": "Could not establish a connection to the Plaza database, please try again later..."
 	},
-	
 	"top": {
 		"title": "Top 50",
 		"desc": "These are the Top 50 Miis, sorted by number of likes!",
 		"database": "Could not establish a connection to the Plaza database, please try again later..."
 	},
-
 	"artisan": {
 		"title": "Artisans",
 		"download": "Download",
@@ -112,7 +106,6 @@
 		"not_found": "The Mii Artisan you were looking for could not be found...",
 		"connection_fail": "Could not establish a connection to the Plaza database, please try again later..."
 	},
-
 	"footer": {
 		"site_by": "by",
 		"main_site": "Site",
@@ -144,6 +137,5 @@
 		"privacy": "Privacy Policy",
 		"eula": "End-User License Agreement (EULA)"
 	},
-
-	"404": "Page not found"	
+	"404": "Page not found"
 }

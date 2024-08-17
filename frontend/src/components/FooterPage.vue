@@ -19,7 +19,7 @@
             <a href="https://github.com/humanoidear"
               >
               <u>Alex</u></a
-            > and <a href="https://github.com/kouacc"
+            > {{ $t('footer.site_by_and') }} <a href="https://github.com/kouacc"
             ><u>Kouacc</u></a>
           </p>
           <p
@@ -54,11 +54,11 @@
             >
           </div>
           <div class="column">
-            <h4><b>{{ $t('footer.github') }}</b></h4>
+            <h4><b>{{ $t('footer.github_links') }}</b></h4>
             <hr
               style="width: 60px; border-top:2px solid white; transform:translate(0, -5px); margin:0px;"
             />
-            <a href="https://github.com/WiiLink24" class="animated-link">{{ $t('footer.github_link') }}</a
+            <a href="https://github.com/WiiLink24" class="animated-link">{{ $t('footer.github') }}</a
             >
             <a
               href="https://github.com/orgs/WiiLink24/repositories"
@@ -102,7 +102,7 @@
               data-bs-placement="left"
               data-bs-title="WiiLink24"
               ><i style="margin-right:10px;" class="fa-brands fa-github"
-              ></i>{{ $t('footer.github_link') }}</a
+              ></i>{{ $t('footer.github') }}</a
             >
             <a
               href="https://www.patreon.com/WiiLink24"

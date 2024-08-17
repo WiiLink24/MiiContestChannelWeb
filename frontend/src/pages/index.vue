@@ -251,7 +251,7 @@ const dragEnd = (e) => {
   </div>
     <div class="flex flex-row items-center justify-between gap-3">
       <h1 class="font-bold text-4xl">{{ $t('main.tools') }}</h1>
-      <h2 class="opacity-60">{{ $t('main.tools.desc') }}</h2>
+      <h2 class="opacity-60">{{ $t('main.tools_desc') }}</h2>
     </div>
     <div class="mt-3 mb-20 lg:mb-0 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-5 gap-3">
       <a class="btn lg:rounded-l-xl lg:rounded-r-md rounded-xl text-center text-black" href="https://www.miicharacters.com/" @mouseenter="displayData('miichar')" @mouseleave="removeData('miichar')">{{ $t('tools.mii_char') }}</a>

@@ -118,13 +118,16 @@
 
 	"footer": {
 		"site_by": "by",
+		"site_by_and": "and",
 		"main_site": "Site",
 		"pages": "Pages",
+		"home": "Home",
 		"popular": "Popular",
 		"top": "The Top 50",
 		"artisans": "Artisans",
 		"contests": "Contests",
-		"github": "GitHub Links",
+		"github": "GitHub",
+		"github_links": "GitHub Links",
 		"repository": "Repository",
 		"projects": "Projects",
 		"teams": "Teams",
