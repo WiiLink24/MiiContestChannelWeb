@@ -4,7 +4,7 @@ import App from './App.vue'
 import { createI18n } from 'vue-i18n'
 import EN from './locale/en.json'
 import PTBR from './locale/ptbr.json'
-import { createHead } from 'unhead'
+import { createHead } from 'unhead/vue'
 import { createRouter, createWebHistory } from 'vue-router/auto'
 import { routes as autoRoutes } from 'vue-router/auto-routes'
 
@@ -20,9 +20,9 @@ const i18n = createI18n({
   }
 })
 
-const app = createApp(App).use(i18n)
+const app = createApp(App)
 
-createHead()
+const head = createHead()
 
 const routes = autoRoutes.map(route => ({
   ...route,
@@ -50,5 +50,7 @@ router.beforeEach((to, from, next) => {
 })
 
 app.use(router)
+app.use(head)
+app.use(i18n)
 app.mount('#app')
 
