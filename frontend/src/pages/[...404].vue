@@ -23,6 +23,6 @@ useHead({
     >
       404
     </h1>
-    <p class="text-3xl font-bold">Page not found</p>
+    <p class="text-3xl font-bold">{{ $t('404') }}</p>
   </div>
 </template>

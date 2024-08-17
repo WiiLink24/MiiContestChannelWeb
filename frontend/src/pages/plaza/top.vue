@@ -36,9 +36,9 @@ onMounted(async () => {
     alt="CMOC Background Image"
   />
 <div class="container translate-y-10">
-    <Title name="Top 50" />
+    <Title :name="$t('top_title')" />
     <p class="-translate-y-20 text-right opacity-45 text-black">
-      These are the Top 50 Miis, sorted by number of likes!
+      {{ $t('top_desc') }}
     </p>
     <LoadingAnimation v-if="isLoading" />
     <template v-if="top50">
@@ -54,7 +54,7 @@ onMounted(async () => {
     <div v-else-if="!isLoading" class="p-20 w-full h-30 rounded-[18px] border-4 border-gray-400 dark:border-slate-500 border-dashed flex items-center justify-center relative">
       <div class="flex flex-col items-center gap-3 text-gray-500 dark:text-slate-400">
           <i class="fa-solid fa-bomb text-6xl"></i>
-          <h2 class="w-96 text-center relative">Could not establish a connection to the Plaza database, please try again later...</h2>
+          <h2 class="w-96 text-center relative">{{ $t('top_database') }}</h2>
       </div>
     </div>
 </div>

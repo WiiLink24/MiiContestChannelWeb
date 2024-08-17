@@ -95,16 +95,16 @@ watch(current_page, async (newValue) => {
 </script>
 
 <template>
-<div class="w-full h-full absolute z-0 blur-sm"></div>
-<div class="top-0 left-0 w-full h-80 absolute dissolve"  style="background: linear-gradient(33deg, rgba(217,114,118,1) 0%, rgba(73,199,44,1) 39%, rgba(26,228,207,1) 80%, rgba(36,189,240,1) 100%);"></div>
+  <div class="w-full h-full absolute z-0 blur-sm"></div>
+  <div class="top-0 left-0 w-full h-80 absolute dissolve"  style="background: linear-gradient(33deg, rgba(217,114,118,1) 0%, rgba(73,199,44,1) 39%, rgba(26,228,207,1) 80%, rgba(36,189,240,1) 100%);"></div>
   <div class="container translate-y-14">
-    <Title icon="fa-solid fa-magnifying-glass" name="Search"/>
+    <Title icon="fa-solid fa-magnifying-glass" :name="$t('search.title')" />
     <div class="w-full -translate-y-8 flex flex-row gap-1 relative">
       <input
         class="w-full p-3 bg-gray-200/60 dark:bg-slate-500/60 backdrop-blur-sm hover:bg-gray-300 dark:hover:bg-slate-600 focus:bg-gray-300 dark:focus:bg-slate-700 transition-all relative rounded-l-[18px] rounded-r-[4px]"
         v-model="search_field"
         type="text"
-        placeholder="Search for Miis or Artisans by Name, ID or Initials..."
+        :placeholder="$t('search.field')" 
         @keyup.enter="searchQuery(), current_page = 1"
         :autofocus="true"
       />
@@ -128,7 +128,7 @@ watch(current_page, async (newValue) => {
                 'text-gray-400': search_type !== 'miis',
                 'text-white': search_type === 'miis'
               }"
-              >Miis</label
+              >{{ $t('miis') }}</label
             >
           </div>
           <input
@@ -158,7 +158,7 @@ watch(current_page, async (newValue) => {
                 'text-gray-400': search_type !== 'artisans',
                 'text-white': search_type === 'artisans'
               }"
-              >Artisans</label
+              >{{ $t('artisans') }}</label
             >
           </div>
           <input
@@ -214,17 +214,24 @@ watch(current_page, async (newValue) => {
     </p>
   </div>
     </div>
-    <div v-else-if="search_type == 'miis'" class="p-20 w-full h-30 rounded-[18px] border-4 border-gray-400 dark:border-slate-500 border-dashed flex items-center justify-center relative">
-        <div class="flex flex-col items-center gap-3 text-gray-500 dark:text-slate-400">
-            <div class="flex flex-row gap-3 items-center"><i class="fa-solid fa-magnifying-glass text-6xl"></i><b class="p-3 pl-6 pr-6 rounded-lg text-white bg-green-500">Mii Search Mode</b></div>
-        <h2 class="sm:w-96 w-full text-center relative">To begin searching, type your query in the box and press the enter key or <i class="fa-solid fa-magnifying-glass"></i> Search icon. You can search for a Mii by using its Name, CMOC Contest Code, or Initals.</h2>
-    </div>
-    </div>
-    <div v-else-if="search_type == 'artisans'" class="p-20 w-full h-30 rounded-[18px] border-4 border-gray-400 dark:border-slate-500 border-dashed flex items-center justify-center relative">
-        <div class="flex flex-col items-center gap-3 text-gray-500 dark:text-slate-400">
-          <div class="flex flex-row gap-3 items-center"><i class="fa-solid fa-magnifying-glass text-6xl"></i><b class="p-3 pl-6 pr-6 rounded-lg text-white bg-blue-500">Artisan Search Mode</b></div>
-        <h2 class="sm:w-96 w-full text-center relative">To begin searching, type your query in the box and press the enter key or <i class="fa-solid fa-magnifying-glass"></i> Search icon. You can search for an Artisan by using its Name, or Wii Number.</h2>
-    </div>
-    </div>
-  </div>
+	<div v-else-if="search_type == 'miis'" class="p-20 w-full h-30 rounded-[18px] border-4 border-gray-400 dark:border-slate-500 border-dashed flex items-center justify-center relative">
+		<div class="flex flex-col items-center gap-3 text-gray-500 dark:text-slate-400">
+			<div class="flex flex-row gap-3 items-center">
+				<i class="fa-solid fa-magnifying-glass text-6xl"></i>
+				<b class="p-3 pl-6 pr-6 rounded-lg text-white bg-green-500">{{ $t('search.mii_mode') }}</b>
+			</div>
+			<h2 class="sm:w-96 w-full text-center relative" v-html="$t('search.mii_instructions')">
+			</h2>
+		</div>
+	</div>
+	<div v-else-if="search_type == 'artisans'" class="p-20 w-full h-30 rounded-[18px] border-4 border-gray-400 dark:border-slate-500 border-dashed flex items-center justify-center relative">
+		<div class="flex flex-col items-center gap-3 text-gray-500 dark:text-slate-400">
+			<div class="flex flex-row gap-3 items-center">
+				<i class="fa-solid fa-magnifying-glass text-6xl"></i>
+				<b class="p-3 pl-6 pr-6 rounded-lg text-white bg-blue-500">{{ $t('search.artisan_mode') }}</b>
+			</div>
+			<h2 class="sm:w-96 w-full text-center relative" v-html="$t('search.artisan_instructions')"></h2>
+		</div>
+		</div>
+	</div>
 </template>

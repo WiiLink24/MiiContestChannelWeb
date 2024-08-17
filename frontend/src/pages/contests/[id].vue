@@ -62,7 +62,7 @@ watch(current_page, async (newValue) => {
   <div v-if="contest_data">
     <div class="flex flex-row gap-3 items-center justify-between">
         <ReturnBtn />
-        <h1 v-if="contest_data" class="text-xl font-bold">Contest Results for {{ contest_data.english_name }}</h1>
+        <h1 v-if="contest_data" class="text-xl font-bold">{{ $t('contests_results') }} {{ contest_data.english_name }}</h1>
     </div>
     <div v-if="contest" class="mt-3">
       <ContestCard v-bind="contest_data" />
@@ -88,7 +88,7 @@ watch(current_page, async (newValue) => {
         <div class="p-20 w-full h-30 rounded-[18px] border-4 border-gray-400 dark:border-slate-500 border-dashed flex items-center justify-center relative">
         <div class="flex flex-col items-center gap-3 text-gray-500 dark:text-slate-400">
             <i class="fa-solid fa-bomb text-6xl"></i>
-        <h2 class="w-96 text-center relative">Coming soon!</h2>
+        <h2 class="w-96 text-center relative">{{ $t('contests_coming') }}</h2>
     </div>
     </div>
     </p>
@@ -97,7 +97,7 @@ watch(current_page, async (newValue) => {
   <div v-else class="p-20 w-full h-30 rounded-[18px] border-4 border-gray-400 dark:border-slate-500 border-dashed flex items-center justify-center relative">
         <div class="flex flex-col items-center gap-3 text-gray-500 dark:text-slate-400">
           <div class="flex flex-row gap-3 items-center"><i class="fa-solid fa-bomb text-6xl"></i></div>
-        <h2 class="w-96 text-center relative">The Contest you were looking for could not be found...</h2>
+        <h2 class="w-96 text-center relative">{{ $t('contests_not_found') }}</h2>
     </div>
     </div>
 </template>

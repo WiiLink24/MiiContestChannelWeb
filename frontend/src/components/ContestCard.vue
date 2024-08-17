@@ -40,12 +40,12 @@ const isNew = computed(() => {
       >
         <div class="flex flex-row items-center justify-between">
           <p class="ml-1 text-white text-lg">
-            <span v-if="daysRemaining < 0">The contest has ended!</span>
-            <span v-else-if="daysRemaining === 1">{{ daysRemaining }} day remaining</span>
-            <span v-else>{{ daysRemaining }} days remaining</span>
+            <span v-if="daysRemaining < 0">{{ $t('contests.ended') }}</span>
+            <span v-else-if="daysRemaining === 1">{{ daysRemaining }} {{ $t('contests.day_remaining') }}</span>
+            <span v-else>{{ daysRemaining }} {{ $t('contests.days_remaining') }}</span>
           </p>
           <p class="flex flex-row items-center uppercase-first-letter">
-            {{ status }} <span class="opacity-60">({{ contest_id }})</span> <div v-if="isNew" class="ml-3 box sb4">New!</div>  <div v-if="daysRemaining <= 2 && daysRemaining >= 0" class="ml-3 box-red sb4-red">Closing soon!</div>
+            {{ status }} <span class="opacity-60">({{ contest_id }})</span> <div v-if="isNew" class="ml-3 box sb4">{{ $t('contests.new') }}</div>  <div v-if="daysRemaining <= 2 && daysRemaining >= 0" class="ml-3 box-red sb4-red">{{ $t('contests.closing_soon') }}</div>
           </p>
         </div>
         <div class="mt-2 bg-white p-1 rounded-xl flex flex-row gap-5 items-center justify-between">

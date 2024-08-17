@@ -108,24 +108,24 @@ export function renderMii(base64String: string) {
 
   export function downloadMii(name: string | [number, number],  entry_id:string, mii_data: any) {
   // Decode base64 string
-  let binaryString = atob(mii_data);
-  let binaryLen = binaryString.length;
+  const binaryString = atob(mii_data);
+  const binaryLen = binaryString.length;
   // Create binary array from base64 decoded string
-  let bytes = new Uint8Array(binaryLen);
+  const bytes = new Uint8Array(binaryLen);
   // Fill the binary array
   for (let i = 0; i < binaryLen; i++) {
-    let ascii = binaryString.charCodeAt(i);
+    const ascii = binaryString.charCodeAt(i);
     bytes[i] = ascii;
   }
 
   // Create a blob object
-  let blob = new Blob([bytes], { type: "application/octet-stream" });
+  const blob = new Blob([bytes], { type: "application/octet-stream" });
 
   // Create a URL for the blob
-  let url = URL.createObjectURL(blob);
+  const url = URL.createObjectURL(blob);
 
   // Create a link element
-  let link = document.createElement("a");
+  const link = document.createElement("a");
   link.href = url;
   link.download = `${name}-(${entry_id}).miigx`; // The name of the downloaded file
 

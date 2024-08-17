@@ -6,6 +6,7 @@ import type { Contest } from '@/types'
 import ContestCard from '@/components/ContestCard.vue'
 import MiiCard from '@/components/MiiCard.vue'
 import { useHead } from '@unhead/vue'
+import { useI18n } from 'vue-i18n'
 
 useHead({
   title: 'Home | CMOC Viewing Tool',
@@ -100,11 +101,8 @@ const dragEnd = (e) => {
     <div class="container lg:py-20 py-10 lg:absolute relative">
       <section class="lg:h-[500px] flex flex-col justify-between grow-0 lg:w-1/2 space-y-2">
         <div>
-          <h1 class="text-5xl font-bold">Welcome to the new CMOC Viewing Tool</h1>
-          <h2 class="mt-2 text-3xl">
-            Get updated info on all running contests, as well as download your favorite Mii
-            Characters from our service.
-          </h2>
+          <h1 class="text-5xl font-bold">{{ $t('main.welcome') }}</h1>
+          <h2 class="mt-2 text-3xl">{{ $t('main.description') }}</h2>
           <br />
           <a
             class="w-full sm:w-auto justify-center inline-flex flex-row gap-1 items-center bg-[#2bca38] hover:bg-green-600 hover:scale-105 hover:shadow-xl hover:shadow-green-400/10 hover:no-underline transition-all px-8 py-3 rounded-xl text-white border-2 border-gray-200/10"
@@ -114,12 +112,11 @@ const dragEnd = (e) => {
               alt="WiiLink Logo"
               style="filter: brightness(10000); height: 20px !important"
             />
-            Install WiiLink</a
+            {{ $t('main.install') }}</a
           >
         </div>
         <div class="text-xl opacity-80 mobile-hide">
-          <i class="fa-solid fa-hand"></i> Here are all available contests, go ahead and play around
-          with them!
+          <i class="fa-solid fa-hand"></i> {{ $t('main.available') }}
         </div>
       </section>
     </div>
@@ -152,8 +149,8 @@ const dragEnd = (e) => {
           <div class="mt-2 bg-white p-1 rounded-xl flex flex-row items-center">
             <div class="p-3 pl-6 pr-6 text-left flex flex-row items-center gap-6" style="color:black !important;">
               <i class="fa-solid fa-triangle-exclamation text-6xl"></i>
-              There are no contests available at the moment...<br />
-              Once there are, they will be shown here!
+              {{ $t('main.no_contests_top') }}<br>
+			  {{ $t('main.no_contests_bottom') }}
             </div>
           </div>
         </div>
@@ -163,37 +160,37 @@ const dragEnd = (e) => {
   <ul class="mb-10 flex gap-1 items-center justify-center translate-y-[67px] z-0 mobile-hide-flex relative">
     <li>
       <RouterLink to="/" class="header-link-index"
-        ><i class="fa-solid fa-house"></i> Home</RouterLink
+        ><i class="fa-solid fa-house"></i> {{ $t('main.home') }}</RouterLink
       >
     </li>
     <li>
       <RouterLink to="/plaza/popular" class="header-link-index"
-        ><i class="fa-solid fa-fire"></i> Popular</RouterLink
+        ><i class="fa-solid fa-fire"></i> {{ $t('main.popular') }}</RouterLink
       >
     </li>
     <li>
       <RouterLink to="/plaza/top" class="header-link-index"
-        ><i class="fa-solid fa-ranking-star"></i> The Top 50</RouterLink
+        ><i class="fa-solid fa-ranking-star"></i> {{ $t('main.top') }}</RouterLink
       >
     </li>
     <li>
       <RouterLink to="/artisans" class="header-link-index"
-        ><i class="fa-solid fa-star"></i> Artisans</RouterLink
+        ><i class="fa-solid fa-star"></i> {{ $t('main.artisans') }}</RouterLink
       >
     </li>
     <li>
       <RouterLink to="/contests/active" class="header-link-index"
-        ><i class="fa-solid fa-trophy"></i> Contests</RouterLink
+        ><i class="fa-solid fa-trophy"></i> {{ $t('main.contests') }}</RouterLink
       >
     </li>
     <li>
       <RouterLink to="/search" class="header-link-index"
-        ><i class="fa-solid fa-magnifying-glass mr-2"></i> Search</RouterLink
+        ><i class="fa-solid fa-magnifying-glass mr-2"></i> {{ $t('main.search') }}</RouterLink
       >
     </li>
   </ul>
   <div class="container translate-y-[90px]">
-    <h1 class="font-bold text-4xl">Newest Miis</h1>
+    <h1 class="font-bold text-4xl">{{ $t('main.newest_miis') }}</h1>
     <div class="mt-3 mb-8 scroll-container">
       <ul class="mt-3 inline-flex flex-row gap-3">
         <MiiCard
@@ -211,74 +208,74 @@ const dragEnd = (e) => {
       </ul>
     </div>
     <div class="mt-6 mb-10">
-      <h1 class="font-bold text-4xl">What's new on the Check Mii Out Channel?</h1>
+      <h1 class="font-bold text-4xl">{{ $t('main.whats_new') }}</h1>
       <div class="p-6 mt-3 border-4 border-slate-600 border-dashed rounded-3xl block relative">
         <i class="-right-10 -top-10 text-9xl animate-spin text-yellow-300/60 fa-solid fa-certificate absolute"></i>
         <div>
-          <h1 class="p-2 pl-4 pr-4 rounded-t-lg rounded-b-md bg-slate-500/30 text-2xl font-bold"><i class="fa-solid fa-hammer"></i> Improved infrastructure</h1>
+          <h1 class="p-2 pl-4 pr-4 rounded-t-lg rounded-b-md bg-slate-500/30 text-2xl font-bold"><i class="fa-solid fa-hammer"></i> {{ $t('main.infrastructure') }}</h1>
           <p class="mt-1 mb-6 p-3 border-2 border-slate-500/30 rounded-t-md rounded-b-lg text-black dark:text-white">
-            We have improved our infrastructure to make the service faster and more reliable. It is now much easier to post new contests and manage data, so expect more frequent contests!
+            {{ $t('main.infrastructure_desc') }}
           </p>
         </div>
         <div>
-          <h1 class="p-2 pl-4 pr-4 rounded-t-lg rounded-b-md bg-slate-500/30 text-2xl font-bold"><i class="fa-solid fa-bug"></i> Bug fixes</h1>
+          <h1 class="p-2 pl-4 pr-4 rounded-t-lg rounded-b-md bg-slate-500/30 text-2xl font-bold"><i class="fa-solid fa-bug"></i> {{ $t('main.fixes') }}</h1>
           <p class="mt-1 mb-6 p-3 border-2 border-slate-500/30 rounded-t-md rounded-b-lg text-black dark:text-white">
-            We have fixed a lot of bugs, meaning you will experience a smoother experience in the Channel.
+            {{ $t('main.fixes_desc') }}
           </p>
         </div>
         <div>
-          <h1 class="p-2 pl-4 pr-4 rounded-t-lg rounded-b-md bg-slate-500/30 text-2xl font-bold"><i class="fa-solid fa-globe"></i> New website</h1>
+          <h1 class="p-2 pl-4 pr-4 rounded-t-lg rounded-b-md bg-slate-500/30 text-2xl font-bold"><i class="fa-solid fa-globe"></i> {{ $t('main.website') }}</h1>
           <p class="mt-1 mb-6 p-3 border-2 border-slate-500/30 rounded-t-md rounded-b-lg text-black dark:text-white">
-            We have updated our website to make it more user-friendly and easier to navigate. We have also added new features to make it easier to find the content you are looking for.
+            {{ $t('main.website_desc') }}
           </p>
       </div>
       <div>
-        <h1 class="p-2 pl-4 pr-4 rounded-t-lg rounded-b-md bg-slate-500/30 text-2xl font-bold"><i class="fa-solid fa-code"></i> New API</h1>
+        <h1 class="p-2 pl-4 pr-4 rounded-t-lg rounded-b-md bg-slate-500/30 text-2xl font-bold"><i class="fa-solid fa-code"></i> {{ $t('main.api') }}</h1>
         <p class="mt-1 mb-6 p-3 border-2 border-slate-500/30 rounded-t-md rounded-b-lg text-black dark:text-white">
-          We have created a new API that allows developers to access the data on the Channel. This will make it easier to create new tools and services that use the data from the Channel.
+          {{ $t('main.api_desc') }}
         </p>
       </div>
       <div>
-        <h1 class="p-2 pl-4 pr-4 rounded-t-lg rounded-b-md bg-slate-500/30 text-2xl font-bold"><i class="fa-solid fa-gavel"></i> Easier moderation</h1>
+        <h1 class="p-2 pl-4 pr-4 rounded-t-lg rounded-b-md bg-slate-500/30 text-2xl font-bold"><i class="fa-solid fa-gavel"></i> {{ $t('main.moderation') }}</h1>
         <p class="mt-1 mb-6 p-3 border-2 border-slate-500/30 rounded-t-md rounded-b-lg text-black dark:text-white">
-          We have added new moderation tools to make it easier to manage the content on the Channel. This will help us keep the Channel safe and fun for everyone.
+          {{ $t('main.moderation_desc') }}
         </p>
       </div>
       <hr class="mt-6 mb-6">
       <div>
-        <h1 class="opacity-60"><i class="fa-regular fa-circle-dot"></i> ...and much more!</h1>
+        <h1 class="opacity-60"><i class="fa-regular fa-circle-dot"></i> {{ $t('main.much_more') }}</h1>
       </div>
     </div>
   </div>
     <div class="flex flex-row items-center justify-between gap-3">
-      <h1 class="font-bold text-4xl">Tools</h1>
-      <h2 class="opacity-60">Here are some tools we really like!</h2>
+      <h1 class="font-bold text-4xl">{{ $t('main.tools') }}</h1>
+      <h2 class="opacity-60">{{ $t('main.tools.desc') }}</h2>
     </div>
     <div class="mt-3 mb-20 lg:mb-0 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-5 gap-3">
-      <a class="btn lg:rounded-l-xl lg:rounded-r-md rounded-xl text-center text-black" href="https://www.miicharacters.com/" @mouseenter="displayData('miichar')" @mouseleave="removeData('miichar')">Mii Characters</a>
-      <a class="btn lg:rounded-md rounded-xl text-center text-black" href="https://www.miilibrary.com/" @mouseenter="displayData('miilib')" @mouseleave="removeData('miilib')">Mii Library</a>
-      <a class="btn lg:rounded-md rounded-xl text-center text-black" href="https://github.com/Genwald/MiiPort/releases/tag/0.1.1" @mouseenter="displayData('miiport')" @mouseleave="removeData('miiport')">MiiPort</a>
-      <a class="btn lg:rounded-md rounded-xl text-center text-black" href="https://pf2m.com/tools/mii/" @mouseenter="displayData('miirender')" @mouseleave="removeData('miirender')">Mii Renderer</a>
-      <a class="btn lg:rounded-l-md lg:rounded-r-xl rounded-xl text-center text-black" href="https://www.wiilink24.com/extras/mii" @mouseenter="displayData('miiedit')" @mouseleave="removeData('miiedit')">Mii Avatar Editor</a>
+      <a class="btn lg:rounded-l-xl lg:rounded-r-md rounded-xl text-center text-black" href="https://www.miicharacters.com/" @mouseenter="displayData('miichar')" @mouseleave="removeData('miichar')">{{ $t('tools.mii_char') }}</a>
+      <a class="btn lg:rounded-md rounded-xl text-center text-black" href="https://www.miilibrary.com/" @mouseenter="displayData('miilib')" @mouseleave="removeData('miilib')">{{ $t('tools.mii_lib') }}</a>
+      <a class="btn lg:rounded-md rounded-xl text-center text-black" href="https://github.com/Genwald/MiiPort/releases/tag/0.1.1" @mouseenter="displayData('miiport')" @mouseleave="removeData('miiport')">{{ $t('tools.mii_port') }}</a>
+      <a class="btn lg:rounded-md rounded-xl text-center text-black" href="https://pf2m.com/tools/mii/" @mouseenter="displayData('miirender')" @mouseleave="removeData('miirender')">{{ $t('tools.mii_render') }}</a>
+      <a class="btn lg:rounded-l-md lg:rounded-r-xl rounded-xl text-center text-black" href="https://www.wiilink24.com/extras/mii" @mouseenter="displayData('miiedit')" @mouseleave="removeData('miiedit')">{{ $t('tools.mii_edit') }}</a>
     </div>
     <div class="mb-10 dark:text-white mobile-hide">
       <p id="temp" class="mt-6 p-3 border-2 border-slate-500/30 rounded-t-md rounded-b-lg flex items-center justify-center gap-3 text-black">
-        <i class="fa-solid fa-question-circle"></i> Hover over a tool to view its description.
+        <i class="fa-solid fa-question-circle"></i> {{ $t('tools.desc') }}
       </p>
       <p id="miichar" class="hidden mt-6 p-3 border-2 border-slate-500/30 rounded-t-md rounded-b-lg text-black">
-        <i class="fa-solid fa-info-circle"></i> Mii Characters is a website where you can find all kinds of Mii Characters, from popular characters to original creations.
+        <i class="fa-solid fa-info-circle"></i> {{ $t('tools.mii_char_desc') }}
       </p>
       <p id="miilib" class="hidden mt-6 p-3 border-2 border-slate-500/30 rounded-t-md rounded-b-lg text-black">
-        <i class="fa-solid fa-info-circle"></i> Mii Library is a website where you can find all kinds of Mii Characters, from popular characters to original creations.
+        <i class="fa-solid fa-info-circle"></i> {{ $t('tools.mii_lib_desc') }}
       </p>
       <p id="miiport" class="hidden mt-6 p-3 border-2 border-slate-500/30 rounded-t-md rounded-b-lg text-black">
-        <i class="fa-solid fa-info-circle"></i> MiiPort is a tool that allows you to transfer Mii Characters between your Wii and your computer. You can use it to back up your Mii Characters, share them with friends, or even edit them on your computer!
+        <i class="fa-solid fa-info-circle"></i> {{ $t('tools.mii_port_desc') }}
       </p>
       <p id="miirender" class="hidden mt-6 p-3 border-2 border-slate-500/30 rounded-t-md rounded-b-lg text-black">
-        <i class="fa-solid fa-info-circle"></i> Mii Renderer is a tool that allows you to render Mii Characters in high resolution. You can use it to create high-quality images of your Mii Characters for use in videos, artwork, or other projects!
+        <i class="fa-solid fa-info-circle"></i> {{ $t('tools.mii_render_desc') }}
       </p>
       <p id="miiedit" class="hidden mt-6 p-3 border-2 border-slate-500/30 rounded-t-md rounded-b-lg text-black">
-        <i class="fa-solid fa-info-circle"></i> Mii Avatar Editor is a tool that allows you to create custom Mii Characters. You can choose from a wide range of features to create a Mii that looks just like you, or create a completely original character!
+        <i class="fa-solid fa-info-circle"></i> {{ $t('tools.mii_edit_desc') }}
       </p>
     </div>
   </div>

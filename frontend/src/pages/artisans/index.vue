@@ -51,7 +51,7 @@ watch(current_page, async (newValue) => {
     alt="CMOC Background Image"
   />
   <div class="container translate-y-10">
-    <Title name="Artisans" />
+    <Title :name="$t('artisan.title')" />
     <div v-if="artisans">
       <ul v-if="!isLoading" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 sm:gap-10 gap-3 mb-6 -translate-y-8">
         <ArtisanCard v-for="artisan in artisans.data" :key="artisan.wii_number" v-bind="artisan" />
@@ -66,7 +66,7 @@ watch(current_page, async (newValue) => {
     <div v-else class="p-20 w-full h-30 rounded-[18px] border-4 border-gray-400 dark:border-slate-500 border-dashed flex items-center justify-center relative">
       <div class="flex flex-col items-center gap-3 text-gray-500 dark:text-slate-400">
           <i class="fa-solid fa-bomb text-6xl"></i>
-          <h2 class="w-96 text-center relative">Could not establish a connection to the Plaza database, please try again later...</h2>
+          <h2 class="w-96 text-center relative">{{ $t('artisan.connection_fail') }}</h2>
       </div>
     </div>
   </div>
