@@ -5,6 +5,9 @@ import { useRoute } from 'vue-router'
 import LoadingAnimation from '@/components/LoadingAnimation.vue';
 import { useHead } from '@unhead/vue'
 
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
+
 useHead({
   title: 'Mii View | CMOC Viewing Tool',
   meta: [

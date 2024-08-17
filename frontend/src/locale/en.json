@@ -79,7 +79,10 @@
 		"day_remaining": "day remaining",
 		"days_remaining": "days remaining",
 		"new": "New!",
-		"closing_soon": "Closing soon!"
+		"closing_soon": "Closing soon!",
+		"previous_judged": "Contests being judged",
+		"previous_results": "Contests displaying results",
+		"previous_closed": "Closed contests"
 	},
 	
 	"mii_not_found": "The Mii you were looking for could not be found...",

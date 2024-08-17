@@ -11,6 +11,7 @@ import { routes as autoRoutes } from 'vue-router/auto-routes'
 const supportedLanguages = ['EN', 'PTBR']
 
 const i18n = createI18n({
+  legacy: false,
   locale: 'EN',
   fallbackLocale: 'EN',
   messages: {

@@ -6,6 +6,9 @@ import LoadingAnimation from '@/components/LoadingAnimation.vue'
 import { fetchPlazaTop } from '@/backend'
 import { useHead } from '@unhead/vue'
 
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
+
 useHead({
   title: 'Top 50 | CMOC Viewing Tool',
   meta: [

@@ -4,6 +4,9 @@ import { ref, onMounted } from 'vue';
 import ContestCard from '@/components/ContestCard.vue';
 import { useHead } from '@unhead/vue'
 
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
+
 useHead({
   title: 'Previous Contests | CMOC Viewing Tool',
   meta: [
@@ -27,7 +30,7 @@ onMounted(async () => {
 <template>
     <div>
         <ul class="flex flex-col gap-3" v-if="judging_contests.length > 0">
-            <h2>Contests being judged</h2>
+            <h2>{{ $t('contests.previous_judged') }}</h2>
             <div  v-for="contest in judging_contests">
             <RouterLink :to="`/contests/${contest.contest_id}`">
                 <ContestCard :key="contest.id" v-bind="contest" />
@@ -35,7 +38,7 @@ onMounted(async () => {
         </div>
         </ul>
         <ul class="flex flex-col gap-3" v-if="results_contests.length > 0">
-            <h2>Contests displaying results</h2>
+            <h2>{{ $t('contests.previous_results') }}</h2>
             <div  v-for="contest in results_contests">
             <RouterLink :to="`/contests/${contest.contest_id}`">
                 <ContestCard :key="contest.id" v-bind="contest" />
@@ -43,7 +46,7 @@ onMounted(async () => {
         </div>
         </ul>
         <ul class="flex flex-col gap-3" v-if="closed_contests.length > 0">
-            <h2>Closed contests</h2>
+            <h2>{{ $t('contests.previous_closed') }}</h2>
             <div  v-for="contest in closed_contests">
             <RouterLink :to="`/contests/${contest.contest_id}`">
                 <ContestCard :key="contest.id" v-bind="contest" />
@@ -54,7 +57,7 @@ onMounted(async () => {
         <div class="p-20 w-full h-30 rounded-[18px] border-4 border-gray-400 dark:border-slate-500 border-dashed flex items-center justify-center relative">
         <div class="flex flex-col items-center gap-3 text-gray-500 dark:text-slate-400">
             <i class="fa-solid fa-bomb text-6xl"></i>
-        <h2 class="w-96 text-center relative">{{ $t('contests_backend_error') }}</h2>
+        <h2 class="w-96 text-center relative">{{ $t('contests.backend_error') }}</h2>
     </div>
     </div>
     </p>

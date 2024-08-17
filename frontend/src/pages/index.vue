@@ -6,7 +6,9 @@ import type { Contest } from '@/types'
 import ContestCard from '@/components/ContestCard.vue'
 import MiiCard from '@/components/MiiCard.vue'
 import { useHead } from '@unhead/vue'
+
 import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 
 useHead({
   title: 'Home | CMOC Viewing Tool',
