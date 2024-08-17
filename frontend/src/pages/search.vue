@@ -101,13 +101,13 @@ watch(current_page, async (newValue) => {
   <div class="w-full h-full absolute z-0 blur-sm"></div>
   <div class="top-0 left-0 w-full h-80 absolute dissolve"  style="background: linear-gradient(33deg, rgba(217,114,118,1) 0%, rgba(73,199,44,1) 39%, rgba(26,228,207,1) 80%, rgba(36,189,240,1) 100%);"></div>
   <div class="container translate-y-14">
-    <Title icon="fa-solid fa-magnifying-glass" :name="$t('search.title')" />
+    <Title icon="fa-solid fa-magnifying-glass" :name="t('search.title')" />
     <div class="w-full -translate-y-8 flex flex-row gap-1 relative">
       <input
         class="w-full p-3 bg-gray-200/60 dark:bg-slate-500/60 backdrop-blur-sm hover:bg-gray-300 dark:hover:bg-slate-600 focus:bg-gray-300 dark:focus:bg-slate-700 transition-all relative rounded-l-[18px] rounded-r-[4px]"
         v-model="search_field"
         type="text"
-        :placeholder="$t('search.field')" 
+        :placeholder="t('search.field')" 
         @keyup.enter="searchQuery(), current_page = 1"
         :autofocus="true"
       />
@@ -131,7 +131,7 @@ watch(current_page, async (newValue) => {
                 'text-gray-400': search_type !== 'miis',
                 'text-white': search_type === 'miis'
               }"
-              >{{ $t('miis') }}</label
+              >{{ t('search.miis') }}</label
             >
           </div>
           <input
@@ -161,7 +161,7 @@ watch(current_page, async (newValue) => {
                 'text-gray-400': search_type !== 'artisans',
                 'text-white': search_type === 'artisans'
               }"
-              >{{ $t('artisans') }}</label
+              >{{ t('search.artisans') }}</label
             >
           </div>
           <input
@@ -221,9 +221,9 @@ watch(current_page, async (newValue) => {
 		<div class="flex flex-col items-center gap-3 text-gray-500 dark:text-slate-400">
 			<div class="flex flex-row gap-3 items-center">
 				<i class="fa-solid fa-magnifying-glass text-6xl"></i>
-				<b class="p-3 pl-6 pr-6 rounded-lg text-white bg-green-500">{{ $t('search.mii_mode') }}</b>
+				<b class="p-3 pl-6 pr-6 rounded-lg text-white bg-green-500">{{ t('search.mii_mode') }}</b>
 			</div>
-			<h2 class="sm:w-96 w-full text-center relative" v-html="$t('search.mii_instructions')">
+			<h2 class="sm:w-96 w-full text-center relative" v-html="t('search.mii_instructions')">
 			</h2>
 		</div>
 	</div>
@@ -231,9 +231,9 @@ watch(current_page, async (newValue) => {
 		<div class="flex flex-col items-center gap-3 text-gray-500 dark:text-slate-400">
 			<div class="flex flex-row gap-3 items-center">
 				<i class="fa-solid fa-magnifying-glass text-6xl"></i>
-				<b class="p-3 pl-6 pr-6 rounded-lg text-white bg-blue-500">{{ $t('search.artisan_mode') }}</b>
+				<b class="p-3 pl-6 pr-6 rounded-lg text-white bg-blue-500">{{ t('search.artisan_mode') }}</b>
 			</div>
-			<h2 class="sm:w-96 w-full text-center relative" v-html="$t('search.artisan_instructions')"></h2>
+			<h2 class="sm:w-96 w-full text-center relative" v-html="t('search.artisan_instructions')"></h2>
 		</div>
 		</div>
 	</div>

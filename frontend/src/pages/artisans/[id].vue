@@ -96,21 +96,21 @@ watch(current_page, async (newValue) => {
         <button 
         class="p-3 pl-6 pr-6 sm-width bg-green-500/60 border-1 border-green-60 backdrop-blur-md rounded-md hover:bg-green-600 transition-all"
         @click="downloadMii(artisan_data.name, artisan_data.mii_data)"
-        ><i class="fa-solid fa-download"></i> {{ $t('artisan_download') }} {{ artisan_data.name }}{{ $t('artisan_mii') }}</button>
+        ><i class="fa-solid fa-download"></i> {{ t('artisan_download') }} {{ artisan_data.name }}{{ t('artisan_mii') }}</button>
         <span v-if="artisan_data.is_master" class="sm-width p-1 pl-2 pr-2 text-md font-bold text-center select-none rounded-full bg-orange-400"
-        >{{ $t('artisan_master') }}
+        >{{ t('artisan_master') }}
         </span>
         </div>
         <p class="flex flex-col text-xl text-black">
-          <span class="opacity-30 text-sm">{{ $t('artisan_number') }}</span>
+          <span class="opacity-30 text-sm">{{ t('artisan_number') }}</span>
           <div class="flex flex-row gap-3">{{ formatWiiNumber(artisan_data.wii_number) }}
           <span v-if="isArtisanNumberValid" class="text-green-500"><i class="fa-solid fa-check"></i></span>
-          <span v-else class="text-red-500"><i class="fa-solid fa-triangle-exclamation text-yellow-300 cursor-pointer" title={{ $t('artisan_dolphin') }} onmouseover="document.getElementById('dolWarn').style.opacity = 1;" onmouseleave="document.getElementById('dolWarn').style.opacity = 0;"></i></span>
+          <span v-else class="text-red-500"><i class="fa-solid fa-triangle-exclamation text-yellow-300 cursor-pointer" :title="t('artisan_dolphin')" onmouseover="document.getElementById('dolWarn').style.opacity = 1;" onmouseleave="document.getElementById('dolWarn').style.opacity = 0;"></i></span>
         </div>
         </p>
         <div class="flex flex-row items-center text-black">
           <p class="flex flex-col justify-end text-left text-black">
-            <span class="opacity-30 text-sm">{{ $t('artisan_last') }} </span>
+            <span class="opacity-30 text-sm">{{ t('artisan_last') }} </span>
             <p id="lastPost" class="text-xl text-black">
               {{ lastPostFormatted }}
           </p>
@@ -121,8 +121,8 @@ watch(current_page, async (newValue) => {
     </div>
     <hr class="pb-3 opacity-5 border-t-black dark:border-t-white" />
     <div class="mt-6 mb-3 flex flex-row gap-5 items-center justify-between">
-      <h1 class="font-bold text-4xl">{{ $t('artisan_miis') }}</h1>
-      <h2 v-if="artisan_data" class="opacity-60 text-right">{{ artisan_data.name }} {{ $t('artisan_submitted') }} {{ artisan_data.number_of_posts }} {{ $t('artisan_n_miis') }}</h2>
+      <h1 class="font-bold text-4xl">{{ t('artisan_miis') }}</h1>
+      <h2 v-if="artisan_data" class="opacity-60 text-right">{{ artisan_data.name }} {{ t('artisan_submitted') }} {{ artisan_data.number_of_posts }} {{ t('artisan_n_miis') }}</h2>
     </div>
     <div v-if="artisan_data && mii_data">
       <ul v-id="!isLoading" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 sm:gap-10 gap-3">
@@ -142,7 +142,7 @@ watch(current_page, async (newValue) => {
       <div class="flex flex-col items-center gap-3 text-gray-500 dark:text-slate-400">
         <i class="fa-solid fa-magnifying-glass text-6xl"></i>
         <h2 class="w-96 text-center relative">
-          {{ artisan_data.name }} {{ $t('artisan_no_miis') }}
+          {{ artisan_data.name }} {{ t('artisan_no_miis') }}
         </h2>
       </div>
     </div>
@@ -150,7 +150,7 @@ watch(current_page, async (newValue) => {
   <div v-else class="container p-20 w-full h-30 translate-y-14 rounded-[18px] border-4 border-gray-400 dark:border-slate-500 border-dashed flex items-center justify-center relative">
         <div class="flex flex-col items-center gap-3 text-gray-500 dark:text-slate-400">
           <div class="flex flex-row gap-3 items-center"><i class="fa-solid fa-bomb text-6xl"></i></div>
-        <h2 class="w-96 text-center relative">{{ $t('artisan_not_found') }}</h2>
+        <h2 class="w-96 text-center relative">{{ t('artisan_not_found') }}</h2>
     </div>
     </div>
 </template>

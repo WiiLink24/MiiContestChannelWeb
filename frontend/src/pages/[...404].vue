@@ -26,6 +26,6 @@ useHead({
     >
       404
     </h1>
-    <p class="text-3xl font-bold">{{ $t('404') }}</p>
+    <p class="text-3xl font-bold">{{ t('404') }}</p>
   </div>
 </template>

@@ -4,19 +4,21 @@ import App from './App.vue'
 import { createI18n } from 'vue-i18n'
 import EN from './locale/en.json'
 import PTBR from './locale/ptbr.json'
-import { createHead } from 'unhead/vue'
+import FR from './locale/fr.json'
+import { createHead } from '@unhead/vue'
 import { createRouter, createWebHistory } from 'vue-router/auto'
 import { routes as autoRoutes } from 'vue-router/auto-routes'
 
-const supportedLanguages = ['EN', 'PTBR']
+const supportedLanguages = ['en', 'ptbr', 'fr']
 
 const i18n = createI18n({
   legacy: false,
-  locale: 'EN',
-  fallbackLocale: 'EN',
+  locale: 'en',
+  fallbackLocale: 'en',
   messages: {
-    EN: EN,
-    PTBR: PTBR,
+    en: EN,
+    ptbr: PTBR,
+    fr: FR,
   }
 })
 
@@ -41,8 +43,8 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   const language = to.params.lang as string
-  if (supportedLanguages.includes(language.toUpperCase())) {
-    i18n.global.locale = language.toUpperCase()
+  if (supportedLanguages.includes(language)) {
+    i18n.global.locale.value = language
   } else {
     return next(`/${i18n.global.locale}${to.path}`)
   }

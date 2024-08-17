@@ -23,7 +23,7 @@ useHead({
     alt="CMOC Background Image"
   />
   <div class="container translate-y-10">
-    <Title :name="$t('contests_title')" />
+    <Title :name="t('contests.title')" />
     <nav
       class="right-0 inline-flex items-center justify-end bg-gray-400/60 dark:bg-slate-500/60 backdrop-blur-sm hover:bg-gray-400 dark:hover:bg-slate-600 transition-all -translate-y-10 rounded-[18px] p-1 gap-1 relative"
     >
@@ -33,7 +33,7 @@ useHead({
         activeClass="bg-green-500 dark:bg-green-500 hover:bg-green-500 dark:hover:bg-green-500"
       >
         <i class="fas fa-trophy"></i>
-        <span class="mobile-hide">{{ $t('contests_active') }}</span>
+        <span class="mobile-hide">{{ t('contests.active') }}</span>
       </RouterLink>
       <RouterLink
         to="/contests/previous"
@@ -41,7 +41,7 @@ useHead({
         activeClass="bg-blue-500 dark:bg-blue-500 hover:bg-blue-500 dark:hover:bg-blue-500"
       >
         <i class="fas fa-history"></i>
-        <span class="mobile-hide">{{ $t('contests_previous') }}</span>
+        <span class="mobile-hide">{{ t('contests.previous') }}</span>
       </RouterLink>
     </nav>
     <RouterView />

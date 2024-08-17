@@ -66,11 +66,11 @@ watch(current_page, async (newValue) => {
     alt="CMOC Background Image"
   />
   <div class="container translate-y-10">
-    <Title :name="$t('plaza.title')" />
+    <Title :name="t('plaza.title')" />
     <LoadingAnimation v-if="isLoading" />
     <div v-else>
       <p v-if="plaza_new" class="-translate-y-20 text-right opacity-45 text-black">
-        {{ $t('plaza.n') }} {{ 50 * plaza_new.total_pages-1 }}+ {{ $t('plaza.miis') }}
+        {{ t('plaza.n') }} {{ 50 * plaza_new.total_pages-1 }}+ {{ t('plaza.miis') }}
       </p>
       <div v-if="plaza_new">
         <ul
@@ -89,7 +89,7 @@ watch(current_page, async (newValue) => {
         <div class="p-20 w-full h-30 rounded-[18px] border-4 border-gray-400 dark:border-slate-500 border-dashed flex items-center justify-center relative">
         <div class="flex flex-col items-center gap-3 text-gray-500 dark:text-slate-400">
             <i class="fa-solid fa-bomb text-6xl"></i>
-        <h2 class="w-96 text-center relative">{{ $t('plaza.database') }}</h2>
+        <h2 class="w-96 text-center relative">{{ t('plaza.database') }}</h2>
     </div>
     </div>
     </p>
