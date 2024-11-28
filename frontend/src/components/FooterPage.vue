@@ -26,7 +26,7 @@
             style="color:#ffffff80; margin-top:-10px; opacity:0.7; margin-right:8px; text-align:left;"
           >
             <i class="fa-solid fa-envelope-open" style="margin-right:5px;"></i>
-            <a href="mailto:contact@wiilink24.com"><u>contact@wiilink24.com</u></a
+            <a href="mailto:support@wiilink.ca"><u>support@wiilink.ca</u></a
             >
           </p>
           <p
