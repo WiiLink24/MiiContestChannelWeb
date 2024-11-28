@@ -15,6 +15,16 @@ import FooterPage from '@/components/FooterPage.vue'
 </template>
 
 <style>
+@font-face {
+    font-family: Rubik;
+    src: url(/fonts/Rubik.ttf);
+}
+
+@font-face {
+    font-family: gilroy;
+    src: url(/fonts/Gilroy.otf);
+}
+
 ul,
 li {
   transition: 0.2s;
