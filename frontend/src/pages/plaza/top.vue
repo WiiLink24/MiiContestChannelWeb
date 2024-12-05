@@ -7,7 +7,7 @@ import { fetchPlazaTop } from '@/backend'
 import { useHead } from '@unhead/vue'
 
 useHead({
-  title: 'Top 50 | CMOC Viewing Tool',
+  title: 'Top 50 | MCC Viewing Tool',
   meta: [
     { name: 'description', content: 'Top 50 Miis currently in the service!'},
     { property: 'og:image', content: '/img/cmocseobg.png' },
@@ -33,7 +33,7 @@ onMounted(async () => {
   <img
     src="https://rc24.xyz/goodies/wallpapers/CMO_Channel_BG_orange_1600x900.png"
     class="w-full absolute z-0 blur-sm dissolve"
-    alt="CMOC Background Image"
+    alt="MCC Background Image"
   />
 <div class="container translate-y-10">
     <Title name="Top 50" />

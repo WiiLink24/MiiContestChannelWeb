@@ -4,7 +4,7 @@ import Title from '@/components/Title.vue'
 import { useHead } from '@unhead/vue'
 
 useHead({
-  title: '404 | CMOC Viewing Tool',
+  title: '404 | MCC Viewing Tool',
   meta: [
     { name: 'description', content: 'The content you were looking for could not be found...' },
     { property: 'og:image', content: '/img/cmocseobg.png' }
