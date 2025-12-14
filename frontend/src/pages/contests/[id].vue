@@ -10,7 +10,7 @@ import LoadingAnimation from '@/components/LoadingAnimation.vue'
 import { useHead } from '@unhead/vue'
 
 useHead({
-  title: 'Contest View | CMOC Viewing Tool',
+  title: 'Contest View | MCC Viewing Tool',
   meta: [
     { name: 'description', content: 'View all running and past contests of the service, as well as information associated to them!'},
     { property: 'og:image', content: '/img/cmocseobg.png' },
