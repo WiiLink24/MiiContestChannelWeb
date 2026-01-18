@@ -1,10 +1,10 @@
-FROM node:latest AS build-stage
+FROM node:alpine AS build-stage
 WORKDIR /app
 COPY frontend/ .
 RUN npm install
 RUN npm run build-only
 
-FROM node:latest AS production-stage
+FROM node:alpine AS production-stage
 WORKDIR /app
 COPY backend/ .
 COPY --from=build-stage /app/dist /app/public/dist
