@@ -32,7 +32,7 @@ app.use(helmet({
       styleSrc: ["'self'", "'unsafe-inline'", "fonts.googleapis.com", "fonts.gstatic.com"],
       scriptSrc: ["'self'", "fontawesome.com", "kit.fontawesome.com", "unpkg.com", "cdn.jsdelivr.net", "'unsafe-inline'"],
       imgSrc: ["'self'", "rc24.xyz", "studio.mii.nintendo.com", "cdn.jsdelivr.net", "'unsafe-inline'"],
-      connectSrc: ["'self'", "ka-f.fontawesome.com", "miicontestp.wii.rc24.xyz", "'unsafe-inline'"],
+      connectSrc: ["'self'", "ka-f.fontawesome.com", "mcc-panel.wiilink.ca", "'unsafe-inline'"],
       fontSrc: ["'self'", "fonts.gstatic.com", "ka-f.fontawesome.com", "kit.fontawesome.com", "'unsafe-inline'"],
     }
   }

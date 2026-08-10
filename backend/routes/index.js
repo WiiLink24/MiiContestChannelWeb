@@ -412,7 +412,7 @@ router.post('/report', cors(corsOptions), limiter, async (req, res) => {
         title: form.report_mii_name,
         type: 'rich',
         description: `Entry ID: ${form.report_mii_id}\nCreator: ${form.report_creator}\nReason: ${reason}`,
-        url: `https://miicontestp.wii.rc24.xyz/panel/plaza/details/${form.report_mii_id}`,
+        url: `https://mcc-panel.wiilink.ca/panel/plaza/details/${form.report_mii_id}`,
         color: 0x00ff00,
         thumbnail: {
           url: form.report_mii_img
