@@ -87,7 +87,7 @@ export function renderMii(base64String: string) {
   formData.append('data', file)
 
   // Use larsen's funky studio.cgi to get the data needed to render the mii
-  return fetch('https://miicontestp.wii.rc24.xyz/cgi-bin/studio.cgi', {
+  return fetch('https://mcc-panel.wiilink.ca/cgi-bin/studio.cgi', {
     method: 'POST',
     body: formData
   })
