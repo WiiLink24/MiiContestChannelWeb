@@ -4,7 +4,7 @@ import { RouterLink, RouterView } from 'vue-router'
 import { useHead } from '@unhead/vue'
 
 useHead({
-  title: 'Contests | CMOC Viewing Tool',
+  title: 'Contests | MCC Viewing Tool',
   meta: [
     { name: 'description', content: 'View all running and past contests of the service, as well as information associated to them!'},
     { property: 'og:image', content: '/img/cmocseobg.png' },
@@ -17,7 +17,7 @@ useHead({
   <img
     src="https://rc24.xyz/goodies/wallpapers/CMO_Channel_BG_1600x900.png"
     class="w-full absolute z-0 blur-sm dissolve"
-    alt="CMOC Background Image"
+    alt="MCC Background Image"
   />
   <div class="container translate-y-10">
     <Title name="Contests" />

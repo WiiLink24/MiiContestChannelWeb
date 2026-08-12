@@ -6,7 +6,7 @@ import LoadingAnimation from '@/components/LoadingAnimation.vue';
 import { useHead } from '@unhead/vue'
 
 useHead({
-  title: 'Mii View | CMOC Viewing Tool',
+  title: 'Mii View | MCC Viewing Tool',
   meta: [
     { name: 'description', content: 'Detailed information about a specific Mii!'},
     { property: 'og:image', content: '/img/cmocseobg.png' },

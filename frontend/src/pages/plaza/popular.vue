@@ -9,7 +9,7 @@ import LoadingAnimation from '@/components/LoadingAnimation.vue'
 import { useHead } from '@unhead/vue'
 
 useHead({
-  title: 'Popular | CMOC Viewing Tool',
+  title: 'Popular | MCC Viewing Tool',
   meta: [
     { name: 'description', content: 'Up and rising Miis in our service, download them for yourself!'},
     { property: 'og:image', content: '/img/cmocseobg.png' },
@@ -60,7 +60,7 @@ watch(current_page, async (newValue) => {
   <img
     src="https://rc24.xyz/goodies/wallpapers/CMO_Channel_BG_blue_1600x900.png"
     class="w-full absolute z-0 blur-sm dissolve"
-    alt="CMOC Background Image"
+    alt="MCC Background Image"
   />
   <div class="container translate-y-10">
     <Title name="Popular" />

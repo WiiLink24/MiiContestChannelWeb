@@ -13,7 +13,7 @@ import LoadingAnimation from '@/components/LoadingAnimation.vue'
 import { useHead } from '@unhead/vue'
 
 useHead({
-  title: 'Artisan View | CMOC Viewing Tool',
+  title: 'Artisan View | MCC Viewing Tool',
   meta: [
     { name: 'description', content: 'Detailed information about a specific Mii Artisan, including all their posted Miis for you to download!'},
     { property: 'og:image', content: '/img/cmocseobg.png' },

@@ -10,7 +10,7 @@ import LoadingAnimation from '@/components/LoadingAnimation.vue'
 import { useHead } from '@unhead/vue'
 
 useHead({
-  title: 'Search | CMOC Viewing Tool',
+  title: 'Search | MCC Viewing Tool',
   meta: [
     { name: 'description', content: 'Search all of our Mii database and download them for yourself!'},
     { property: 'og:image', content: '/img/cmocseobg.png' },
@@ -217,7 +217,7 @@ watch(current_page, async (newValue) => {
     <div v-else-if="search_type == 'miis'" class="p-20 w-full h-30 rounded-[18px] border-4 border-gray-400 dark:border-slate-500 border-dashed flex items-center justify-center relative">
         <div class="flex flex-col items-center gap-3 text-gray-500 dark:text-slate-400">
             <div class="flex flex-row gap-3 items-center"><i class="fa-solid fa-magnifying-glass text-6xl"></i><b class="p-3 pl-6 pr-6 rounded-lg text-white bg-green-500">Mii Search Mode</b></div>
-        <h2 class="sm:w-96 w-full text-center relative">To begin searching, type your query in the box and press the enter key or <i class="fa-solid fa-magnifying-glass"></i> Search icon. You can search for a Mii by using its Name, CMOC Contest Code, or Initals.</h2>
+        <h2 class="sm:w-96 w-full text-center relative">To begin searching, type your query in the box and press the enter key or <i class="fa-solid fa-magnifying-glass"></i> Search icon. You can search for a Mii by using its Name, MCC Contest Code, or Initals.</h2>
     </div>
     </div>
     <div v-else-if="search_type == 'artisans'" class="p-20 w-full h-30 rounded-[18px] border-4 border-gray-400 dark:border-slate-500 border-dashed flex items-center justify-center relative">
